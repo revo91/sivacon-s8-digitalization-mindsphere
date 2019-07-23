@@ -1,0 +1,21 @@
+{
+    "displayName": "SIVACON S8",
+    "appVersion": "1.0.0",
+    "appCopyright": "© Siemens 2019",
+    "links": {
+      "default": [
+        {
+          "type": "www",
+          "name": "DEV Information",
+          "value": "https://www.siemens.pl"
+        }
+      ],
+      "de": [
+        {
+          "type": "www",
+          "name": "Entwicklungs-Information",
+          "value": "https://www.siemens.pl"
+        }
+      ]
+    }
+  }
