@@ -1,11 +1,22 @@
+import { TOGGLE, SWITCH, GENERATE_RANDOM_DATA, MANAGE_ZOOM, MANAGE_DRAWER_OPEN, MANAGE_DIALOG_OPEN, 
+    MANAGE_DIALOG_TAB, SET_CURRENT_DEVICE_STATUS, SET_CURRENT_DEVICE_TYPE } from '../actions/index';
+
 const initialState = {
     //drawer
     drawerOpen: false, 
 
-    //chartPopup
-    chartData: {
+    //popup dialog with properties
+    deviceProperties: {
         openDialog: false,
-        contentType: 'deviceOverview',
+        selectedDevice: '',
+        //circuit presentation names
+        deviceTitle: '',
+        deviceSection: '',
+        deviceOutgoingFeeder: '',
+        //device type for showing circuit type
+        currentDeviceType: '',
+        currentDeviceStatus: 0,
+        tabIndex: 0,
         zoom: 1,
         timeRangeSlider: 1,
         datasetName: 'PAC2200',
@@ -38,44 +49,14 @@ const initialState = {
                 y:224.271
             }],
     },
-
-    //elevation
-    elevation: {
-        S2P2_1: 0,
-        S2P2_2: 0,
-        S2P2_3: 0,
-        S2P2_4: 0,
-        S2P2_5: 0,
-        S2P2_10: 0,
-        S1P2_1: 0,
-        S1P2_2: 0,
-        S1P2_3: 0,
-        S1P2_4: 0,
-        S1P2_5: 0,
-        S1P2_6: 0,
-        S1P2_10: 0,
-        S1P4_3: 0,
-        S1P4_4: 0,
-        S2P3_1: 0,
-        S2P1_1: 0,
-        S0P0_1: 0,
-        S1P1_1: 0,
-        S1P3_1: 0,
-        S1P4_3VA_1: 0,
-        S1P4_3VA_2: 0,
-        S2P1_3VA_1: 0,
-        S2P1_3VA_2: 0,
-        S1P1_3VA_1: 0,
-        S1P1_3VA_2: 0
-    },
-
     //overview
     sources: {
         TR2: {
             state: 1,
             power: "21",
             current: "32",
-            capacity: "21"
+            capacity: "21",
+
         },
         TR1: {
             state: 0,
@@ -84,7 +65,7 @@ const initialState = {
             capacity: ""
         },
         GEN: {
-            state: 1,
+            state: 0,
             power: "",
             current: "",
             capacity: ""
@@ -218,7 +199,7 @@ const initialState = {
             capacity: ""
         },
         cb_1FP1: {
-            state: 0,
+            state: 1,
             power: "",
             current: "",
             capacity: ""
@@ -244,7 +225,7 @@ export const reducer = (state = initialState, action) => {
     let deviceType = action.deviceType;
     
     switch (action.type) {
-        case 'TOGGLE':
+        case TOGGLE:
             return {
                 ...state,
                 [deviceType]: {
@@ -256,7 +237,7 @@ export const reducer = (state = initialState, action) => {
                 }
             };
 
-        case 'SWITCH':
+        case SWITCH:
             return {
                 ...state,
                 elevation: {
@@ -265,46 +246,64 @@ export const reducer = (state = initialState, action) => {
 
                 }
             }
-        case 'GENERATE_RANDOM_DATA':
+        case GENERATE_RANDOM_DATA:
             return {
                 ...state,
-                chartData: {
-                    ...state.chartData,
+                deviceProperties: {
+                    ...state.deviceProperties,
                     values: action.data
                 }
             }
-        case 'MANAGE_ZOOM':
+        case MANAGE_ZOOM:
             return {
                 ...state,
-                chartData: {
-                    ...state.chartData,
+                deviceProperties: {
+                    ...state.deviceProperties,
                     zoom: action.InOut
                 }
             }
-        case 'MANAGE_DRAWER_OPEN':
+        case MANAGE_DRAWER_OPEN:
             return {
                 ...state,
                 drawerOpen: action.open
             }
-        case 'MANAGE_DIALOG_OPEN':
+        case MANAGE_DIALOG_OPEN:
             return {
                 ...state,
-                chartData: {
-                    ...state.chartData,
+                deviceProperties: {
+                    ...state.deviceProperties,
                     openDialog: action.open,
-                    datasetName: action.chartName
+                    deviceTitle: action.deviceTitle,
+                    deviceSection: action.deviceSection,
+                    deviceOutgoingFeeder: action.deviceOutgoingFeeder,
+                    selectedDevice: action.deviceName
                 }
             }
-        case 'MANAGE_SHOWN_DIALOG_CONTENT_TYPE':
+        case MANAGE_DIALOG_TAB:
             return {
                 ...state,
-                chartData: {
-                    ...state.chartData,
-                    contentType: action.content
+                deviceProperties: {
+                    ...state.deviceProperties,
+                    tabIndex: action.index
+                }
+            }
+        case SET_CURRENT_DEVICE_STATUS:
+            return {
+                ...state,
+                deviceProperties: {
+                    ...state.deviceProperties,
+                    currentDeviceStatus: action.status
+                }
+            }
+        case SET_CURRENT_DEVICE_TYPE:
+            return {
+                ...state,
+                deviceProperties: {
+                    ...state.deviceProperties,
+                    currentDeviceType: action.deviceType
                 }
             }
         default:
             return state;
-        
     }
 }

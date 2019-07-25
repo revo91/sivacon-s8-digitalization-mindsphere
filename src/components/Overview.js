@@ -499,10 +499,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP2_Tab" data-name="1FP2_Tab"
-                                className={((breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q1.state === 1 && sources.TR2.state === 1) //TR2 path
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q1.state === 1 && sources.GEN.state === 1) // GEN path
-                                    || (sources.TR1.state === 1)) //TR1 path
-                                    && breakers.cb_1FP2.state === 1 ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === 1) && (breakers.cb_1FP2.state === 1) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="592.74" y1="212.29" x2="592.74" y2="249.82" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -522,19 +519,13 @@ class Overview extends React.Component {
                                                     transform="translate(564.74 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1FP2.capacity}</text></g>
                             <g id="_1FP2" data-name="1FP2" ref={this.cb_1FP2_ref}
-                                className={((breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q1.state === 1 && sources.TR2.state === 1) //TR2 path
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q1.state === 1 && sources.GEN.state === 1) // GEN path
-                                    || (sources.TR1.state === 1)) //TR1 path
-                                    && breakers.cb_1FP2.state === 1 ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === 1) && (breakers.cb_1FP2.state === 1) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="567.49" y1="187.04" x2="592.74" y2="212.29" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP1_Tab" data-name="1FP1_Tab"
-                                className={((breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q1.state === 1 && sources.TR2.state === 1) //TR2 path
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q1.state === 1 && sources.GEN.state === 1) // GEN path
-                                    || (sources.TR1.state === 1)) //TR1 path
-                                    && breakers.cb_1FP1.state === 1 ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === 1) && (breakers.cb_1FP1.state === 1) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="515.81" y1="212.06" x2="515.81" y2="249.59" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -554,10 +545,7 @@ class Overview extends React.Component {
                                                     transform="translate(487.81 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1FP1.capacity}</text></g>
                             <g id="_1FP1" data-name="1FP1" ref={this.cb_1FP1_ref}
-                                className={((breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q1.state === 1 && sources.TR2.state === 1) //TR2 path
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q1.state === 1 && sources.GEN.state === 1) // GEN path
-                                    || (sources.TR1.state === 1)) //TR1 path
-                                    && breakers.cb_1FP1.state === 1 ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === 1) && (breakers.cb_1FP1.state === 1) ? "voltageApplied" : "noVoltage"
                                 }
                             >
                                 <line x1="490.56" y1="186.81" x2="515.81" y2="212.06" fill="none" strokeMiterlimit="10"

@@ -20,7 +20,7 @@ import {
 } from 'react-router-dom';
 
 import OverviewTest from './components/OverviewTest';
-import ElevationTest from './components/ElevationTest';
+import Elevation from './components/Elevation';
 import SlideupDialog from './components/SlideupDialog';
 import { connect } from 'react-redux';
 
@@ -115,7 +115,7 @@ class App extends React.Component {
                 <ListItemIcon><HomeIcon /></ListItemIcon>
                 <ListItemText primary="Przegląd" />
               </ListItem>
-              <ListItem button component={Link} to="/elevation">
+              <ListItem button component={Link} to="/elewacja">
                 <ListItemIcon><ViewArrayIcon /></ListItemIcon>
                 <ListItemText primary="Elewacja" />
               </ListItem>
@@ -124,10 +124,12 @@ class App extends React.Component {
           <main className={classes.content} >
             <div className={classes.toolbar} />
             <Route exact path="/" component={OverviewTest} />
-            <Route path="/elevation" component={ElevationTest} />
+            <Route path="/elewacja" component={Elevation} />
           </main>
+          <SlideupDialog/>
         </Router>
-        <SlideupDialog/>
+        
+        
       </div>
     )
   }

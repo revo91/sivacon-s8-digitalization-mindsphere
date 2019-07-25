@@ -149,7 +149,7 @@ class TimeSeriesChart extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      params: state.chartData
+      params: state.deviceProperties
     };
   }
 

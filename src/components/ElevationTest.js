@@ -11,7 +11,7 @@ class ElevationTest extends React.Component {
 
     render() {
 
-        let testButtonsElevation = Object.entries(this.props.params.elevation).map(([key, value]) => 
+        let testButtonsElevation = Object.entries(this.props.params1.elevation).map(([key, value]) => 
         { 
           return <button key={key} onClick={()=>this.elevationTest(key)}>{key}</button>
         });
@@ -27,7 +27,7 @@ class ElevationTest extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      params: state
+      params1: state
     };
   }
 

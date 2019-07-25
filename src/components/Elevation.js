@@ -10,20 +10,39 @@ import { manageDialogOpen } from '../actions/index';
 class Elevation extends React.Component {
 
     manageSwitchesState = (name) => {
-        let prop = this.props.params[name];
-        if (name === 'S2P1_3VA_1' || name === 'S2P1_3VA_2' || name === 'S1P4_3VA_1' || name === 'S1P4_3VA_2' || name === 'S1P1_3VA_1' || name === 'S1P1_3VA_2') {
-            return prop === 0 ? 'Wył.' : 'Zał.'
+        let deviceState = null;
+        let namesToShort = ['cb_2FP1','cb_2FP2','cb_1FP1','cb_1FP2']
+        if(name.indexOf('cb_')!==-1)
+        {
+            deviceState = this.props.params.breakers[name].state
+            if(namesToShort.indexOf(name)!==-1)
+            {
+                return deviceState === 0 ? 'Wył.' : 'Zał.'
+            }
+            else {
+                return deviceState === 0 ? 'Wyłączony' : 'Załączony'
+            }
         }
-        return prop === 0 ? 'Wyłączony' : 'Załączony'
+        else {
+            deviceState = this.props.params.sources[name].state
+            return deviceState === 0 ? 'Wyłączony' : 'Załączony'
+        }
     }
 
     manageSwitchesClassName = (name) => {
-        let prop = this.props.params[name];
-        return prop === 0 ? 'open' : 'closed'
+        let deviceState = null;
+        if(name.indexOf('cb_')!==-1)
+        {
+            deviceState = this.props.params.breakers[name].state
+        }
+        else {
+            deviceState = this.props.params.sources[name].state
+        }
+        return deviceState === 0 ? 'open' : 'closed'
     }
 
-    openProperties = (name) => {
-        this.props.dispatch(manageDialogOpen(true, name))
+    openProperties = (name, title, section, outgoingFeeder) => {
+        this.props.dispatch(manageDialogOpen(true, name, title, section, outgoingFeeder))
     }
 
     render() {
@@ -678,8 +697,8 @@ class Elevation extends React.Component {
                                 <polygon points="1406.74 565.64 1406.17 565.64 1406.17 560.48 1406.74 560.48 1406.74 565.64 1406.74 565.64"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P4.3_rotary_status" className={this.manageSwitchesClassName('S1P4_3')}><text transform="translate(1433.04 598.59)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P4_3')}</text></g>
+                            <g id="S1P4.3_rotary_status" className={this.manageSwitchesClassName('cb_3F1')}><text transform="translate(1433.04 598.59)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_3F1')}</text></g>
                             <g id="S1P4.4_rotary">
                                 <path d="M1504.8,680.11h5.77V730.2h-50.1V680.11h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1460.76,729.92h49.52V680.39h-49.52v49.53Zm50.09.57h-50.66V679.82h50.66v50.67Z"
@@ -699,8 +718,8 @@ class Elevation extends React.Component {
                                 <polygon points="1406.74 646.51 1406.17 646.51 1406.17 641.35 1406.74 641.35 1406.74 646.51 1406.74 646.51"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P4.4_rotary_status" className={this.manageSwitchesClassName('S1P4_4')}><text transform="translate(1433.04 680.39)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P4_4')}</text></g>
+                            <g id="S1P4.4_rotary_status" className={this.manageSwitchesClassName('cb_3F2')}><text transform="translate(1433.04 680.39)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_3F2')}</text></g>
                             <g id="S2P2.1_rotary">
                                 <path d="M144.41,195.15h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,245h49.52V195.43H100.37V245Zm50.1.57H99.8V194.86h50.67v50.67Z"
@@ -719,8 +738,8 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 161.55 45.78 161.55 45.78 156.39 46.35 156.39 46.35 161.55 46.35 161.55"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P2.1_rotary_status" className={this.manageSwitchesClassName('S2P2_1')}><text transform="translate(71.04 194.46)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_1')}</text></g>
+                            <g id="S2P2.1_rotary_status" className={this.manageSwitchesClassName('cb_2F1')}><text transform="translate(71.04 194.46)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F1')}</text></g>
                             <g id="S2P2.2_rotary">
                                 <path d="M144.41,275.76h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,325.57h49.52V276H100.37v49.53Zm50.1.57H99.8V275.47h50.67v50.67Z"
@@ -737,8 +756,8 @@ class Elevation extends React.Component {
                                 <polygon points="36.55 242.16 35.98 242.16 35.98 237 36.55 237 36.55 242.16 36.55 242.16" fill="#055f87" />
                                 <polygon points="46.35 242.16 45.78 242.16 45.78 237 46.35 237 46.35 242.16 46.35 242.16" fill="#055f87" />
                             </g>
-                            <g id="S2P2.2_rotary_status" className={this.manageSwitchesClassName('S2P2_2')}><text transform="translate(71.04 275.18)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_2')}</text></g>
+                            <g id="S2P2.2_rotary_status" className={this.manageSwitchesClassName('cb_2F2')}><text transform="translate(71.04 275.18)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F2')}</text></g>
                             <g id="S2P2.3_rotary">
                                 <path d="M144.41,356.68h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,406.49h49.52V357H100.37v49.52Zm50.1.58H99.8V356.39h50.67v50.68Z"
@@ -757,8 +776,8 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 323.09 45.78 323.09 45.78 317.92 46.35 317.92 46.35 323.09 46.35 323.09"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P2.3_rotary_status" className={this.manageSwitchesClassName('S2P2_3')}><text transform="translate(71.04 356.04)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_3')}</text></g>
+                            <g id="S2P2.3_rotary_status" className={this.manageSwitchesClassName('cb_2F4')}><text transform="translate(71.04 356.04)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F4')}</text></g>
                             <g id="S2P2.4_rotary">
                                 <path d="M144.41,437.55h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,487.36h49.52V437.84H100.37v49.52Zm50.1.58H99.8V437.26h50.67v50.68Z"
@@ -777,8 +796,8 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 403.96 45.78 403.96 45.78 398.79 46.35 398.79 46.35 403.96 46.35 403.96"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P2.4_rotary_status" className={this.manageSwitchesClassName('S2P2_4')}><text transform="translate(71.04 436.91)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_4')}</text></g>
+                            <g id="S2P2.4_rotary_status" className={this.manageSwitchesClassName('cb_2F5')}><text transform="translate(71.04 436.91)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F5')}</text></g>
                             <g id="S2P2.5_rotary">
                                 <path d="M144.41,518.42h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,568.23h49.52V518.71H100.37v49.52Zm50.1.58H99.8V518.13h50.67v50.68Z"
@@ -797,8 +816,8 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 484.83 45.78 484.83 45.78 479.66 46.35 479.66 46.35 484.83 46.35 484.83"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P2.5_rotary_status" className={this.manageSwitchesClassName('S2P2_5')}><text transform="translate(71.04 517.78)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_5')}</text></g>
+                            <g id="S2P2.5_rotary_status" className={this.manageSwitchesClassName('cb_2F6')}><text transform="translate(71.04 517.78)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F6')}</text></g>
                             <g id="S2P2.10_rotary">
                                 <path d="M144.41,922.77h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,972.58h49.52V923.06H100.37v49.52Zm50.1.57H99.8V922.48h50.67v50.67Z"
@@ -817,8 +836,8 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 889.17 45.78 889.17 45.78 884.01 46.35 884.01 46.35 889.17 46.35 889.17"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P2.10_rotary_status" className={this.manageSwitchesClassName('S2P2_10')}><text transform="translate(71.04 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P2_10')}</text></g>
+                            <g id="S2P2.10_rotary_status" className='closed'><text transform="translate(71.04 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">Załączony</text></g>
                             <g id="S1P2.1_rotary">
                                 <path d="M1051.1,195.15h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,245h49.52V195.43h-49.52V245Zm50.09.57h-50.66V194.86h50.66v50.67Z"
@@ -837,8 +856,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 161.55 952.47 161.55 952.47 156.39 953.04 156.39 953.04 161.55 953.04 161.55"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.1_rotary_status" className={this.manageSwitchesClassName('S1P2_1')}><text transform="translate(979.04 194.5)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_1')}</text></g>
+                            <g id="S1P2.1_rotary_status" className={this.manageSwitchesClassName('cb_1F2')}><text transform="translate(979.04 194.5)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F2')}</text></g>
                             <g id="S1P2.2_rotary">
                                 <path d="M1051.1,275.31h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,325.12h49.52V275.6h-49.52v49.52Zm50.09.58h-50.66V275h50.66V325.7Z"
@@ -857,8 +876,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 241.72 952.47 241.72 952.47 236.55 953.04 236.55 953.04 241.72 953.04 241.72"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.2_rotary_status" className={this.manageSwitchesClassName('S1P2_2')}><text transform="translate(979.04 275.33)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_2')}</text></g>
+                            <g id="S1P2.2_rotary_status" className={this.manageSwitchesClassName('cb_1F3')}><text transform="translate(979.04 275.33)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F3')}</text></g>
                             <g id="S1P2.3_rotary">
                                 <path d="M1051.1,356.35h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,406.16h49.52V356.63h-49.52v49.53Zm50.09.57h-50.66V356.06h50.66v50.67Z"
@@ -877,8 +896,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 322.75 952.47 322.75 952.47 317.59 953.04 317.59 953.04 322.75 953.04 322.75"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.3_rotary_status" className={this.manageSwitchesClassName('S1P2_3')}><text transform="translate(979.04 356.2)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_3')}</text></g>
+                            <g id="S1P2.3_rotary_status" className={this.manageSwitchesClassName('cb_1F4')}><text transform="translate(979.04 356.2)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F4')}</text></g>
                             <g id="S1P2.4_rotary">
                                 <path d="M1051.1,437.5h5.77v50.1h-50.1V437.5h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,487.31h49.52V437.78h-49.52v49.53Zm50.09.57h-50.66V437.21h50.66v50.67Z"
@@ -897,8 +916,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 403.9 952.47 403.9 952.47 398.74 953.04 398.74 953.04 403.9 953.04 403.9"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.4_rotary_status" className={this.manageSwitchesClassName('S1P2_4')}><text transform="translate(979.04 437.06)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_4')}</text></g>
+                            <g id="S1P2.4_rotary_status" className={this.manageSwitchesClassName('cb_1F5')}><text transform="translate(979.04 437.06)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F5')}</text></g>
                             <g id="S1P2.5_rotary">
                                 <path d="M1051.1,518.37h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,568.18h49.52V518.65h-49.52v49.53Zm50.09.57h-50.66V518.08h50.66v50.67Z"
@@ -917,8 +936,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 484.77 952.47 484.77 952.47 479.61 953.04 479.61 953.04 484.77 953.04 484.77"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.5_rotary_status" className={this.manageSwitchesClassName('S1P2_5')}><text transform="translate(978.64 517.93)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_5')}</text></g>
+                            <g id="S1P2.5_rotary_status" className={this.manageSwitchesClassName('cb_1F6')}><text transform="translate(978.64 517.93)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F6')}</text></g>
                             <g id="S1P2.6_rotary">
                                 <path d="M1051.1,599.24h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,649.05h49.52V599.52h-49.52v49.53Zm50.09.57h-50.66V599h50.66v50.67Z"
@@ -937,8 +956,8 @@ class Elevation extends React.Component {
                                 <polygon points="953.04 565.64 952.47 565.64 952.47 560.48 953.04 560.48 953.04 565.64 953.04 565.64"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.6_rotary_status" className={this.manageSwitchesClassName('S1P2_6')}><text transform="translate(978.64 598.8)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_6')}</text></g>
+                            <g id="S1P2.6_rotary_status" className={this.manageSwitchesClassName('cb_1F7')}><text transform="translate(978.64 598.8)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F7')}</text></g>
                             <g id="S1P2.10_rotary">
                                 <path d="M1049.76,922.77h5.77v50.1h-50.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1005.72,972.58h49.53V923.06h-49.53v49.52Zm50.1.57h-50.67V922.48h50.67v50.67Z"
@@ -958,8 +977,8 @@ class Elevation extends React.Component {
                                 <polygon points="951.71 889.17 951.13 889.17 951.13 884.01 951.71 884.01 951.71 889.17 951.71 889.17"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P2.10_rotary_status" className={this.manageSwitchesClassName('S1P2_10')}><text transform="translate(979.04 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P2_10')}</text></g>
+                            <g id="S1P2.10_rotary_status" className='static'><text transform="translate(979.04 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">Załączony</text></g>
                             <g id="S2P3.1">
                                 <path d="M476.63,620.16H513.7V595H476.63v25.16Zm37.41.34H476.29V594.66H514V620.5Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1038,8 +1057,8 @@ class Elevation extends React.Component {
                                 <polygon points="399.88 514.35 377.85 514.35 377.85 514.01 399.88 514.01 399.88 514.35 399.88 514.35"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P3.1_status" className={this.manageSwitchesClassName('S2P3_1')}><text transform="translate(345.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P3_1')}</text></g>
+                            <g id="S2P3.1_status" className={this.manageSwitchesClassName('cb_1F1')}><text transform="translate(345.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F1')}</text></g>
                             <g id="S2P1.1">
                                 <g clipPath="url(#clip-path-15)">
                                     <polygon points="466.71 455.55 585.16 455.55 585.16 609.8 466.71 609.8 466.71 455.55 466.71 455.55"
@@ -1200,8 +1219,8 @@ class Elevation extends React.Component {
                                 <polygon points="496.27 506.99 498.07 506.99 498.07 505.19 496.27 505.19 496.27 506.99 496.27 506.99"
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
-                            <g id="S2P1.1_status" className={this.manageSwitchesClassName('S2P1_1')}><text transform="translate(482.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P1_1')}</text></g>
+                            <g id="S2P1.1_status" className={this.manageSwitchesClassName('TR2')}><text transform="translate(482.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('TR2')}</text></g>
                             <g id="S1P3.1">
                                 <path d="M1384.63,620.16h37.07V595h-37.07v25.16Zm37.41.34h-37.75V594.66H1422V620.5Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1280,8 +1299,8 @@ class Elevation extends React.Component {
                                 <polygon points="1307.88 514.35 1285.85 514.35 1285.85 514.01 1307.88 514.01 1307.88 514.35 1307.88 514.35"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P3.1_status" className={this.manageSwitchesClassName('S1P3_1')}><text transform="translate(1253.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P3_1')}</text></g>
+                            <g id="S1P3.1_status" className={this.manageSwitchesClassName('cb_1F1')}><text transform="translate(1253.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F1')}</text></g>
                             <g id="S1P4_3VA_1">
                                 <path d="M1499,416.66h26.87V398.42H1499v18.24Zm27.11.24h-27.35V398.18h27.35V416.9Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1438,10 +1457,10 @@ class Elevation extends React.Component {
                                 <polygon points="1506.37 325.89 1490.4 325.89 1490.4 325.64 1506.37 325.64 1506.37 325.89 1506.37 325.89"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P4_3VA_1_status" className={this.manageSwitchesClassName('S1P4_3VA_1')}><text transform="translate(1379.57 437.07)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P4_3VA_1')}</text></g>
-                            <g id="S1P4_3VA_2_status" className={this.manageSwitchesClassName('S1P4_3VA_2')}><text transform="translate(1465.7 437.07)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P4_3VA_2')}</text></g>
+                            <g id="S1P4_3VA_1_status" className='closed'><text transform="translate(1379.57 437.07)" fontSize="21"
+                                fontFamily="ArialMT, Arial">Zał.</text></g>
+                            <g id="S1P4_3VA_2_status" className='closed'><text transform="translate(1465.7 437.07)" fontSize="21"
+                                fontFamily="ArialMT, Arial">Zał.</text></g>
                             <g id="S2P1_3VA_1">
                                 <path d="M579.22,914.88h22.83V899.39H579.22v15.49Zm23,.21H579V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1520,9 +1539,9 @@ class Elevation extends React.Component {
                                 <polygon points="499.7 830.06 486.13 830.06 486.13 829.86 499.7 829.86 499.7 830.06 499.7 830.06"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P1_3VA_1_status" className={this.manageSwitchesClassName('S2P1_3VA_1')}><text transform="translate(465.15 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P1_3VA_1')}</text></g>
-                            <g id="S2P1_3VA_2">
+                            <g id="S2P1_3VA_1_status" className={this.manageSwitchesClassName('cb_2FP1')}><text transform="translate(465.15 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2FP1')}</text></g>
+                            <g id="S2P1_3VA_2" onClick={() => this.openProperties('cb_2FP2','Wyłącznik 2FP2','Sekcja TR2','RPZOK')} className={this.manageSwitchesClassName('cb_2FP2')}>
                                 <path d="M645.22,914.88h22.83V899.39H645.22v15.49Zm23,.21H645V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
                                 <g clipPath="url(#clip-path-20)">
@@ -1600,8 +1619,8 @@ class Elevation extends React.Component {
                                 <polygon points="565.7 830.06 552.13 830.06 552.13 829.86 565.7 829.86 565.7 830.06 565.7 830.06"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P1_3VA_2_status" className={this.manageSwitchesClassName('S2P1_3VA_2')}><text transform="translate(531.15 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S2P1_3VA_2')}</text></g>
+                            <g id="S2P1_3VA_2_status" className={this.manageSwitchesClassName('cb_2FP2')}><text transform="translate(531.15 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2FP2')}</text></g>
                             <g id="S1P1_3VA_1">
                                 <path d="M896.79,914.88h22.82V899.39H896.79v15.49Zm23,.21H896.58V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1680,8 +1699,8 @@ class Elevation extends React.Component {
                                 <polygon points="817.26 830.06 803.7 830.06 803.7 829.86 817.26 829.86 817.26 830.06 817.26 830.06"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P1_3VA_1_status" className={this.manageSwitchesClassName('S1P1_3VA_1')}><text transform="translate(782.72 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P1_3VA_1')}</text></g>
+                            <g id="S1P1_3VA_1_status" className={this.manageSwitchesClassName('cb_1FP1')}><text transform="translate(782.72 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1FP2')}</text></g>
                             <g id="S1P1_3VA_2">
                                 <path d="M960.69,914.88h22.82V899.39H960.69v15.49Zm23,.21H960.48V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1760,8 +1779,8 @@ class Elevation extends React.Component {
                                 <polygon points="881.16 830.06 867.6 830.06 867.6 829.86 881.16 829.86 881.16 830.06 881.16 830.06"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P1_3VA_2_status" className={this.manageSwitchesClassName('S1P1_3VA_2')}><text transform="translate(848.2 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P1_3VA_2')}</text></g>
+                            <g id="S1P1_3VA_2_status" className={this.manageSwitchesClassName('cb_1FP2')}><text transform="translate(848.2 929.28)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1FP2')}</text></g>
                             <g id="S0P0.1">
                                 <g clipPath="url(#clip-path-23)">
                                     <polygon points="625.21 455.55 743.66 455.55 743.66 609.8 625.21 609.8 625.21 455.55 625.21 455.55"
@@ -1922,8 +1941,8 @@ class Elevation extends React.Component {
                                 <polygon points="654.77 506.99 656.57 506.99 656.57 505.19 654.77 505.19 654.77 506.99 654.77 506.99"
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
-                            <g id="S0P0.1_status" className={this.manageSwitchesClassName('S0P0_1')}><text transform="translate(662.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S0P0_1')}</text></g>
+                            <g id="S0P0.1_status" className={this.manageSwitchesClassName('cb_Q4')}><text transform="translate(662.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q4')}</text></g>
                             <g id="S1P1.1">
                                 <g clipPath="url(#clip-path-24)">
                                     <polygon points="783.51 455.55 901.96 455.55 901.96 609.8 783.51 609.8 783.51 455.55 783.51 455.55"
@@ -2085,76 +2104,106 @@ class Elevation extends React.Component {
                                 <polygon points="813.07 506.99 814.87 506.99 814.87 505.19 813.07 505.19 813.07 506.99 813.07 506.99"
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
-                            <g id="S1P1.1_status" className={this.manageSwitchesClassName('S1P1_1')}><text transform="translate(798.64 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('S1P1_1')}</text></g>
-                            <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('S2P2_1')} onClick={() => this.openProperties('S2P2_1')}>
+                            <g id="S1P1.1_status" className={this.manageSwitchesClassName('TR1')}><text transform="translate(798.64 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('TR1')}</text></g>
+                            <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('cb_2F1')} 
+                            onClick={() => this.openProperties('cb_2F1','Wyłącznik 2F1','Sekcja TR2','Budynek 1B - P2')}>
                                 <rect x="3.44" y="128.32" width="180" height="80.87" />
                             </g>
-                            <g id="S2P2.2_overlay" className={this.manageSwitchesClassName('S2P2_2')}>
+                            <g id="S2P2.2_overlay" className={this.manageSwitchesClassName('cb_2F2')}
+                            onClick={() => this.openProperties('cb_2F2','Wyłącznik 2F2','Sekcja TR2','Budynek 2 - RG')}>
                                 <rect x="3.44" y="209.19" width="180" height="80.87" />
                             </g>
-                            <g id="S2P2.3_overlay" className={this.manageSwitchesClassName('S2P2_3')}>
+                            <g id="S2P2.3_overlay" className={this.manageSwitchesClassName('cb_2F4')}
+                            onClick={() => this.openProperties('cb_2F4','Wyłącznik 2F4','Sekcja TR2','Budynek 2 - R1')}>
                                 <rect x="3.44" y="290.12" width="180" height="80.87" />
                             </g>
-                            <g id="S2P2.4_overlay" className={this.manageSwitchesClassName('S2P2_4')}>
+                            <g id="S2P2.4_overlay" className={this.manageSwitchesClassName('cb_2F5')}
+                            onClick={() => this.openProperties('cb_2F5','Wyłącznik 2F5','Sekcja TR2','Budynek 1A')}>
                                 <rect x="3.44" y="370.99" width="180" height="80.87" />
                             </g>
-                            <g id="S2P2.5_overlay" className={this.manageSwitchesClassName('S2P2_5')}>
+                            <g id="S2P2.5_overlay" className={this.manageSwitchesClassName('cb_2F6')}
+                            onClick={() => this.openProperties('cb_2F6','Wyłącznik 2F6','Sekcja TR2','Parking')}>
                                 <rect x="3.44" y="451.86" width="180" height="80.87" />
                             </g>
-                            <g id="S2P2.10_overlay" className={this.manageSwitchesClassName('S2P2_10')}>
+                            <g id="S2P2.10_overlay" className='static'>
                                 <rect x="3.44" y="856.15" width="180" height="88.01" />
                             </g>
-                            <g id="S2P3.1_overlay" className={this.manageSwitchesClassName('S2P3_1')}>
+                            <g id="S2P3.1_overlay" className={this.manageSwitchesClassName('cb_2F3')}
+                            onClick={() => this.openProperties('cb_2F3','Wyłącznik 2F3','Sekcja TR2','Budynek 01 - MSB2')}>
                                 <rect x="320.44" y="370.93" width="137" height="323.48" />
                             </g>
-                            <g id="S2P1.1_overlay" className={this.manageSwitchesClassName('S2P1_1')}>
+                            <g id="S2P1.1_overlay" className={this.manageSwitchesClassName('TR2')}
+                            onClick={() => this.openProperties('TR2','Wyłącznik Q2','Transformator TR2','Sekcja TR2')}>
                                 <rect x="457.44" y="370.77" width="137" height="323.48" />
                             </g>
-                            <g id="S0P0.1_overlay" className="closed">
+                            <g id="S0P0.1_overlay" className="static">
                                 <rect x="594.44" y="370.93" width="180" height="323.48" />
                             </g>
-                            <g id="S1P1.1_overlay" className={this.manageSwitchesClassName('S1P1_1')}>
+                            <g id="S1P1.1_overlay" className={this.manageSwitchesClassName('TR1')}
+                            onClick={() => this.openProperties('TR1','Wyłącznik Q1','Transformator TR1','Sekcja TR1')}>
                                 <rect x="774.44" y="370.77" width="136.6" height="323.48" />
                             </g>
-                            <g id="S1P2.1_overlay" className={this.manageSwitchesClassName('S1P2_1')}>
+                            <g id="S1P2.1_overlay" className={this.manageSwitchesClassName('cb_1F2')}
+                            onClick={() => this.openProperties('cb_1F2','Wyłącznik 1F2','Sekcja TR1','Budynek 3 - komp.')}>
                                 <rect x="911.04" y="128.32" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.2_overlay" className={this.manageSwitchesClassName('S1P2_2')}>
+                            <g id="S1P2.2_overlay" className={this.manageSwitchesClassName('cb_1F3')}
+                            onClick={() => this.openProperties('cb_1F3','Wyłącznik 1F3','Sekcja TR1','Budynek 1A - komp.')}>
                                 <rect x="911.04" y="209.18" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.3_overlay" className={this.manageSwitchesClassName('S1P2_3')}>
+                            <g id="S1P2.3_overlay" className={this.manageSwitchesClassName('cb_1F4')}
+                            onClick={() => this.openProperties('cb_1F4','Wyłącznik 1F4','Sekcja TR1','Budynek 1A - klim.')}>
                                 <rect x="911.04" y="289.84" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.4_overlay" className={this.manageSwitchesClassName('S1P2_4')}>
+                            <g id="S1P2.4_overlay" className={this.manageSwitchesClassName('cb_1F5')}
+                            onClick={() => this.openProperties('cb_1F5','Wyłącznik 1F5','Sekcja TR1','Budynek 3 - RG')}>
                                 <rect x="911.04" y="370.79" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.5_overlay" className={this.manageSwitchesClassName('S1P2_5')}>
+                            <g id="S1P2.5_overlay" className={this.manageSwitchesClassName('cb_1F6')}
+                            onClick={() => this.openProperties('cb_1F6','Wyłącznik 1F6','Sekcja TR1','Budynek 2 - RG')}>
                                 <rect x="911.04" y="451.86" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.6_overlay" className={this.manageSwitchesClassName('S1P2_6')}>
+                            <g id="S1P2.6_overlay" className={this.manageSwitchesClassName('cb_1F7')}
+                            onClick={() => this.openProperties('cb_1F7','Wyłącznik 1F7','Sekcja TR1','Budynek 2 - RG')}>
                                 <rect x="911.04" y="532.67" width="180" height="80.87" />
                             </g>
-                            <g id="S1P2.10_overlay" className={this.manageSwitchesClassName('S1P2_10')}>
+                            <g id="S1P2.10_overlay" className='static'>
                                 <rect x="911.04" y="856.2" width="180" height="87.82" />
                             </g>
-                            <g id="S1P3.1_overlay" className={this.manageSwitchesClassName('S1P3_1')}>
+                            <g id="S1P3.1_overlay" className={this.manageSwitchesClassName('cb_1F1')}
+                            onClick={() => this.openProperties('cb_1F1','Wyłącznik 1F1','Sekcja TR1','Budynek 01 - MSB1')}>
                                 <rect x="1228.44" y="370.93" width="136.6" height="323.48" />
                             </g>
-                            <g id="S1P4.3_overlay" className={this.manageSwitchesClassName('S1P4_3')}>
+                            <g id="S1P4.3_overlay" className={this.manageSwitchesClassName('cb_3F1')}
+                            onClick={() => this.openProperties('cb_3F1','Wyłącznik 3F1','Sekcja GEN','Budynek 2 - serwer.')}>
                                 <rect x="1365.24" y="532.73" width="180" height="80.87" />
                             </g>
-                            <g id="S1P4.4_overlay" className={this.manageSwitchesClassName('S1P4_4')}>
+                            <g id="S1P4.4_overlay" className={this.manageSwitchesClassName('cb_3F2')}
+                            onClick={() => this.openProperties('cb_3F2','Wyłącznik 3F2','Sekcja GEN','Budynek 01 - MSG')}>
                                 <rect x="1365.44" y="613.6" width="180" height="80.87" />
                             </g>
-                            <g id="S1P4_overlay" className="closed">
-                                <rect x="1365.44" y="85.62" width="180" height="366.18" />
+                            <g id="S1P4_3VA_1_overlay" className="closed">
+                                <rect x="1365.44" y="85.62" width="90" height="366.18" />
                             </g>
-                            <g id="S2P1_overlay" className="closed">
-                                <rect x="457.64" y="694.41" width="136.6" height="249.61" />
+                            <g id="S1P4_3VA_2_overlay" className="closed">
+                                <rect x="1455.44" y="85.62" width="90" height="366.18" />
                             </g>
-                            <g id="S1P1_overlay" className="closed">
-                                <rect x="774.64" y="694.41" width="136.6" height="249.61" />
+                            <g id="S2P1_3VA_1_overlay" className={this.manageSwitchesClassName('cb_2FP1')}
+                            onClick={() => this.openProperties('cb_2FP1','Wyłącznik 2FP1','TR2','Budynek 01 - MSF')}>
+                                <rect x="457.64" y="694.41" width="68.3" height="249.61" />
+                            </g>
+                            <g id="S2P1_3VA_2_overlay" className={this.manageSwitchesClassName('cb_2FP2')}
+                            onClick={() => this.openProperties('cb_2FP2','Wyłącznik 2FP2','TR2','RPZOK')}>
+                                <rect x="525.94" y="694.41" width="68.3" height="249.61" />
+                            </g>
+                            <g id="S1P1_3VA_1_overlay" className={this.manageSwitchesClassName('cb_1FP1')}
+                            onClick={() => this.openProperties('cb_1FP1','Wyłącznik 1FP1','TR1','Budynek 01 - MSF')}>
+                                <rect x="774.64" y="694.41" width="68.3" height="249.61" />
+                            </g>
+                            <g id="S1P1_3VA_2_overlay" className={this.manageSwitchesClassName('cb_1FP2')}
+                            onClick={() => this.openProperties('cb_1FP2','Wyłącznik 1FP2','TR1','RPZOK')}>
+                                <rect x="842.94" y="694.41" width="68.3" height="249.61" />
                             </g>
                             <g id="Roof">
                                 <polygon points="1669.84 33.62 3.44 33.62 53.44 1.82 1719.44 1.82 1669.84 33.62" fill="#a6c7d5" stroke="#055f87"
@@ -2170,8 +2219,9 @@ class Elevation extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        params: state.elevation,
-        dialogOpen: state.chartData.openDialog
+        //params: state.elevation,
+        params: state,
+        dialogOpen: state.deviceProperties.openDialog
     };
 }
 

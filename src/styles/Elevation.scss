@@ -6,30 +6,42 @@ $strokeOnHover:rgba(255,180,0,1);
 $strokeWidth: 5px;
 $opacityZero: rgba(255,255,255,0);
 
+//mixins
+@mixin strokeParams {
+    stroke-width: $strokeWidth;
+    stroke: $strokeOnHover;
+}
+
 .minwidth {
     min-width: 1023px
 }
 
 .closed {
     fill: $closedText;
-    rect 
+    rect
     {
         fill: $opacityZero;
         &:hover {
-            stroke-width: 5px;
-            stroke: $strokeOnHover;
+            @include strokeParams
         }
     }
 }
 
 .open {
     fill: $openText;
+    
     rect
     {
         fill: $errorLayer;
         &:hover {
-            stroke-width: $strokeWidth;
-            stroke: $strokeOnHover;
+            @include strokeParams
         }
+    }
+}
+
+.static {
+    fill: $closedText;
+    rect {
+        fill: $opacityZero;
     }
 }
