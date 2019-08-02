@@ -1,7 +1,8 @@
 import React from 'react'
 import Chart from "chart.js";
 import { connect } from 'react-redux';
-import { getData } from '../actions/iottimeseriesData';
+import { getData, sliderSetTimerange } from '../actions/iottimeseriesData';
+import moment from 'moment';
 
 let myLineChart;
 Chart.defaults.global.animation.duration = 300;
@@ -135,11 +136,12 @@ class TimeSeriesChart extends React.Component {
     }
 
     updateChartWithInterval = () => {
-        this.props.getData(this.tabIndex)
+        this.props.getData(this.tabIndex, this.props.params.timeRangeSlider)
+        
         this.updateInterval = setInterval(()=>{ 
             if(this.props.params.liveDataUpdate===true)
             {
-                this.props.getData(this.tabIndex)
+                this.props.getData(this.tabIndex, this.props.params.timeRangeSlider)
             }
         }, 30000)
     }
@@ -161,7 +163,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    getData
+    getData,
+    sliderSetTimerange
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeSeriesChart)

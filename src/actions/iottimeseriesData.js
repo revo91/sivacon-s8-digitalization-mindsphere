@@ -15,9 +15,12 @@ export const clearDatasets = () => ({ type: CLEAR_DATASETS })
 export const chartLiveUpdate = (enabled) => ({ type: CHART_LIVE_UPDATE, enabled })
 export const sliderSetTimerange = (timerange) => ({ type: SLIDER_SET_TIMERANGE, timerange })
 
-export const getData = (tabIndex) => {
-    let fromDate = moment().subtract(1, 'hour').toISOString();
-    let toDate = moment().toISOString()
+export const getData = (tabIndex, fromTime) => {
+
+    let from = moment(fromTime).toISOString()
+    let to = moment(from).add(30, 'minutes').toISOString();
+    console.log(from)
+    console.log(to)
 
     return dispatch => {
         let datasets = [];
@@ -51,7 +54,7 @@ export const getData = (tabIndex) => {
         // set state to "loading"
         dispatch(getDataRequested());
         axios({
-            url: `/api/iottimeseries/v3/timeseries/be32c81e40b541dab543f139a9f99eee/PAC2200?from=${fromDate}&to=${toDate}&sort=desc&limit=2000`,
+            url: `/api/iottimeseries/v3/timeseries/be32c81e40b541dab543f139a9f99eee/PAC2200?from=${from}&to=${to}&sort=desc&limit=2000`,
             header: 'application/json',
             method: 'GET',
             withCredentials: true,

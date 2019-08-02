@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from '@material-ui/core/Slider';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-import { sliderSetTimerange, getData } from '../actions/iottimeseriesData';
+import { sliderSetTimerange, getData, chartLiveUpdate } from '../actions/iottimeseriesData';
 import { connect } from 'react-redux';
 
 const styles = theme => ({
@@ -216,8 +216,8 @@ class ChartDataRangeTimeSlider extends React.Component {
 
     componentDidMount() {
         window.addEventListener("resize", this.checkWidth);
-        console.log(this.props.timeRange)
     }
+
 
     checkWidth = () => {
         let divider = null;
@@ -239,18 +239,41 @@ class ChartDataRangeTimeSlider extends React.Component {
         return formattedMarks;
     }
 
+    setCurrentTime = () => {
+        let sliderValue = 0;
+        let currentTimeInHHmmFormat = moment(this.props.timeRange).format('HH:mm');
+        let hours = currentTimeInHHmmFormat.substring(0,2)
+        let minutes = currentTimeInHHmmFormat.substring(3,currentTimeInHHmmFormat.length)
+        sliderValue = hours*2;
+        if(parseInt(minutes[0])>=3)
+        {
+            sliderValue++
+        }
+        return sliderValue
+    }
+
     setTimeRange = (value) => {
         let multiplier = value;
         let addMinutes = multiplier*30;
-        let startOfDay = moment().startOf("day");
-        this.props.sliderSetTimerange(startOfDay.add(addMinutes,"minutes").toISOString());
-        this.props.getData(this.props.tabIndex)
+        let startOfDay = null;
+        if(this.props.timeRange !== null)
+        {
+            startOfDay = moment(this.props.timeRange).startOf("day");
+        }
+        else {
+            startOfDay = moment().startOf("day");
+        }
+        let addedMinutes = startOfDay.add(addMinutes,"minutes").toISOString()
+
+        this.props.sliderSetTimerange(addedMinutes);
+        this.props.getData(this.props.tabIndex, addedMinutes)
+        this.props.chartLiveUpdate(false)
     }
 
     render() {
         return (
             <Slider
-                defaultValue={20}
+                defaultValue={this.setCurrentTime()}
                 getAriaValueText={this.valuetext}
                 aria-labelledby="discrete-slider"
                 step={1}
@@ -275,7 +298,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
     sliderSetTimerange,
-    getData
+    getData,
+    chartLiveUpdate
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ChartDataRangeTimeSlider))

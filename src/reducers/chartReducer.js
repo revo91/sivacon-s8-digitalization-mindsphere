@@ -16,7 +16,7 @@ const initialState = {
     isChartDataLoading: false,
     isError: false,
     zoom: 1,
-    timeRangeSlider: 1, //0-47
+    timeRangeSlider: new Date().toISOString(),
     liveDataUpdate: true,
     datasets: [],
     unit: 'V',

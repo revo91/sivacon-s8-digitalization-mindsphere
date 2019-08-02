@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { sliderSetTimerange } from '../actions/iottimeseriesData';
 
 const styles = theme => ({
     container: {
@@ -17,6 +18,11 @@ class ChartDataRangeTimePicker extends React.Component {
     getTodayDate = () => {
         return moment().format('YYYY-MM-DD')
     }
+
+    handleChangeTime = (event) => {
+        this.props.sliderSetTimerange(moment(event.target.value).toISOString())
+    }
+
     render() {
         const { classes } = this.props;
         return (
@@ -30,6 +36,7 @@ class ChartDataRangeTimePicker extends React.Component {
                     InputLabelProps={{
                         shrink: true,
                     }}
+                    onChange={this.handleChangeTime}
                 />
             </form>
         )
@@ -44,7 +51,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    //setDataRange
+    sliderSetTimerange,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ChartDataRangeTimePicker))
