@@ -21,8 +21,14 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TweenLite from 'gsap';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { randomizeChartData, manageDialogOpen, zoom, manageDialogTab, setCurrentDeviceStatus,
-setCurrentDeviceType } from '../actions/index';
+import {
+  randomizeChartData, manageDialogOpen, zoom, manageDialogTab, setCurrentDeviceStatus,
+  setCurrentDeviceType
+} from '../actions/index';
+import { clearDatasets } from '../actions/iottimeseriesData';
+import ChartLiveUpdateControls from './ChartLiveUpdateControls';
+import ChartDataRangeTimePicker from './ChartDataRangeTimePicker';
+import ChartDataRangeTimeSlider from './ChartDataRangeTimeSlider';
 import '../styles/SlideupDialog.scss';
 
 const styles = theme => ({
@@ -49,6 +55,14 @@ const styles = theme => ({
   },
   svgMaxHeight: {
     maxHeight: '60vh'
+  },
+  chartControls: {
+    padding:theme.spacing(2),
+    marginTop: theme.spacing(3),
+    backgroundColor: '#dbdbdb'
+  },
+  chartSlider: {
+    width: '95%'
   }
 });
 
@@ -76,29 +90,33 @@ class SlideupDialog extends React.Component {
 
 
   handleChangeTabs = (event, val) => {
-    this.props.dispatch(manageDialogTab(val))
+    this.props.manageDialogTab(val)
     if (val === 0) {
-      setTimeout(()=>this.changeDeviceState(),100)
+      setTimeout(() => this.changeDeviceState(), 100)
+    }
+    if(val!==this.props.params.tabIndex)
+    {
+      this.props.clearDatasets()
     }
   }
 
   changeDeviceState = () => {
     let currentDevice = this.props.params.selectedDevice;
     let currentTab = this.props.params.tabIndex;
-    let middleDevices = ['cb_1FP1','cb_1FP2','cb_2FP1','cb_2FP2'];
-    let topDevices = ['TR1','TR2','GEN'];
+    let middleDevices = ['cb_1FP1', 'cb_1FP2', 'cb_2FP1', 'cb_2FP2'];
+    let topDevices = ['TR1', 'TR2', 'GEN'];
     let deviceLevelRef = null;
     //check device type for showing circuit svg
-    if (topDevices.indexOf(currentDevice)!==-1) {
-      this.props.dispatch(setCurrentDeviceType('topDevice'))
+    if (topDevices.indexOf(currentDevice) !== -1) {
+      this.props.setCurrentDeviceType('topDevice')
       deviceLevelRef = this.switchRefTop.current;
     }
-    else if (middleDevices.indexOf(currentDevice)!==-1) {
-      this.props.dispatch(setCurrentDeviceType('middleDevice'))
+    else if (middleDevices.indexOf(currentDevice) !== -1) {
+      this.props.setCurrentDeviceType('middleDevice')
       deviceLevelRef = this.switchRefMid.current;
     }
     else {
-      this.props.dispatch(setCurrentDeviceType('bottomDevice'))
+      this.props.setCurrentDeviceType('bottomDevice')
       deviceLevelRef = this.switchRefBottom.current;
     }
 
@@ -107,22 +125,22 @@ class SlideupDialog extends React.Component {
         let breaker = this.props.breakers[currentDevice].state;
         if (breaker === 0) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 0, transformOrigin: "100% 100%" })
-          this.props.dispatch(setCurrentDeviceStatus(0))
+          this.props.setCurrentDeviceStatus(0)
         }
         else if (breaker === 1) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 45, transformOrigin: "100% 100%" })
-          this.props.dispatch(setCurrentDeviceStatus(1))
+          this.props.setCurrentDeviceStatus(1)
         }
       }
       else {
         let source = this.props.sources[currentDevice].state;
         if (source === 0) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 0, transformOrigin: "100% 100%" })
-          this.props.dispatch(setCurrentDeviceStatus(0))
+          this.props.setCurrentDeviceStatus(0)
         }
         else if (source === 1) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 45, transformOrigin: "100% 100%" })
-          this.props.dispatch(setCurrentDeviceStatus(1))
+          this.props.setCurrentDeviceStatus(1)
         }
       }
     }
@@ -143,21 +161,21 @@ class SlideupDialog extends React.Component {
 
       data.push({ x: point.toISOString(), y: Math.floor(Math.random() * 1000) })
     }
-    this.props.dispatch(randomizeChartData(data));
+    this.props.randomizeChartData(data);
   }
 
   chartZoomDateRange = (InOut) => {
-    let currentZoomValue = this.props.params.zoom;
+    let currentZoomValue = this.props.zoomMultiplier;
     if (currentZoomValue < 2 && InOut === "In") {
-      this.props.dispatch(zoom((currentZoomValue * 10 + 0.1 * 10) / 10));
+      this.props.zoom((currentZoomValue * 10 + 0.1 * 10) / 10);
     }
     else if (currentZoomValue > 0.1 && InOut === 'Out') {
-      this.props.dispatch(zoom((currentZoomValue * 10 - 0.1 * 10) / 10));
+      this.props.zoom((currentZoomValue * 10 - 0.1 * 10) / 10);
     }
   }
 
   handleDialogOpen = (open) => {
-    this.props.dispatch(manageDialogOpen(open))
+    this.props.manageDialogOpen(open)
   }
 
   getCurrentDeviceType = () => {
@@ -165,8 +183,8 @@ class SlideupDialog extends React.Component {
   }
 
   render() {
-    const { classes, params } = this.props;
-    const overviewDeviceCircuitMid = <svg id="main" className={params.currentDeviceType!=='middleDevice'?'invisibleCircuit':'visibleCircuit'} data-name="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 158.76 291.11" >
+    const { classes, params, zoomMultiplier } = this.props;
+    const overviewDeviceCircuitMid = <svg id="main" className={params.currentDeviceType !== 'middleDevice' ? 'invisibleCircuit' : 'visibleCircuit'} data-name="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 158.76 291.11" >
       <line x1="107.98" x2="107.98" y2="39" fill="#383838" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
       <circle cx="107.98" cy="68.07" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
       <circle cx="107.98" cy="97.13" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
@@ -193,7 +211,7 @@ class SlideupDialog extends React.Component {
               id="OutgoingFeederName" transform="translate(1.45 285.3)" fontSize="12" fill="#1d1d1b"
               fontFamily="ArialMT, Arial">{params.deviceOutgoingFeeder}</text>
     </svg>
-    const overviewDeviceCircuitBottom = <svg  className={params.currentDeviceType!=='bottomDevice'?'invisibleCircuit':'visibleCircuit'} id="overview_device_bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 107.41 244.83">
+    const overviewDeviceCircuitBottom = <svg className={params.currentDeviceType !== 'bottomDevice' ? 'invisibleCircuit' : 'visibleCircuit'} id="overview_device_bottom" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 107.41 244.83">
       <line x1="25.32" y1="128.59" x2="41.22" y2="112.69" fill="none" stroke="#1d1d1b" strokeLinecap="square"
         strokeMiterlimit="10" strokeWidth="2" />
       <line x1="41.22" y1="128.59" x2="25.32" y2="112.69" fill="none" stroke="#1d1d1b" strokeLinecap="square"
@@ -211,9 +229,7 @@ class SlideupDialog extends React.Component {
               transform="translate(1 239.02)" fontSize="12" fill="#1d1d1b" fontFamily="ArialMT, Arial">{params.deviceOutgoingFeeder}</text>
     </svg>
 
-    
-
-    const overviewDeviceCircuitTop = <svg className={params.currentDeviceType!=='topDevice'?'invisibleCircuit':'visibleCircuit'} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.27 319.63" >
+    const overviewDeviceCircuitTop = <svg className={params.currentDeviceType !== 'topDevice' ? 'invisibleCircuit' : 'visibleCircuit'} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121.27 319.63" >
       <g id="Main">
         <line x1="36.86" x2="36.86" y2="39" fill="#383838" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
         <circle cx="36.86" cy="68.91" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
@@ -253,8 +269,6 @@ class SlideupDialog extends React.Component {
       </g>
     </svg>
 
-
-
     return (
       <div>
         <Dialog fullScreen open={params.openDialog} onClose={() => this.handleDialogOpen(false)}
@@ -269,7 +283,7 @@ class SlideupDialog extends React.Component {
               <Typography variant="h6" className={classes.title}>
                 {params.deviceTitle}
               </Typography>
-              {this.props.params.tabIndex !== 0 ?
+              {params.tabIndex !== 0 ?
                 <div>
                   <Tooltip title="Powrót" >
                     <IconButton color="inherit" onClick={() => this.handleChangeTabs(null, 0)}>
@@ -286,16 +300,16 @@ class SlideupDialog extends React.Component {
                       <ChevronRight />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title="Przybliż">
-                    <IconButton color="inherit" onClick={() => this.chartZoomDateRange("Out")}>
+                  <IconButton color="inherit" onClick={() => this.chartZoomDateRange("Out")} disabled={zoomMultiplier <= 1 ? true : false}>
+                    <Tooltip title="Oddal">
                       <ZoomOutIcon />
-                    </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Oddal">
-                    <IconButton color="inherit" onClick={() => this.chartZoomDateRange("In")}>
+                    </Tooltip>
+                  </IconButton>
+                  <IconButton color="inherit" onClick={() => this.chartZoomDateRange("In")} disabled={zoomMultiplier >= 2 ? true : false}>
+                    <Tooltip title="Przybliż">
                       <ZoomInIcon />
-                    </IconButton>
-                  </Tooltip>
+                    </Tooltip>
+                  </IconButton>
                 </div>
                 : null}
             </Toolbar>
@@ -310,9 +324,10 @@ class SlideupDialog extends React.Component {
                 indicatorColor="primary"
                 textColor="primary"
                 centered
-                
+
               >
                 <Tab label="Przegląd" />
+                <Tab label="Napięcie" />
                 <Tab label="Prąd" />
                 <Tab label="Moc" />
               </Tabs>
@@ -320,11 +335,9 @@ class SlideupDialog extends React.Component {
             {params.tabIndex === 0 && <TabContainer><Grid container spacing={2} alignItems="flex-start" justify="center">
               <Grid container item xs={12} sm={12} md={4} spacing={2}>
                 <Grid item xs={12}>
-                {overviewDeviceCircuitBottom}
-                {overviewDeviceCircuitMid}
-                {overviewDeviceCircuitTop}
-
-
+                  {overviewDeviceCircuitBottom}
+                  {overviewDeviceCircuitMid}
+                  {overviewDeviceCircuitTop}
                 </Grid>
               </Grid>
               <Grid container item xs={12} sm={12} md={8} spacing={2}>
@@ -393,9 +406,41 @@ class SlideupDialog extends React.Component {
               </Grid>
             </Grid>
             </TabContainer>}
-            {this.props.params.tabIndex === 1 && <TabContainer><TimeSeriesChart /></TabContainer>}
-            {this.props.params.tabIndex === 2 && <TabContainer>Item Three</TabContainer>}
-
+            {params.tabIndex === 1 && <TabContainer>
+              <TimeSeriesChart />
+              <Grid container spacing={1} direction="row" justify="center" alignItems="center">
+                <Grid item xs={11}>
+                  <ChartDataRangeTimeSlider/>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} justify="space-between" alignItems="flex-start" alignContent="space-around" className={classes.chartControls}>
+                <Grid item xs={12}>
+                <Typography variant="h6">Ustawienia</Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ChartDataRangeTimePicker/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ChartLiveUpdateControls/>
+                </Grid>
+              </Grid>
+              
+              </TabContainer>}
+            {params.tabIndex === 2 && <TabContainer>
+              <TimeSeriesChart />
+              <Grid container spacing={2} justify="space-between" alignItems="flex-start" alignContent="space-around" className={classes.chartControls}>
+                <Grid item xs={12}>
+                <Typography variant="h6">Ustawienia</Typography>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ChartDataRangeTimePicker/>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <ChartLiveUpdateControls/>
+                </Grid>
+              </Grid>
+              </TabContainer>}
+            {params.tabIndex === 3 && <TabContainer>Fourth</TabContainer>}
           </div>
         </Dialog>
       </div>
@@ -405,10 +450,22 @@ class SlideupDialog extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    params: state.deviceProperties,
-    breakers: state.breakers,
-    sources: state.sources
+    params: state.dialogReducer,
+    breakers: state.switchesStateReducer.breakers,
+    sources: state.switchesStateReducer.sources,
+    zoomMultiplier: state.chartReducer.zoom,
+    chartDatasets: state.chartReducer.datasets
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(SlideupDialog))
+const mapDispatchToProps = {
+  randomizeChartData,
+  manageDialogOpen,
+  zoom,
+  manageDialogTab,
+  setCurrentDeviceStatus,
+  setCurrentDeviceType,
+  clearDatasets
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SlideupDialog))

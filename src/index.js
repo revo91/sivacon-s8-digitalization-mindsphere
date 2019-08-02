@@ -6,10 +6,11 @@ import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
 
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import { reducer } from './reducer/index';
+import { createStore, applyMiddleware } from 'redux';
 import teal from '@material-ui/core/colors/teal';
 import red from '@material-ui/core/colors/red';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers/rootReducer';
 
 import { MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
 
@@ -20,7 +21,7 @@ const theme = createMuiTheme({
     }
   });
   
-const store = createStore(reducer)
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(<Provider store={store}><MuiThemeProvider theme={theme}><App /></MuiThemeProvider></Provider>, document.getElementById('root'));
 

@@ -137,7 +137,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    drawerOpen: state.drawerOpen
+    drawerOpen: state.drawerReducer.drawerOpen
   };
 }
 

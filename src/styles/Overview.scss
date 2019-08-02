@@ -1,37 +1,21 @@
-//overview variables
-$voltageAppliedLine: #3ec221;
-$noVoltage: #30332f;
 
-//elevation variables
-$closedText: #03ac1a;
-$openText: #ee0000;
-$errorLayer:rgba(255,0,0,0.3);
-$opacityZero: rgba(255,255,255,0);
+
+@import '_variables.scss';
 
 .minwidth {
-    min-width: 1023px
+    min-width: $svgMinWidth
 }
 
 .voltageApplied {
-    stroke: $voltageAppliedLine
+    stroke: $voltageAppliedLine;
 }
 
 .noVoltage {
     stroke: $noVoltage
 }
 
-.closed {
-    fill: $closedText;
-    rect 
-    {
-        fill: $opacityZero;
-    }
-}
-
-.open {
-    fill: $openText;
-    rect
-    {
-        fill: $errorLayer;
+.overlay {
+    &:hover {
+        @include strokeParams
     }
 }

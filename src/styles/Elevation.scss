@@ -1,19 +1,7 @@
-//elevation variables
-$closedText: #03ac1a;
-$openText: #ee0000;
-$errorLayer:rgba(255, 196, 0, 0.445);
-$strokeOnHover:rgba(255,180,0,1);
-$strokeWidth: 5px;
-$opacityZero: rgba(255,255,255,0);
-
-//mixins
-@mixin strokeParams {
-    stroke-width: $strokeWidth;
-    stroke: $strokeOnHover;
-}
+@import '_variables.scss';
 
 .minwidth {
-    min-width: 1023px
+    min-width: $svgMinWidth;
 }
 
 .closed {

@@ -27,7 +27,7 @@ class ElevationTest extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      params1: state
+      params1: state.overviewReducer
     };
   }
 

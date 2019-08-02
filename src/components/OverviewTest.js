@@ -31,7 +31,7 @@ class OverviewTest extends React.Component {
 
 function mapStateToProps(state) {
     return {
-      params: state
+      params: state.switchesStateReducer
     };
   }
 

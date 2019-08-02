@@ -42,7 +42,7 @@ class Elevation extends React.Component {
     }
 
     openProperties = (name, title, section, outgoingFeeder) => {
-        this.props.dispatch(manageDialogOpen(true, name, title, section, outgoingFeeder))
+        this.props.manageDialogOpen(true, name, title, section, outgoingFeeder)
     }
 
     render() {
@@ -2219,10 +2219,13 @@ class Elevation extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        //params: state.elevation,
-        params: state,
-        dialogOpen: state.deviceProperties.openDialog
+        params: state.switchesStateReducer,
+        dialogOpen: state.dialogReducer.openDialog
     };
 }
 
-export default connect(mapStateToProps)(Elevation)
+const mapDispatchToProps = {
+    manageDialogOpen
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Elevation)
