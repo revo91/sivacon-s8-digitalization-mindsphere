@@ -12,7 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewArrayIcon from '@material-ui/icons/ViewArray';
-import EventIcon from '@material-ui/icons/EventIcon';
+import EventIcon from '@material-ui/icons/Event';
 import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
