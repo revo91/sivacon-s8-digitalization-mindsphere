@@ -83,7 +83,7 @@ const styles = theme => ({
 class App extends React.Component {
 
   handleDrawerOpen = (open) => {
-    this.props.dispatch(manageDrawerOpen(open))
+    this.props.manageDrawerOpen(open)
   }
 
   render() {
@@ -130,7 +130,7 @@ class App extends React.Component {
               <Divider />
               <ListItem button onClick={()=>this.props.manageLanguageDialog(true)}>
                 <ListItemIcon><LanguageIcon /></ListItemIcon>
-                <ListItemText primary="Zdarzenia" />
+                <ListItemText primary="Język" />
               </ListItem>
             </List>
           </Drawer>
@@ -159,7 +159,8 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-  manageLanguageDialog, 
+  manageLanguageDialog,
+  manageDrawerOpen
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App))
