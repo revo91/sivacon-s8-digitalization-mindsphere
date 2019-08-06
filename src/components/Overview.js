@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import { manageDialogOpen } from '../actions/index';
+import { withTranslation } from 'react-i18next';
 
 class Overview extends React.Component {
     constructor(props) {
@@ -69,6 +70,7 @@ class Overview extends React.Component {
     render() {
         const breakers = this.props.params.breakers;
         const sources = this.props.params.sources;
+        const t = this.props.t;
 
         //voltage to 1-3FX shortcuts
         const breakers_2FX = (breakers.cb_Q2.state === 1 && sources.TR2.state === 1)
@@ -86,7 +88,7 @@ class Overview extends React.Component {
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <Typography variant="h3" gutterBottom>
-                            Przegląd
+                            {t('overview')}
                         </Typography>
                         <Divider />
                     </Grid>
@@ -129,7 +131,8 @@ class Overview extends React.Component {
                                 <line x1="252.54" y1="126.2" x2="252.54" y2="230.73" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
-                            <g id="TR2_Tab" onClick={() => this.openProperties('TR2','Wyłącznik Q2','Transformator TR2','Sekcja TR2')}>
+                            <g id="TR2_Tab" onClick={() => this.openProperties('TR2','Q2',`${t('slideUpDialogCircuitTransformer')} TR2`,
+                            `${t('slideUpDialogCircuitSection')} TR2`)}>
                                 <rect x="303.91" y="64.33" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="303.91" y="82.6" width="60" height="18.6" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -405,7 +408,8 @@ class Overview extends React.Component {
                                 <line x1="712.24" y1="126.2" x2="712.24" y2="231.03" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
-                            <g id="TR1_Tab" onClick={() => this.openProperties('TR1','Wyłącznik Q1','Transformator TR1','Sekcja TR1')}>
+                            <g id="TR1_Tab" onClick={() => this.openProperties('TR1','Q1',`${t('slideUpDialogCircuitTransformer')} TR1`,
+                            `${t('slideUpDialogCircuitSection')} TR1`)}>
                                 <rect x="763.65" y="64.33" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="763.65" y="82.6" width="60" height="18.6" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -435,7 +439,7 @@ class Overview extends React.Component {
                                 <line x1="1017.82" y1="126.2" x2="1017.82" y2="230.14" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
-                            <g id="GEN_Tab" onClick={() => this.openProperties('GEN','Wyłącznik Q3','Generator','Sekcja GEN')}>
+                            <g id="GEN_Tab" onClick={() => this.openProperties('GEN','Q3','Generator','Sekcja GEN')}>
                                 <rect x="937.85" y="155.2" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="937.85" y="173.46" width="60" height="18.6" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -504,7 +508,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP2_Tab" data-name="1FP2_Tab" 
-                            onClick={() => this.openProperties('cb_1FP2','Wyłącznik 1FP2','Sekcja TR1','RPZOK')}
+                            onClick={() => this.openProperties('cb_1FP2','1FP2',`${t('slideUpDialogCircuitSection')} TR1`,'RPZOK')}
                                 className={(sources.TR1.state === 1) && (breakers.cb_1FP2.state === 1) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="592.74" y1="212.29" x2="592.74" y2="249.82" fill="none" strokeLinecap="round"
@@ -531,7 +535,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP1_Tab" data-name="1FP1_Tab"
-                            onClick={() => this.openProperties('cb_1FP1','Wyłącznik 1FP1','Sekcja TR1','Budynek 01 - MSF')}
+                            onClick={() => this.openProperties('cb_1FP1','1FP1',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 01 - MSF')}
                                 className={(sources.TR1.state === 1) && (breakers.cb_1FP1.state === 1) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="515.81" y1="212.06" x2="515.81" y2="249.59" fill="none" strokeLinecap="round"
@@ -559,7 +563,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2FP2_Tab" data-name="2FP2_Tab" 
-                            onClick={() => this.openProperties('cb_2FP2','Wyłącznik 2FP2','Sekcja TR2','RPZOK')}
+                            onClick={() => this.openProperties('cb_2FP2','2FP2',`${t('slideUpDialogCircuitSection')} TR2`,'RPZOK')}
                             className={breakers.cb_2FP2.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="134.29" y1="211.87" x2="134.29" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -583,7 +587,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2FP1_Tab" data-name="2FP1_Tab" 
-                            onClick={() => this.openProperties('cb_2FP1','Wyłącznik 2FP1','Sekcja TR2','Budynek 01 - MSF')}
+                            onClick={() => this.openProperties('cb_2FP1','2FP1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSF')}
                             className={breakers.cb_2FP1.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="56.07" y1="211.87" x2="56.07" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -608,7 +612,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F2_Tab" data-name="3F2_Tab"
-                            onClick={() => this.openProperties('cb_3F2','Wyłącznik 3F2','Sekcja GEN','Budynek 01 - MSG')}
+                            onClick={() => this.openProperties('cb_3F2','3F2','Sekcja GEN','Budynek 01 - MSG')}
                                 className={breakers_3FX && breakers.cb_3F2.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1017.82" y1="410.07" x2="1017.82" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -631,7 +635,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F1_Tab" data-name="3F1_Tab"
-                            onClick={() => this.openProperties('cb_3F1','Wyłącznik 3F1','Sekcja GEN','Budynek 2 - serwer.')}
+                            onClick={() => this.openProperties('cb_3F1','3F1','Sekcja GEN','Budynek 2 - serwer.')}
                                 className={breakers_3FX && breakers.cb_3F1.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="952.14" y1="410.07" x2="952.14" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -655,7 +659,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F7_Tab" data-name="1F7_Tab"
-                            onClick={() => this.openProperties('cb_1F7','Wyłącznik 1F7','Sekcja TR1','Budynek 2 - RG')}
+                            onClick={() => this.openProperties('cb_1F7','1F7',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}
                                 className={breakers_1FX && breakers.cb_1F7.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="844.89" y1="410.07" x2="844.89" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -680,7 +684,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F6_Tab" data-name="1F6_Tab"
-                            onClick={() => this.openProperties('cb_1F6','Wyłącznik 1F6','Sekcja TR1','Budynek 2 - RG')}
+                            onClick={() => this.openProperties('cb_1F6','1F6',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}
                                 className={breakers_1FX && breakers.cb_1F6.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="779.21" y1="410.07" x2="779.21" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -705,7 +709,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F5_Tab" data-name="1F5_Tab"
-                            onClick={() => this.openProperties('cb_1F5','Wyłącznik 1F5','Sekcja TR1','Budynek 3 - RG')}
+                            onClick={() => this.openProperties('cb_1F5','1F5',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - RG')}
                                 className={breakers_1FX && breakers.cb_1F5.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="713.53" y1="410.07" x2="713.53" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -730,7 +734,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F4_Tab" data-name="1F4_Tab"
-                            onClick={() => this.openProperties('cb_1F4','Wyłącznik 1F4','Sekcja TR1','Budynek 1A - klim.')}
+                            onClick={() => this.openProperties('cb_1F4','1F4',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - klim.')}
                                 className={breakers_1FX && breakers.cb_1F4.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="647.84" y1="410.07" x2="647.84" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -756,7 +760,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F3_Tab" data-name="1F3_Tab"
-                            onClick={() => this.openProperties('cb_1F3','Wyłącznik 1F3','Sekcja TR1','Budynek 1A - komp.')}
+                            onClick={() => this.openProperties('cb_1F3','1F3',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - komp.')}
                                 className={breakers_1FX && breakers.cb_1F3.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="582.16" y1="410.07" x2="582.16" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -782,7 +786,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F2_Tab" data-name="1F2_Tab"
-                            onClick={() => this.openProperties('cb_1F2','Wyłącznik 1F2','Sekcja TR1','Budynek 3 - komp.')}
+                            onClick={() => this.openProperties('cb_1F2','1F2',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - komp.')}
                                 className={breakers_1FX && breakers.cb_1F2.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="516.48" y1="410.07" x2="516.48" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -807,7 +811,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F1_Tab" data-name="1F1_Tab"
-                            onClick={() => this.openProperties('cb_1F1','Wyłącznik 1F1','Sekcja TR1','Budynek 01 - MSB1')}
+                            onClick={() => this.openProperties('cb_1F1','1F1',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 01 - MSB1')}
                                 className={breakers_1FX && breakers.cb_1F1.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="450.8" y1="410.07" x2="450.8" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -832,7 +836,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F6_Tab" data-name="2F6_Tab"
-                            onClick={() => this.openProperties('cb_2F6','Wyłącznik 2F6','Sekcja TR2','Parking')}
+                            onClick={() => this.openProperties('cb_2F6','2F6',`${t('slideUpDialogCircuitSection')} TR2`,'Parking')}
                                 className={breakers_2FX && breakers.cb_2F6.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="385.12" y1="410.07" x2="385.12" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -857,7 +861,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F5_Tab" data-name="2F5_Tab" 
-                            onClick={() => this.openProperties('cb_2F5','Wyłącznik 2F5','Sekcja TR2','Budynek 1A')}
+                            onClick={() => this.openProperties('cb_2F5','2F5',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1A')}
                             className={breakers_2FX && breakers.cb_2F5.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="319.43" y1="410.07" x2="319.43" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -882,7 +886,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F4_Tab" data-name="2F4_Tab"
-                            onClick={() => this.openProperties('cb_2F4','Wyłącznik 2F4','Sekcja TR2','Budynek 2 - R1')}
+                            onClick={() => this.openProperties('cb_2F4','2F4',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - R1')}
                                 className={breakers_2FX && breakers.cb_2F4.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="253.75" y1="410.07" x2="253.75" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -907,7 +911,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F3_Tab" data-name="2F3_Tab"
-                            onClick={() => this.openProperties('cb_2F3','Wyłącznik 2F3','Sekcja TR2','Budynek 01 - MSB2')}
+                            onClick={() => this.openProperties('cb_2F3','2F3',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSB2')}
                                 className={breakers_2FX && breakers.cb_2F3.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="188.07" y1="410.07" x2="188.07" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -932,7 +936,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F2_Tab" data-name="2F2_Tab"
-                            onClick={() => this.openProperties('cb_2F2','Wyłącznik 2F2','Sekcja TR2','Budynek 2 - RG')}
+                            onClick={() => this.openProperties('cb_2F2','2F2',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - RG')}
                                 className={breakers_2FX && breakers.cb_2F2.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="122.39" y1="410.07" x2="122.39" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -957,7 +961,7 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F1_Tab" data-name="2F1_Tab"
-                            onClick={() => this.openProperties('cb_2F1','Wyłącznik 2F1','Sekcja TR2','Budynek 1B - P2')}
+                            onClick={() => this.openProperties('cb_2F1','2F1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1B - P2')}
                                 className={breakers_2FX && breakers.cb_2F1.state === 1 ? "voltageApplied" : "noVoltage"}>
                                 <rect x="26.07" y="466.53" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
                                     strokeMiterlimit="10" />
@@ -999,4 +1003,4 @@ const mapDispatchToProps = {
     manageDialogOpen
   };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Overview);
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Overview));

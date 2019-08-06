@@ -11,19 +11,27 @@ import teal from '@material-ui/core/colors/teal';
 import red from '@material-ui/core/colors/red';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
+//i18n
+import './i18n';
 
-import { MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
-    palette: {
-      primary: teal,
-      secondary: red,
-    }
-  });
-  
+  palette: {
+    primary: teal,
+    secondary: red,
+  }
+});
+
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
-ReactDOM.render(<Provider store={store}><MuiThemeProvider theme={theme}><App /></MuiThemeProvider></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}>
+  <MuiThemeProvider theme={theme}>
+
+      <App />
+   
+  </MuiThemeProvider>
+</Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,0 +1,71 @@
+Date : 2019-08-06 14:23:16
+Directory : e:\Dev\Mindsphere\SIDIRO-WARSZAWA-FRONT-END
+Total : 35 files,  23089 codes, 92 comments, 223 blanks, all 23404 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          4 |     17,712 |          0 |          3 |     17,715 |
+| JavaScript |         22 |      5,267 |         68 |        200 |      5,535 |
+| SCSS       |          4 |         66 |          0 |         15 |         81 |
+| HTML       |          1 |         24 |         24 |          1 |         49 |
+| CSS        |          2 |         12 |          0 |          3 |         15 |
+| XML        |          1 |          7 |          0 |          1 |          8 |
+| Markdown   |          1 |          1 |          0 |          0 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------+------------+------------+------------+------------+------------+
+| path                                       | files      | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| .                                          |         35 |     23,089 |         92 |        223 |     23,404 |
+| src                                        |         29 |      5,352 |         68 |        219 |      5,639 |
+| src\components                             |         10 |      4,398 |          9 |        125 |      4,532 |
+| src\reducers                               |          5 |        369 |          2 |         16 |        387 |
+| src\actions                                |          2 |        118 |          6 |         13 |        137 |
+| src\styles                                 |          4 |         66 |          0 |         15 |         81 |
+| public                                     |          3 |         60 |         24 |          2 |         86 |
++--------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                   | language   | code       | comment    | blank      | total      |
++--------------------------------------------+------------+------------+------------+------------+------------+
+| README.md                                  | Markdown   |          1 |          0 |          0 |          1 |
+| package-lock.json                          | JSON       |     17,626 |          0 |          1 |     17,627 |
+| package.json                               | JSON       |         50 |          0 |          1 |         51 |
+| public\app-info.json                       | JSON       |         21 |          0 |          0 |         21 |
+| public\index.html                          | HTML       |         24 |         24 |          1 |         49 |
+| public\manifest.json                       | JSON       |         15 |          0 |          1 |         16 |
+| src\App.css                                | CSS        |          0 |          0 |          1 |          1 |
+| src\App.js                                 | JavaScript |        139 |          0 |         13 |        152 |
+| src\App.test.js                            | JavaScript |          8 |          0 |          2 |         10 |
+| src\actions\index.js                       | JavaScript |         18 |          0 |          2 |         20 |
+| src\actions\iottimeseriesData.js           | JavaScript |        100 |          6 |         11 |        117 |
+| src\components\ChartDataRangeTimePicker.js | JavaScript |         63 |          1 |         11 |         75 |
+| src\components\ChartDataRangeTimeSlider.js | JavaScript |        304 |          2 |         16 |        322 |
+| src\components\ChartLiveUpdateControls.js  | JavaScript |         41 |          0 |          8 |         49 |
+| src\components\Elevation.js                | JavaScript |      2,226 |          0 |          8 |      2,234 |
+| src\components\ElevationTest.js            | JavaScript |         27 |          0 |          7 |         34 |
+| src\components\Events.js                   | JavaScript |        101 |          0 |          6 |        107 |
+| src\components\Overview.js                 | JavaScript |        989 |          2 |         13 |      1,004 |
+| src\components\OverviewTest.js             | JavaScript |         31 |          0 |          7 |         38 |
+| src\components\SlideupDialog.js            | JavaScript |        450 |          1 |         26 |        477 |
+| src\components\TimeSeriesChart.js          | JavaScript |        166 |          3 |         23 |        192 |
+| src\i18n.js                                | JavaScript |        116 |         16 |          9 |        141 |
+| src\index.css                              | CSS        |         12 |          0 |          2 |         14 |
+| src\index.js                               | JavaScript |         27 |          4 |          9 |         40 |
+| src\logo.svg                               | XML        |          7 |          0 |          1 |          8 |
+| src\reducers\chartReducer.js               | JavaScript |        104 |          0 |          4 |        108 |
+| src\reducers\dialogReducer.js              | JavaScript |         49 |          2 |          6 |         57 |
+| src\reducers\drawerReducer.js              | JavaScript |         15 |          0 |          2 |         17 |
+| src\reducers\rootReducer.js                | JavaScript |         11 |          0 |          2 |         13 |
+| src\reducers\switchesStateReducer.js       | JavaScript |        190 |          0 |          2 |        192 |
+| src\serviceWorker.js                       | JavaScript |         92 |         31 |         13 |        136 |
+| src\styles\Elevation.scss                  | SCSS       |         30 |          0 |          5 |         35 |
+| src\styles\Overview.scss                   | SCSS       |         15 |          0 |          6 |         21 |
+| src\styles\SlideupDialog.scss              | SCSS       |          6 |          0 |          1 |          7 |
+| src\styles\_variables.scss                 | SCSS       |         15 |          0 |          3 |         18 |
+| Total                                      |            |     23,089 |         92 |        223 |     23,404 |
++--------------------------------------------+------------+------------+------------+------------+------------+

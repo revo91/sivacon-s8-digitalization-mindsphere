@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewArrayIcon from '@material-ui/icons/ViewArray';
 import EventIcon from '@material-ui/icons/Event';
+import LanguageIcon from '@material-ui/icons/Language';
 import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -25,8 +26,9 @@ import Elevation from './components/Elevation';
 import Events from './components/Events';
 import SlideupDialog from './components/SlideupDialog';
 import { connect } from 'react-redux';
-
+import { manageLanguageDialog } from './actions/languageDialog';
 import { manageDrawerOpen } from './actions/index';
+import LanguageDialog from './components/LanguageSelectionDialog';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -125,6 +127,11 @@ class App extends React.Component {
                 <ListItemIcon><EventIcon /></ListItemIcon>
                 <ListItemText primary="Zdarzenia" />
               </ListItem>
+              <Divider />
+              <ListItem button onClick={()=>this.props.manageLanguageDialog(true)}>
+                <ListItemIcon><LanguageIcon /></ListItemIcon>
+                <ListItemText primary="Zdarzenia" />
+              </ListItem>
             </List>
           </Drawer>
           <main className={classes.content} >
@@ -134,6 +141,7 @@ class App extends React.Component {
             <Route path="/zdarzenia" component={Events} />
           </main>
           <SlideupDialog/>
+          <LanguageDialog/>
         </Router>
         
         
@@ -144,8 +152,14 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    drawerOpen: state.drawerReducer.drawerOpen
+    drawerOpen: state.drawerReducer.drawerOpen,
+    languageDialogOpen: state.languageDialogReducer.openDialog,
+    applicationLanguage: state.languageDialogReducer.language
   };
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(App))
+const mapDispatchToProps = {
+  manageLanguageDialog, 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App))

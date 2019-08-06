@@ -31,6 +31,7 @@ import ChartLiveUpdateControls from './ChartLiveUpdateControls';
 import ChartDataRangeTimePicker from './ChartDataRangeTimePicker';
 import ChartDataRangeTimeSlider from './ChartDataRangeTimeSlider';
 import '../styles/SlideupDialog.scss';
+import { withTranslation } from 'react-i18next';
 
 const styles = theme => ({
   sliderBar: {
@@ -148,21 +149,12 @@ class SlideupDialog extends React.Component {
   }
 
   getCurrentDeviceStatus = () => {
-    return this.props.params.currentDeviceStatus === 0 ? 'Wyłączony' : 'Załączony'
+    let t = this.props.t;
+    return this.props.params.currentDeviceStatus === 0 ? t('slideUpDialogBreakerStateOpen') : t('slideUpDialogBreakerStateClosed')
   }
 
   getCurrentDeviceStatusTextColor = () => {
     return this.props.params.currentDeviceStatus === 0 ? 'secondary' : 'primary'
-  }
-
-  randomizeData = (numberOfPoints) => {
-    let data = [];
-    for (let i = 0; i < numberOfPoints; i++) {
-      let point = new Date(`15 July 2019 12:${i}:15 UTC`);
-
-      data.push({ x: point.toISOString(), y: Math.floor(Math.random() * 1000) })
-    }
-    this.props.randomizeChartData(data);
   }
 
   chartZoomDateRange = (InOut) => {
@@ -193,7 +185,7 @@ class SlideupDialog extends React.Component {
 
 
   render() {
-    const { classes, params, zoomMultiplier, chartRewindDirection } = this.props;
+    const { classes, params, zoomMultiplier, chartRewindDirection, t } = this.props;
     const overviewDeviceCircuitMid = <svg id="main" className={params.currentDeviceType !== 'middleDevice' ? 'invisibleCircuit' : 'visibleCircuit'} data-name="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 158.76 291.11" >
       <line x1="107.98" x2="107.98" y2="39" fill="#383838" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
       <circle cx="107.98" cy="68.07" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
@@ -291,34 +283,34 @@ class SlideupDialog extends React.Component {
                 <CloseIcon />
               </IconButton>
               <Typography variant="h6" className={classes.title}>
-                {params.deviceTitle}
+                {t('slideUpDialogTitlebarBreaker')} {params.deviceTitle}
               </Typography>
               {params.tabIndex !== 0 ?
                 <div>
-                  <Tooltip title="Powrót" >
+                  <Tooltip title={t('slideUpDialogTooltipBackToPreview')} >
                     <IconButton color="inherit" onClick={() => this.handleChangeTabs(null, 0)}>
                       <ArrowBackIcon />
                     </IconButton>
                   </Tooltip>
                     <IconButton color="inherit" onClick={() => this.setChartRewindDirection("Backward")} 
                     disabled={(chartRewindDirection === -1) || (zoomMultiplier ===1)? true: false}>
-                    <Tooltip title="Przewiń czas w lewo">
+                    <Tooltip title={t('slideUpDialogTooltipRewindLeft')}>
                       <ChevronLeft />
                       </Tooltip>
                     </IconButton>
                     <IconButton color="inherit" onClick={() => this.setChartRewindDirection("Forward")} 
                     disabled={(chartRewindDirection === 1) || (zoomMultiplier ===1)? true: false}>
-                    <Tooltip title="Przewiń czas w prawo">
+                    <Tooltip title={t('slideUpDialogTooltipRewindRight')}>
                       <ChevronRight />
                       </Tooltip>
                     </IconButton>
                   <IconButton color="inherit" onClick={() => this.chartZoomDateRange("Out")} disabled={zoomMultiplier <= 1 ? true : false}>
-                    <Tooltip title="Oddal">
+                    <Tooltip title={t('slideUpDialogTooltipZoomOut')}>
                       <ZoomOutIcon />
                     </Tooltip>
                   </IconButton>
                   <IconButton color="inherit" onClick={() => this.chartZoomDateRange("In")} disabled={zoomMultiplier >= 4 ? true : false}>
-                    <Tooltip title="Przybliż">
+                    <Tooltip title={t('slideUpDialogTooltipZoomIn')}>
                       <ZoomInIcon />
                     </Tooltip>
                   </IconButton>
@@ -338,10 +330,10 @@ class SlideupDialog extends React.Component {
                 centered
 
               >
-                <Tab label="Przegląd" />
-                <Tab label="Napięcie" />
-                <Tab label="Prąd" />
-                <Tab label="Moc" />
+                <Tab label={t('slideUpDialogTabOverview')} />
+                <Tab label={t('slideUpDialogTabVoltage')} />
+                <Tab label={t('slideUpDialogTabCurrent')} />
+                <Tab label={t('slideUpDialogTabPower')} />
               </Tabs>
             </AppBar>
             {params.tabIndex === 0 && <TabContainer><Grid container spacing={2} alignItems="flex-start" justify="center">
@@ -355,62 +347,62 @@ class SlideupDialog extends React.Component {
               <Grid container item xs={12} sm={12} md={8} spacing={2}>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Paper className={classes.paper}>
-                    <Typography variant="h5" gutterBottom>Status wyłącznika</Typography>
+                    <Typography variant="h5" gutterBottom>{t('slideUpDialogBreakerStateTitle')}</Typography>
                     <Typography variant="body1" color={this.getCurrentDeviceStatusTextColor()}>{this.getCurrentDeviceStatus()}</Typography>
                   </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Paper className={classes.paper}>
-                    <Typography variant="h5" gutterBottom>Ostatnie wyzwolenie</Typography>
-                    <Typography variant="body1" gutterBottom>Przyczyna ostatniego wyzwolenia</Typography>
+                    <Typography variant="h5" gutterBottom>{t('slideUpDialogLastTripTitle')}</Typography>
+                    <Typography variant="body1" gutterBottom>{t('slideUpDialogLastTripReason')}</Typography>
                   </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Paper className={classes.paper}>
-                    <Typography variant="h5" gutterBottom>Prąd
-                  <Tooltip title="Pokaż wykres prądów" placement="top">
+                    <Typography variant="h5" gutterBottom>{t('slideUpDialogTabCurrent')}
+                  <Tooltip title={t('slideUpDialogTooltipShowCurrentChart')} placement="top">
                         <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 1)}>
                           <TimelineIcon />
                         </IconButton>
                       </Tooltip>
                     </Typography>
                     <div>
-                      <Typography variant="body1" display="inline">Prąd L1</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L1</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
                     </div>
                     <div>
-                      <Typography variant="body1" display="inline">Prąd L2</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L2</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
                     </div>
                     <div>
-                      <Typography variant="body1" display="inline">Prąd L3</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L3</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
                     </div>
                   </Paper>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6}>
                   <Paper className={classes.paper}>
-                    <Typography variant="h5" gutterBottom>Moc
-                  <Tooltip title="Pokaż wykres mocy" placement="top">
+                    <Typography variant="h5" gutterBottom>{t('slideUpDialogTabPower')}
+                  <Tooltip title={t('slideUpDialogTooltipShowPowerChart')} placement="top">
                         <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 2)}>
                           <TimelineIcon />
                         </IconButton>
                       </Tooltip>
                     </Typography>
                     <div>
-                      <Typography variant="body1" display="inline">Moc czynna</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogActivePower')}</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kW</Typography>
                     </div>
                     <div>
-                      <Typography variant="body1" display="inline">Moc bierna</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogReactivePower')}</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kvar</Typography>
                     </div>
                     <div>
-                      <Typography variant="body1" display="inline">Moc pozorna</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogApparentPower')}</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kVa</Typography>
                     </div>
                     <div>
-                      <Typography variant="body1" display="inline">Cos Total</Typography>
+                      <Typography variant="body1" display="inline">{t('slideUpDialogCosTotal')}</Typography>
                       <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0</Typography>
                     </div>
                   </Paper>
@@ -482,4 +474,4 @@ const mapDispatchToProps = {
   chartSetRewindDirection
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SlideupDialog))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withTranslation()(SlideupDialog)))
