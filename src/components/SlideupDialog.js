@@ -25,6 +25,7 @@ import {
   randomizeChartData, manageDialogOpen, zoom, manageDialogTab, setCurrentDeviceStatus,
   setCurrentDeviceType
 } from '../actions/index';
+import { chartSetRewindDirection } from '../actions/iottimeseriesData';
 import { clearDatasets } from '../actions/iottimeseriesData';
 import ChartLiveUpdateControls from './ChartLiveUpdateControls';
 import ChartDataRangeTimePicker from './ChartDataRangeTimePicker';
@@ -166,11 +167,19 @@ class SlideupDialog extends React.Component {
 
   chartZoomDateRange = (InOut) => {
     let currentZoomValue = this.props.zoomMultiplier;
-    if (currentZoomValue < 2 && InOut === "In") {
-      this.props.zoom((currentZoomValue * 10 + 0.1 * 10) / 10);
+    if (currentZoomValue < 4 && InOut === "In") {
+      this.props.zoom((currentZoomValue * 10 + 0.2 * 10) / 10);
     }
-    else if (currentZoomValue > 0.1 && InOut === 'Out') {
-      this.props.zoom((currentZoomValue * 10 - 0.1 * 10) / 10);
+    else if (currentZoomValue > 1 && InOut === 'Out') {
+      this.props.zoom((currentZoomValue * 10 - 0.2 * 10) / 10);
+    }
+  }
+
+  setChartRewindDirection = (direction) => {
+    let currentDirection = this.props.chartRewindDirection;
+    if((direction==="Forward" && currentDirection<1) || (direction==="Backward" && currentDirection>-1))
+    {
+      this.props.chartSetRewindDirection(direction);
     }
   }
 
@@ -182,8 +191,9 @@ class SlideupDialog extends React.Component {
     return this.props.params.currentDeviceType
   }
 
+
   render() {
-    const { classes, params, zoomMultiplier } = this.props;
+    const { classes, params, zoomMultiplier, chartRewindDirection } = this.props;
     const overviewDeviceCircuitMid = <svg id="main" className={params.currentDeviceType !== 'middleDevice' ? 'invisibleCircuit' : 'visibleCircuit'} data-name="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 158.76 291.11" >
       <line x1="107.98" x2="107.98" y2="39" fill="#383838" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
       <circle cx="107.98" cy="68.07" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
@@ -290,22 +300,24 @@ class SlideupDialog extends React.Component {
                       <ArrowBackIcon />
                     </IconButton>
                   </Tooltip>
-                  <Tooltip title="Przewiń czas w lewo">
-                    <IconButton color="inherit" onClick={() => this.randomizeData(23)}>
+                    <IconButton color="inherit" onClick={() => this.setChartRewindDirection("Backward")} 
+                    disabled={(chartRewindDirection === -1) || (zoomMultiplier ===1)? true: false}>
+                    <Tooltip title="Przewiń czas w lewo">
                       <ChevronLeft />
+                      </Tooltip>
                     </IconButton>
-                  </Tooltip>
-                  <Tooltip title="Przewiń czas w prawo">
-                    <IconButton color="inherit" onClick={() => this.randomizeData(23)}>
+                    <IconButton color="inherit" onClick={() => this.setChartRewindDirection("Forward")} 
+                    disabled={(chartRewindDirection === 1) || (zoomMultiplier ===1)? true: false}>
+                    <Tooltip title="Przewiń czas w prawo">
                       <ChevronRight />
+                      </Tooltip>
                     </IconButton>
-                  </Tooltip>
                   <IconButton color="inherit" onClick={() => this.chartZoomDateRange("Out")} disabled={zoomMultiplier <= 1 ? true : false}>
                     <Tooltip title="Oddal">
                       <ZoomOutIcon />
                     </Tooltip>
                   </IconButton>
-                  <IconButton color="inherit" onClick={() => this.chartZoomDateRange("In")} disabled={zoomMultiplier >= 2 ? true : false}>
+                  <IconButton color="inherit" onClick={() => this.chartZoomDateRange("In")} disabled={zoomMultiplier >= 4 ? true : false}>
                     <Tooltip title="Przybliż">
                       <ZoomInIcon />
                     </Tooltip>
@@ -454,7 +466,8 @@ function mapStateToProps(state) {
     breakers: state.switchesStateReducer.breakers,
     sources: state.switchesStateReducer.sources,
     zoomMultiplier: state.chartReducer.zoom,
-    chartDatasets: state.chartReducer.datasets
+    chartDatasets: state.chartReducer.datasets,
+    chartRewindDirection: state.chartReducer.zoomedRewindDirection
   };
 }
 
@@ -465,7 +478,8 @@ const mapDispatchToProps = {
   manageDialogTab,
   setCurrentDeviceStatus,
   setCurrentDeviceType,
-  clearDatasets
+  clearDatasets,
+  chartSetRewindDirection
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SlideupDialog))

@@ -12,6 +12,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import ViewArrayIcon from '@material-ui/icons/ViewArray';
+import EventIcon from '@material-ui/icons/EventIcon';
 import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ import {
 
 import OverviewTest from './components/OverviewTest';
 import Elevation from './components/Elevation';
+import Events from './components/Events';
 import SlideupDialog from './components/SlideupDialog';
 import { connect } from 'react-redux';
 
@@ -119,12 +121,17 @@ class App extends React.Component {
                 <ListItemIcon><ViewArrayIcon /></ListItemIcon>
                 <ListItemText primary="Elewacja" />
               </ListItem>
+              <ListItem button component={Link} to="/zdarzenia">
+                <ListItemIcon><EventIcon /></ListItemIcon>
+                <ListItemText primary="Zdarzenia" />
+              </ListItem>
             </List>
           </Drawer>
           <main className={classes.content} >
             <div className={classes.toolbar} />
             <Route exact path="/" component={OverviewTest} />
             <Route path="/elewacja" component={Elevation} />
+            <Route path="/zdarzenia" component={Events} />
           </main>
           <SlideupDialog/>
         </Router>

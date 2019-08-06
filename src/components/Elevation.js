@@ -1057,8 +1057,8 @@ class Elevation extends React.Component {
                                 <polygon points="399.88 514.35 377.85 514.35 377.85 514.01 399.88 514.01 399.88 514.35 399.88 514.35"
                                     fill="#055f87" />
                             </g>
-                            <g id="S2P3.1_status" className={this.manageSwitchesClassName('cb_1F1')}><text transform="translate(345.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F1')}</text></g>
+                            <g id="S2P3.1_status" className={this.manageSwitchesClassName('cb_2F3')}><text transform="translate(345.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F3')}</text></g>
                             <g id="S2P1.1">
                                 <g clipPath="url(#clip-path-15)">
                                     <polygon points="466.71 455.55 585.16 455.55 585.16 609.8 466.71 609.8 466.71 455.55 466.71 455.55"

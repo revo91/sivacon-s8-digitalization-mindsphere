@@ -7,6 +7,9 @@ export const GET_DATA_FAILED = 'GET_DATA_FAILED';
 export const CLEAR_DATASETS = 'CLEAR_DATASETS';
 export const CHART_LIVE_UPDATE = 'CHART_LIVE_UPDATE';
 export const SLIDER_SET_TIMERANGE = 'SLIDER_SET_TIMERANGE';
+export const SLIDER_SET_STEP_VALUE = 'SLIDER_SET_STEP_VALUE';
+export const CHART_SET_MARGIN_TO_REWIND = 'CHART_SET_MARGIN_TO_REWIND';
+export const CHART_SET_REWIND_DIRECTION = 'CHART_SET_REWIND_DIRECTION';
 
 export const getDataRequested = () => ({ type: GET_DATA_REQUESTED })
 export const getDataDone = (data) => ({ type: GET_DATA_DONE, data: data })
@@ -14,6 +17,9 @@ export const getDataFailed = (error) => ({ type: GET_DATA_FAILED, data: error })
 export const clearDatasets = () => ({ type: CLEAR_DATASETS })
 export const chartLiveUpdate = (enabled) => ({ type: CHART_LIVE_UPDATE, enabled })
 export const sliderSetTimerange = (timerange) => ({ type: SLIDER_SET_TIMERANGE, timerange })
+export const sliderSetStepValue = (stepValue) => ({ type: SLIDER_SET_STEP_VALUE, stepValue })
+export const chartSetMarginToRewind = (marginRange) => ({ type: CHART_SET_MARGIN_TO_REWIND, marginRange })
+export const chartSetRewindDirection = (direction) => ({ type: CHART_SET_REWIND_DIRECTION, direction})
 
 export const getData = (tabIndex, fromTime) => {
 

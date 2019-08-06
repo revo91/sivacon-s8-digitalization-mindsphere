@@ -9,14 +9,20 @@ import {
     GET_DATA_FAILED,
     CLEAR_DATASETS,
     CHART_LIVE_UPDATE,
-    SLIDER_SET_TIMERANGE
+    SLIDER_SET_TIMERANGE,
+    SLIDER_SET_STEP_VALUE,
+    CHART_SET_REWIND_DIRECTION,
+    CHART_SET_MARGIN_TO_REWIND
 } from '../actions/iottimeseriesData';
 
 const initialState = {
     isChartDataLoading: false,
     isError: false,
     zoom: 1,
+    zoomedUnixTimeMargin: 0,
+    zoomedRewindDirection: 0,
     timeRangeSlider: new Date().toISOString(),
+    timeRangeStepValue: false,
     liveDataUpdate: true,
     datasets: [],
     unit: 'V',
@@ -72,10 +78,28 @@ export const chartReducer = (state = initialState, action) => {
             }
         }
         case SLIDER_SET_TIMERANGE: {
-            console.log(action.timerange)
             return {
                 ...state,
                 timeRangeSlider: action.timerange
+            }
+        }
+        case SLIDER_SET_STEP_VALUE: {
+            return {
+                ...state,
+                timeRangeStepValue: action.stepValue
+            }
+        }
+        case CHART_SET_MARGIN_TO_REWIND: {
+            return {
+                ...state,
+                zoomedUnixTimeMargin: action.marginRange
+            }
+        }
+        case CHART_SET_REWIND_DIRECTION: {
+            return {
+                ...state,
+                zoomedRewindDirection: action.direction==="Forward"?state.zoomedRewindDirection+1:
+                action.direction==="Backward"?state.zoomedRewindDirection-1:0
             }
         }
         default:

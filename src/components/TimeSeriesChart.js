@@ -1,8 +1,7 @@
 import React from 'react'
 import Chart from "chart.js";
 import { connect } from 'react-redux';
-import { getData, sliderSetTimerange } from '../actions/iottimeseriesData';
-import moment from 'moment';
+import { getData, sliderSetTimerange, chartSetMarginToRewind } from '../actions/iottimeseriesData';
 
 let myLineChart;
 Chart.defaults.global.animation.duration = 300;
@@ -17,6 +16,7 @@ class TimeSeriesChart extends React.Component {
 
     calculateMinMaxRange = () => {
         let data = this.props.params;
+        let zoomedRewindDirection = this.props.zoomedRewindDirection; // -1,0,1
         if (data.datasets.length>0) {
             let zoom = data.zoom;
             let minDate = new Date(data.datasets[0].data[0].x).valueOf();
@@ -28,9 +28,26 @@ class TimeSeriesChart extends React.Component {
             let centerDate = new Date(minDate + rangeCenter).valueOf();
             let zoomedMinDate = new Date(centerDate - rangeCenter * (1 / zoom));
             let zoomedMaxDate = new Date(centerDate + rangeCenter * (1 / zoom));
-
-            this.min = zoomedMinDate.valueOf();
-            this.max = zoomedMaxDate.valueOf();
+            let marginToRewindInUnixTime = maxDate-zoomedMaxDate.valueOf();
+            
+            switch(zoomedRewindDirection) {
+                case -1:
+                    console.log('case -1')
+                    this.min = zoomedMinDate.valueOf()-marginToRewindInUnixTime
+                    this.max = zoomedMaxDate.valueOf()-marginToRewindInUnixTime
+                    break;
+                case 1:
+                        console.log('case 1')
+                    this.min = zoomedMinDate.valueOf()+marginToRewindInUnixTime
+                    this.max = zoomedMaxDate.valueOf()+marginToRewindInUnixTime
+                    break;
+                default:
+                        console.log('case 0')
+                    this.min = zoomedMinDate.valueOf();
+                    this.max = zoomedMaxDate.valueOf();
+                    break;
+            }
+            //this.props.chartSetMarginToRewind(marginToRewindInUnixTime);
         }
     }
 
@@ -98,19 +115,21 @@ class TimeSeriesChart extends React.Component {
         myLineChart.options.scales.xAxes[0].time.min = this.min;
         myLineChart.options.scales.xAxes[0].time.max = this.max;
         
-        if(myLineChart.data.datasets.length>0)
+        if(myLineChart.data.datasets.length>0 && this.props.params.datasets.length>0)
         {
-            if(myLineChart.data.datasets[0].label === this.props.params.datasets[0].label)
-            {
-                myLineChart.data.datasets.map(dataset => {
-                    this.props.params.datasets.map(datasetFromStore => {
-                        if(datasetFromStore.label===dataset.label)
-                        {
-                            dataset.data = datasetFromStore.data
-                        }
+     
+                if(myLineChart.data.datasets[0].label === this.props.params.datasets[0].label)
+                {
+                    myLineChart.data.datasets.map(dataset => {
+                        this.props.params.datasets.map(datasetFromStore => {
+                            if(datasetFromStore.label===dataset.label)
+                            {
+                                dataset.data = datasetFromStore.data
+                            }
+                        })
                     })
-                })
-            }
+                }
+                        
         }
         else {
             myLineChart.data = {
@@ -141,7 +160,7 @@ class TimeSeriesChart extends React.Component {
         this.updateInterval = setInterval(()=>{ 
             if(this.props.params.liveDataUpdate===true)
             {
-                this.props.getData(this.tabIndex, this.props.params.timeRangeSlider)
+                this.props.getData(this.tabIndex, new Date().toISOString())
             }
         }, 30000)
     }
@@ -158,13 +177,16 @@ class TimeSeriesChart extends React.Component {
 function mapStateToProps(state) {
     return {
         params: state.chartReducer,
-        tabIndex: state.dialogReducer.tabIndex
+        tabIndex: state.dialogReducer.tabIndex,
+        zoomedLeftRightMarginToRewind: state.chartReducer.zoomedUnixTimeMargin,
+        zoomedRewindDirection: state.chartReducer.zoomedRewindDirection
     };
 }
 
 const mapDispatchToProps = {
     getData,
-    sliderSetTimerange
+    sliderSetTimerange,
+    chartSetMarginToRewind
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeSeriesChart)
