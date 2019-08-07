@@ -50,7 +50,15 @@ const resources = {
             "slideUpDialogTooltipZoomIn": "Przybliż",
             "slideUpDialogTooltipZoomOut": "Oddal",
             "slideUpDialogCircuitSection": "Sekcja",
-            "slideUpDialogCircuitTransformer": "Transformator"
+            "slideUpDialogCircuitTransformer": "Transformator",
+            //languageDialog
+            "languageDialogTitle": "Zmiana języka aplikacji",
+            "languageDialogText": "Aplikacja na podstawie różnych ustawień przeglądarki automatycznie dopasowuje język. Za pomocą przycisków można te ustawienia nadpisać.",
+            "languageDialogPolishLanguage": "Polski",
+            "languageDialogEnglishLanguage": "Angielski",
+            //sidebar
+            "language": "Język",
+
         }
     },
     en: {
@@ -99,9 +107,14 @@ const resources = {
             "slideUpDialogTooltipZoomIn": "Zoom in",
             "slideUpDialogTooltipZoomOut": "Zoom out",
             "slideUpDialogCircuitSection": "Section",
-            "slideUpDialogCircuitTransformer": "Transformer"
-            //TimeSeriesChart
-
+            "slideUpDialogCircuitTransformer": "Transformer",
+            //languageDialog
+            "languageDialogTitle": "Change application language",
+            "languageDialogText": "Based on various browser's settings, application automatically sets language. You can override this setting using buttons below.",
+            "languageDialogPolishLanguage": "Polish",
+            "languageDialogEnglishLanguage": "English",
+            //sidebar
+            "language": "Language",
         }
     }
 };

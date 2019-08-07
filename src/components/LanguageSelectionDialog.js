@@ -25,7 +25,7 @@ class LanguageDialog extends React.Component {
     }
     
     render() {
-        const { open, i18n } = this.props;
+        const { open, t } = this.props;
         return (
             <React.Fragment>
                 <Dialog
@@ -34,19 +34,18 @@ class LanguageDialog extends React.Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Zmiana języka aplikacji"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{t('languageDialogTitle')}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Aplikacja na podstawie różnych ustawień przeglądarki automatycznie ustawia język.
-                            Za pomocą przycisków można te ustawienia nadpisać.
+                            {t('languageDialogText')}
           </DialogContentText>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={()=>this.handleChangeLanguage('en')} color="primary">
-                            Angielski
+                            {t('languageDialogEnglishLanguage')}
           </Button>
                         <Button onClick={()=>this.handleChangeLanguage('pl')} color="primary" autoFocus>
-                            Polski
+                            {t('languageDialogPolishLanguage')}
           </Button>
                     </DialogActions>
                 </Dialog>

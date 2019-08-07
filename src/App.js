@@ -20,6 +20,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import { withTranslation } from 'react-i18next';
 
 import OverviewTest from './components/OverviewTest';
 import Elevation from './components/Elevation';
@@ -87,7 +88,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, t } = this.props;
     let open = this.props.drawerOpen;
     return (
       <div className={classes.root}>
@@ -117,20 +118,20 @@ class App extends React.Component {
             <List onClick={open ? () => this.handleDrawerOpen(false) : null} onBlur={open ? () => this.handleDrawerOpen(false) : null}>
               <ListItem button component={Link} to="/">
                 <ListItemIcon><HomeIcon /></ListItemIcon>
-                <ListItemText primary="Przegląd" />
+                <ListItemText primary={t('overview')} />
               </ListItem>
               <ListItem button component={Link} to="/elewacja">
                 <ListItemIcon><ViewArrayIcon /></ListItemIcon>
-                <ListItemText primary="Elewacja" />
+                <ListItemText primary={t('elevation')} />
               </ListItem>
               <ListItem button component={Link} to="/zdarzenia">
                 <ListItemIcon><EventIcon /></ListItemIcon>
-                <ListItemText primary="Zdarzenia" />
+                <ListItemText primary={t('events')} />
               </ListItem>
               <Divider />
               <ListItem button onClick={()=>this.props.manageLanguageDialog(true)}>
                 <ListItemIcon><LanguageIcon /></ListItemIcon>
-                <ListItemText primary="Język" />
+                <ListItemText primary={t('language')} />
               </ListItem>
             </List>
           </Drawer>
@@ -163,4 +164,4 @@ const mapDispatchToProps = {
   manageDrawerOpen
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(App))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withTranslation()(App)))
