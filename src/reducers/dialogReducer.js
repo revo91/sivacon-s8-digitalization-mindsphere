@@ -15,12 +15,14 @@ const initialState = {
     //device type for showing circuit type
     currentDeviceType: '',
     currentDeviceStatus: 0,
-    tabIndex: 0,
+    tabIndex: 'overviewTab',
 };
 
 export const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case MANAGE_DIALOG_OPEN:
+            console.log(action.deviceTitle)
+            console.log(action.deviceName)
             return {
                 ...state,
                 openDialog: action.open,
@@ -33,23 +35,17 @@ export const dialogReducer = (state = initialState, action) => {
         case MANAGE_DIALOG_TAB:
             return {
                 ...state,
-                ...state.deviceProperties,
                 tabIndex: action.index
-
             }
         case SET_CURRENT_DEVICE_STATUS:
             return {
                 ...state,
-                ...state.deviceProperties,
                 currentDeviceStatus: action.status
-
             }
         case SET_CURRENT_DEVICE_TYPE:
             return {
                 ...state,
-                ...state.deviceProperties,
                 currentDeviceType: action.deviceType
-
             }
         default:
             return state;

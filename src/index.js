@@ -11,6 +11,7 @@ import teal from '@material-ui/core/colors/teal';
 import red from '@material-ui/core/colors/red';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
+import { SnackbarProvider } from 'notistack';
 //i18n
 import './i18n';
 
@@ -26,11 +27,13 @@ const theme = createMuiTheme({
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(<Provider store={store}>
-  <MuiThemeProvider theme={theme}>
 
+  <MuiThemeProvider theme={theme}>
+    <SnackbarProvider maxSnack={1}>
       <App />
-   
+    </SnackbarProvider>
   </MuiThemeProvider>
+
 </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

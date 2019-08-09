@@ -90,10 +90,9 @@ class SlideupDialog extends React.Component {
 
   myTween = null;
 
-
   handleChangeTabs = (event, val) => {
     this.props.manageDialogTab(val)
-    if (val === 0) {
+    if (val === 'overviewTab') {
       setTimeout(() => this.changeDeviceState(), 100)
     }
     if(val!==this.props.params.tabIndex)
@@ -122,7 +121,7 @@ class SlideupDialog extends React.Component {
       deviceLevelRef = this.switchRefBottom.current;
     }
 
-    if (currentTab === 0) {
+    if (currentTab === 'overviewTab') {
       if (currentDevice.indexOf('cb_') !== -1) {
         let breaker = this.props.breakers[currentDevice].state;
         if (breaker === 0) {
@@ -177,12 +176,12 @@ class SlideupDialog extends React.Component {
 
   handleDialogOpen = (open) => {
     this.props.manageDialogOpen(open)
+    this.props.clearDatasets()
   }
 
   getCurrentDeviceType = () => {
     return this.props.params.currentDeviceType
   }
-
 
   render() {
     const { classes, params, zoomMultiplier, chartRewindDirection, t } = this.props;
@@ -288,7 +287,7 @@ class SlideupDialog extends React.Component {
               {params.tabIndex !== 0 ?
                 <div>
                   <Tooltip title={t('slideUpDialogTooltipBackToPreview')} >
-                    <IconButton color="inherit" onClick={() => this.handleChangeTabs(null, 0)}>
+                    <IconButton color="inherit" onClick={() => this.handleChangeTabs(null, 'overviewTab')}>
                       <ArrowBackIcon />
                     </IconButton>
                   </Tooltip>
@@ -328,15 +327,15 @@ class SlideupDialog extends React.Component {
                 indicatorColor="primary"
                 textColor="primary"
                 centered
-
+                scrollButtons="auto"
               >
-                <Tab label={t('slideUpDialogTabOverview')} />
-                <Tab label={t('slideUpDialogTabVoltage')} />
-                <Tab label={t('slideUpDialogTabCurrent')} />
-                <Tab label={t('slideUpDialogTabPower')} />
+                <Tab label={t('slideUpDialogTabOverview')} value="overviewTab"/>
+                <Tab label={t('slideUpDialogTabVoltage')} value="voltageTab"/>
+                <Tab label={t('slideUpDialogTabCurrent')} value="currentTab"/>
+                <Tab label={t('slideUpDialogTabPower')} value="powerTab"/>
               </Tabs>
             </AppBar>
-            {params.tabIndex === 0 && <TabContainer><Grid container spacing={2} alignItems="flex-start" justify="center">
+            {params.tabIndex === 'overviewTab' && <TabContainer><Grid container spacing={2} alignItems="flex-start" justify="center">
               <Grid container item xs={12} sm={12} md={4} spacing={2}>
                 <Grid item xs={12}>
                   {overviewDeviceCircuitBottom}
@@ -361,7 +360,7 @@ class SlideupDialog extends React.Component {
                   <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>{t('slideUpDialogTabCurrent')}
                   <Tooltip title={t('slideUpDialogTooltipShowCurrentChart')} placement="top">
-                        <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 1)}>
+                        <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 'currentTab')}>
                           <TimelineIcon />
                         </IconButton>
                       </Tooltip>
@@ -384,7 +383,7 @@ class SlideupDialog extends React.Component {
                   <Paper className={classes.paper}>
                     <Typography variant="h5" gutterBottom>{t('slideUpDialogTabPower')}
                   <Tooltip title={t('slideUpDialogTooltipShowPowerChart')} placement="top">
-                        <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 2)}>
+                        <IconButton className={classes.marginFAB} onClick={() => this.handleChangeTabs(null, 'powerTab')}>
                           <TimelineIcon />
                         </IconButton>
                       </Tooltip>
@@ -410,7 +409,7 @@ class SlideupDialog extends React.Component {
               </Grid>
             </Grid>
             </TabContainer>}
-            {params.tabIndex === 1 && <TabContainer>
+            {params.tabIndex === 'voltageTab' && <TabContainer>
               <TimeSeriesChart />
               <Grid container spacing={1} direction="row" justify="center" alignItems="center">
                 <Grid item xs={11}>
@@ -419,7 +418,7 @@ class SlideupDialog extends React.Component {
               </Grid>
               <Grid container spacing={2} justify="space-between" alignItems="flex-start" alignContent="space-around" className={classes.chartControls}>
                 <Grid item xs={12}>
-                <Typography variant="h6">Ustawienia</Typography>
+                <Typography variant="h6">{t('chartSettings')}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <ChartDataRangeTimePicker/>
@@ -430,11 +429,16 @@ class SlideupDialog extends React.Component {
               </Grid>
               
               </TabContainer>}
-            {params.tabIndex === 2 && <TabContainer>
+            {params.tabIndex === 'currentTab' && <TabContainer>
               <TimeSeriesChart />
+              <Grid container spacing={1} direction="row" justify="center" alignItems="center">
+                <Grid item xs={11}>
+                  <ChartDataRangeTimeSlider/>
+                </Grid>
+              </Grid>
               <Grid container spacing={2} justify="space-between" alignItems="flex-start" alignContent="space-around" className={classes.chartControls}>
                 <Grid item xs={12}>
-                <Typography variant="h6">Ustawienia</Typography>
+                <Typography variant="h6">{t('chartSettings')}</Typography>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <ChartDataRangeTimePicker/>
@@ -444,7 +448,7 @@ class SlideupDialog extends React.Component {
                 </Grid>
               </Grid>
               </TabContainer>}
-            {params.tabIndex === 3 && <TabContainer>Fourth</TabContainer>}
+            {params.tabIndex === 'powerTab' && <TabContainer>Fourth</TabContainer>}
           </div>
         </Dialog>
       </div>
@@ -459,7 +463,8 @@ function mapStateToProps(state) {
     sources: state.switchesStateReducer.sources,
     zoomMultiplier: state.chartReducer.zoom,
     chartDatasets: state.chartReducer.datasets,
-    chartRewindDirection: state.chartReducer.zoomedRewindDirection
+    chartRewindDirection: state.chartReducer.zoomedRewindDirection,
+    chartDataLoading: state.chartReducer.isChartDataLoading
   };
 }
 

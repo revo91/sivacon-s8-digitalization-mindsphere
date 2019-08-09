@@ -1,7 +1,10 @@
 import React from 'react'
 import Chart from "chart.js";
 import { connect } from 'react-redux';
-import { getData, sliderSetTimerange, chartSetMarginToRewind } from '../actions/iottimeseriesData';
+import { getData, sliderSetTimerange, chartSetMarginToRewind, chartLiveUpdate } from '../actions/iottimeseriesData';
+import { withTranslation } from 'react-i18next';
+import moment from 'moment';
+import { withSnackbar } from 'notistack';
 
 let myLineChart;
 Chart.defaults.global.animation.duration = 300;
@@ -14,13 +17,25 @@ class TimeSeriesChart extends React.Component {
     updateInterval = null;
     tabIndex = this.props.tabIndex
 
+    translatedLabels = {
+        Voltage_L1_L2: this.props.t('voltageL1L2'),
+        Voltage_L1_N: this.props.t('voltageL1N'),
+        Voltage_L2_L3: this.props.t('voltageL2L3'),
+        Voltage_L2_N: this.props.t('voltageL2N'),
+        Voltage_L3_L1: this.props.t('voltageL3L1'),
+        Voltage_L3_N: this.props.t('voltageL3N'),
+        Current_L1: this.props.t('currentL1'),
+        Current_L2: this.props.t('currentL2'),
+        Current_L3: this.props.t('currentL3'),
+    }
+
     calculateMinMaxRange = () => {
-        let data = this.props.params;
+        let datasets = this.props.datasets;
         let zoomedRewindDirection = this.props.zoomedRewindDirection; // -1,0,1
-        if (data.datasets.length>0) {
-            let zoom = data.zoom;
-            let minDate = new Date(data.datasets[0].data[0].x).valueOf();
-            let maxDate = new Date(data.datasets[0].data[data.datasets[0].data.length - 1].x).valueOf();
+        if (datasets.length > 0) {
+            let zoom = this.props.zoom;
+            let minDate = new Date(datasets[0].data[0].x).valueOf();
+            let maxDate = new Date(datasets[0].data[datasets[0].data.length - 1].x).valueOf();
 
             //Get the difference
             let range = maxDate - minDate;
@@ -28,21 +43,18 @@ class TimeSeriesChart extends React.Component {
             let centerDate = new Date(minDate + rangeCenter).valueOf();
             let zoomedMinDate = new Date(centerDate - rangeCenter * (1 / zoom));
             let zoomedMaxDate = new Date(centerDate + rangeCenter * (1 / zoom));
-            let marginToRewindInUnixTime = maxDate-zoomedMaxDate.valueOf();
-            
-            switch(zoomedRewindDirection) {
+            let marginToRewindInUnixTime = maxDate - zoomedMaxDate.valueOf();
+
+            switch (zoomedRewindDirection) {
                 case -1:
-                    console.log('case -1')
-                    this.min = zoomedMinDate.valueOf()-marginToRewindInUnixTime
-                    this.max = zoomedMaxDate.valueOf()-marginToRewindInUnixTime
+                    this.min = zoomedMinDate.valueOf() - marginToRewindInUnixTime
+                    this.max = zoomedMaxDate.valueOf() - marginToRewindInUnixTime
                     break;
                 case 1:
-                        console.log('case 1')
-                    this.min = zoomedMinDate.valueOf()+marginToRewindInUnixTime
-                    this.max = zoomedMaxDate.valueOf()+marginToRewindInUnixTime
+                    this.min = zoomedMinDate.valueOf() + marginToRewindInUnixTime
+                    this.max = zoomedMaxDate.valueOf() + marginToRewindInUnixTime
                     break;
                 default:
-                        console.log('case 0')
                     this.min = zoomedMinDate.valueOf();
                     this.max = zoomedMaxDate.valueOf();
                     break;
@@ -51,12 +63,21 @@ class TimeSeriesChart extends React.Component {
         }
     }
 
+    // translateLabels = (datasets) => {
+    //     let arrToReturn = []
+    //     datasets.map(dataset => {
+    //         dataset.label = this.translatedLabels[dataset.label]
+    //         arrToReturn.push(dataset)
+    //     })
+    //     return arrToReturn
+    // }
+
     processChartData = () => {
-        let data = this.props.params;
+        const { datasets, t } = this.props;
         return {
             type: 'bar',
             data: {
-                datasets: [...data.datasets]
+                datasets: [...datasets]
             },
             options: {
                 aspectRatio: 2.2,
@@ -83,13 +104,13 @@ class TimeSeriesChart extends React.Component {
                         },
                         scaleLabel: {
                             display: true,
-                            labelString: data.xLabel
+                            labelString: t('chartXaxis')
                         }
                     }],
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: data.yLabel
+                            labelString: t('chartYaxis')
                         }
                     }]
                 },
@@ -110,18 +131,17 @@ class TimeSeriesChart extends React.Component {
         myLineChart = new Chart(myChartRef, this.processChartData());
     }
 
-    updateChart = () => {
+    updateChart = (prevProps) => {
         this.calculateMinMaxRange()
         myLineChart.options.scales.xAxes[0].time.min = this.min;
         myLineChart.options.scales.xAxes[0].time.max = this.max;
         
-        if(myLineChart.data.datasets.length>0 && this.props.params.datasets.length>0)
+        if(myLineChart.data.datasets.length>0 && this.props.datasets.length>0)
         {
-     
-                if(myLineChart.data.datasets[0].label === this.props.params.datasets[0].label)
+                if(myLineChart.data.datasets[0].label === this.props.datasets[0].label)
                 {
                     myLineChart.data.datasets.map(dataset => {
-                        this.props.params.datasets.map(datasetFromStore => {
+                        this.props.datasets.map(datasetFromStore => {
                             if(datasetFromStore.label===dataset.label)
                             {
                                 dataset.data = datasetFromStore.data
@@ -131,13 +151,14 @@ class TimeSeriesChart extends React.Component {
                 }
                         
         }
-        else {
-            myLineChart.data = {
-                datasets: [...this.props.params.datasets]
+            else {
+                myLineChart.data = {
+                    datasets: [...this.props.datasets]
+                }
             }
-        }
+            myLineChart.update()
         
-        myLineChart.update()
+            
     }
 
     componentDidMount() {
@@ -145,9 +166,16 @@ class TimeSeriesChart extends React.Component {
         this.updateChartWithInterval()
     }
 
-    componentDidUpdate() {
-        this.updateChart()
+    componentDidUpdate(prevProps) {
+        this.updateChart(prevProps)
         //this.setLiveUpdate()
+
+        if (prevProps.dataUpdateFailed === false && this.props.dataUpdateFailed === true) {
+            this.props.chartLiveUpdate(false)
+            this.props.enqueueSnackbar("Błąd połączenia", {
+                variant: 'error',
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -155,12 +183,11 @@ class TimeSeriesChart extends React.Component {
     }
 
     updateChartWithInterval = () => {
-        this.props.getData(this.tabIndex, this.props.params.timeRangeSlider)
-        
-        this.updateInterval = setInterval(()=>{ 
-            if(this.props.params.liveDataUpdate===true)
-            {
-                this.props.getData(this.tabIndex, new Date().toISOString())
+        this.props.getData(this.tabIndex, this.props.timeRangeSlider)
+        this.updateInterval = setInterval(() => {
+            if (this.props.liveDataUpdate === true) {
+                this.props.sliderSetTimerange(new Date().toISOString())
+                this.props.getData(this.tabIndex, moment().subtract(30, 'minutes').toISOString())
             }
         }, 30000)
     }
@@ -176,17 +203,24 @@ class TimeSeriesChart extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        params: state.chartReducer,
+        timeRangeSlider: state.chartReducer.timeRangeSlider,
+        liveDataUpdate: state.chartReducer.liveDataUpdate,
+        datasets: state.chartReducer.datasets,
         tabIndex: state.dialogReducer.tabIndex,
         zoomedLeftRightMarginToRewind: state.chartReducer.zoomedUnixTimeMargin,
-        zoomedRewindDirection: state.chartReducer.zoomedRewindDirection
+        zoomedRewindDirection: state.chartReducer.zoomedRewindDirection,
+        dataUpdateFailed: state.chartReducer.isError,
+        dataUpdateAwaiting: state.chartReducer.isChartDataLoading,
+        zoom: state.chartReducer.zoom,
+        selectedDevice: state.dialogReducer.selectedDevice
     };
 }
 
 const mapDispatchToProps = {
     getData,
     sliderSetTimerange,
-    chartSetMarginToRewind
+    chartSetMarginToRewind,
+    chartLiveUpdate
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TimeSeriesChart)
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(withSnackbar(TimeSeriesChart)))

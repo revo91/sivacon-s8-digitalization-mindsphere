@@ -12,7 +12,7 @@ import {
     SLIDER_SET_TIMERANGE,
     SLIDER_SET_STEP_VALUE,
     CHART_SET_REWIND_DIRECTION,
-    CHART_SET_MARGIN_TO_REWIND
+    CHART_SET_MARGIN_TO_REWIND,
 } from '../actions/iottimeseriesData';
 
 const initialState = {
@@ -26,8 +26,6 @@ const initialState = {
     liveDataUpdate: true,
     datasets: [],
     unit: 'V',
-    xLabel: 'Czas',
-    yLabel: 'Wartości',
 };
 
 export const chartReducer = (state = initialState, action) => {

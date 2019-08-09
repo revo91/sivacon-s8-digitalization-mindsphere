@@ -217,7 +217,6 @@ class ChartDataRangeTimeSlider extends React.Component {
         window.addEventListener("resize", this.checkWidth);
     }
 
-
     checkWidth = () => {
         let divider = null;
         let formattedMarks = []
@@ -230,10 +229,7 @@ class ChartDataRangeTimeSlider extends React.Component {
             divider = 2
         }
         marks.map((mark,index)=>{
-            if(index%divider===0)
-            {
-                formattedMarks.push(mark)
-            }
+            return index%divider===0? formattedMarks.push(mark) : null
         })
         return formattedMarks;
     }
@@ -245,7 +241,8 @@ class ChartDataRangeTimeSlider extends React.Component {
         {
             timeRange = new Date().toISOString()
         }
-        else {
+        else 
+        {
             timeRange = this.props.timeRange
         }
         let currentTimeInHHmmFormat = moment(timeRange).format('HH:mm');
@@ -277,11 +274,10 @@ class ChartDataRangeTimeSlider extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.liveUpdate===false && this.props.liveUpdate===true)
+        if((prevProps.liveUpdate===false && this.props.liveUpdate===true))
         {
             this.setTimeRange(this.setCurrentTime(true),true)
         }
-        
     }
 
     render() {

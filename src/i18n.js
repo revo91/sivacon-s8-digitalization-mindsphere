@@ -58,7 +58,22 @@ const resources = {
             "languageDialogEnglishLanguage": "Angielski",
             //sidebar
             "language": "Język",
-
+            //chart labels and settings,
+            "chartYaxis": "Wartości",
+            "chartXaxis": "Czas",
+            "chartSettings": "Ustawienia",
+            "chartDataPickerTitle": "Data",
+            "chartRealtimeUpdate": "Odświeżanie na żywo",
+            //chart variable names
+            "voltageL1L2": "Napięcie L1-L2",
+            "voltageL1N": "Napięcie L1-N",
+            "voltageL2L3": "Napięcie L2-L3",
+            "voltageL2N": "Napięcie L2-N",
+            "voltageL3L1": "Napięcie L3-L1",
+            "voltageL3N": "Napięcie L3-N",
+            "currentL1": "Prąd L1",
+            "currentL2": "Prąd L2",
+            "currentL3": "Prąd L3"
         }
     },
     en: {
@@ -115,6 +130,22 @@ const resources = {
             "languageDialogEnglishLanguage": "English",
             //sidebar
             "language": "Language",
+            //chart labels and settings,
+            "chartYaxis": "Values",
+            "chartXaxis": "Time",
+            "chartSettings": "Settings",
+            "chartDataPickerTitle": "Date",
+            "chartRealtimeUpdate": "Live updating",
+            //chart variable names
+            "voltageL1L2": "Voltage L1-L2",
+            "voltageL1N": "Voltage L1-N",
+            "voltageL2L3": "Voltage L2-L3",
+            "voltageL2N": "Voltage L2-N",
+            "voltageL3L1": "Voltage L3-L1",
+            "voltageL3N": "Voltage L3-N",
+            "currentL1": "Prąd L1",
+            "currentL2": "Prąd L2",
+            "currentL3": "Prąd L3"
         }
     }
 };

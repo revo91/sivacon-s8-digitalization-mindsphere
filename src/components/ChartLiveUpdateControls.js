@@ -5,13 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import { chartLiveUpdate } from '../actions/iottimeseriesData';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
-
-const styles = theme => ({
-    chartControls: {
-      
-    }
-  });
+import { withTranslation } from 'react-i18next';
 
 class ChartLiveUpdateControls extends React.Component {
 
@@ -20,18 +14,18 @@ class ChartLiveUpdateControls extends React.Component {
     };
 
     render() {
-        const { classes, params } = this.props;
+        const { params, t } = this.props;
         return (
-            <div className={classes.chartControls}>
+            <React.Fragment>
                 <FormControl component="fieldset">
                     <FormGroup>
                         <FormControlLabel
                             control={<Checkbox checked={params.liveDataUpdate} onChange={this.handleChange()} value="liveDataUpdate" />}
-                            label="Odświeżanie na żywo"
+                            label={t('chartRealtimeUpdate')}
                         />
                     </FormGroup>
                 </FormControl>
-            </div>
+            </React.Fragment>
         )
     }
 }
@@ -46,4 +40,4 @@ const mapDispatchToProps = {
     chartLiveUpdate
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ChartLiveUpdateControls))
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ChartLiveUpdateControls))
