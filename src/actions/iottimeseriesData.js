@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-
+//chart data
 export const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';
 export const GET_DATA_DONE = 'GET_DATA_DONE';
 export const GET_DATA_FAILED = 'GET_DATA_FAILED';
@@ -22,12 +22,9 @@ export const chartSetMarginToRewind = (marginRange) => ({ type: CHART_SET_MARGIN
 export const chartSetRewindDirection = (direction) => ({ type: CHART_SET_REWIND_DIRECTION, direction })
 
 export const getData = (tabIndex, fromTime) => {
-
     let from = moment(fromTime).toISOString()
     let to = moment(from).add(30, 'minutes').toISOString();
-
     return dispatch => {
-
         let datasets = [];
         let colors = ['#ff4000',
             '#ff8000',
@@ -86,7 +83,6 @@ export const getData = (tabIndex, fromTime) => {
                         res.data.map(singlePoint => {
                             return xyData.unshift({ x: new Date(singlePoint._time).toISOString(), y: (singlePoint[key]).toFixed(3) })
                         })
-
                         //if replace whole datasets > tab changed
                         datasets.push({
                             label: key,

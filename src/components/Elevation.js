@@ -12,35 +12,59 @@ class Elevation extends React.Component {
     
     manageSwitchesState = (name) => {
         let t = this.props.t;
-        let deviceState = null;
+        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
         let namesToShort = ['cb_2FP1','cb_2FP2','cb_1FP1','cb_1FP2']
-        if(name.indexOf('cb_')!==-1)
+
+        if(namesToShort.indexOf(name)!==-1)
         {
-            deviceState = this.props.params.breakers[name].state
-            if(namesToShort.indexOf(name)!==-1)
+            if(deviceStateClosed === true)
             {
-                return deviceState === 0 ? t('elevationOpenShort') : t('elevationClosedShort')
+                return t('elevationClosedShort')
             }
-            else {
-                return deviceState === 0 ? t('elevationOpenLong') : t('elevationClosedLong')
+            else if(deviceStateOpen === true)
+            {
+                return t('elevationOpenShort')
+            }
+            else if(deviceStateTripped === true)
+            {
+                return t('elevationTrippedShort')
             }
         }
         else {
-            deviceState = this.props.params.sources[name].state
-            return deviceState === 0 ? t('elevationOpenLong') : t('elevationClosedLong')
-        }
+            if(deviceStateClosed === true)
+            {
+                return t('elevationClosedLong')
+            }
+            else if(deviceStateOpen === true)
+            {
+                return t('elevationOpenLong')
+            }
+            else if(deviceStateTripped === true)
+            {
+                return t('elevationTrippedLong')
+            }
+        } 
     }
 
     manageSwitchesClassName = (name) => {
-        let deviceState = null;
-        if(name.indexOf('cb_')!==-1)
+        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
+
+        if(deviceStateClosed === true)
         {
-            deviceState = this.props.params.breakers[name].state
+            return 'closed'
         }
-        else {
-            deviceState = this.props.params.sources[name].state
+        else if(deviceStateOpen === true)
+        {
+            return 'open'
         }
-        return deviceState === 0 ? 'open' : 'closed'
+        else if(deviceStateTripped === true)
+        {
+            return 'tripped'
+        }
     }
 
     openProperties = (name, title, section, outgoingFeeder) => {
@@ -1221,8 +1245,8 @@ class Elevation extends React.Component {
                                 <polygon points="496.27 506.99 498.07 506.99 498.07 505.19 496.27 505.19 496.27 506.99 496.27 506.99"
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
-                            <g id="S2P1.1_status" className={this.manageSwitchesClassName('TR2')}><text transform="translate(482.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('TR2')}</text></g>
+                            <g id="S2P1.1_status" className={this.manageSwitchesClassName('cb_Q2')}><text transform="translate(482.04 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q2')}</text></g>
                             <g id="S1P3.1">
                                 <path d="M1384.63,620.16h37.07V595h-37.07v25.16Zm37.41.34h-37.75V594.66H1422V620.5Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -2107,8 +2131,8 @@ class Elevation extends React.Component {
                                 <polygon points="813.07 506.99 814.87 506.99 814.87 505.19 813.07 505.19 813.07 506.99 813.07 506.99"
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
-                            <g id="S1P1.1_status" className={this.manageSwitchesClassName('TR1')}><text transform="translate(798.64 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('TR1')}</text></g>
+                            <g id="S1P1.1_status" className={this.manageSwitchesClassName('cb_Q1')}><text transform="translate(798.64 679.67)" fontSize="21"
+                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q1')}</text></g>
                             <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('cb_2F1')} 
                             onClick={() => this.openProperties('cb_2F1','2F1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1B - P2')}>
                                 <rect x="3.44" y="128.32" width="180" height="80.87" />
@@ -2136,14 +2160,14 @@ class Elevation extends React.Component {
                             onClick={() => this.openProperties('cb_2F3','2F3',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSB2')}>
                                 <rect x="320.44" y="370.93" width="137" height="323.48" />
                             </g>
-                            <g id="S2P1.1_overlay" className={this.manageSwitchesClassName('TR2')}
+                            <g id="S2P1.1_overlay" className={this.manageSwitchesClassName('cb_Q2')}
                             onClick={() => this.openProperties('TR2','Q2',`${t('slideUpDialogCircuitTransformer')} TR2`,`${t('slideUpDialogCircuitSection')} TR2`)}>
                                 <rect x="457.44" y="370.77" width="137" height="323.48" />
                             </g>
                             <g id="S0P0.1_overlay" className="static">
                                 <rect x="594.44" y="370.93" width="180" height="323.48" />
                             </g>
-                            <g id="S1P1.1_overlay" className={this.manageSwitchesClassName('TR1')}
+                            <g id="S1P1.1_overlay" className={this.manageSwitchesClassName('cb_Q1')}
                             onClick={() => this.openProperties('TR1','Q1',`${t('slideUpDialogCircuitTransformer')} TR1`,`${t('slideUpDialogCircuitSection')} TR1`)}>
                                 <rect x="774.44" y="370.77" width="136.6" height="323.48" />
                             </g>

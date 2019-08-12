@@ -17,10 +17,20 @@
 
 .open {
     fill: $openText;
-    
     rect
     {
-        fill: $errorLayer;
+        fill: $openLayer;
+        &:hover {
+            @include strokeParams
+        }
+    }
+}
+
+.tripped {
+    fill: $trippedText;
+    rect 
+    {
+        fill: $trippedLayer;
         &:hover {
             @include strokeParams
         }

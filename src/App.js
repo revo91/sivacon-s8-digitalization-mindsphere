@@ -21,8 +21,7 @@ import {
   Link
 } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
-
-import OverviewTest from './components/OverviewTest';
+import Overview from './components/Overview';
 import Elevation from './components/Elevation';
 import Events from './components/Events';
 import SlideupDialog from './components/SlideupDialog';
@@ -30,6 +29,7 @@ import { connect } from 'react-redux';
 import { manageLanguageDialog } from './actions/languageDialog';
 import { manageDrawerOpen } from './actions/index';
 import LanguageDialog from './components/LanguageSelectionDialog';
+import { getIntervalData } from './actions/mindsphereDataUpdateInterval';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -133,19 +133,22 @@ class App extends React.Component {
                 <ListItemIcon><LanguageIcon /></ListItemIcon>
                 <ListItemText primary={t('language')} />
               </ListItem>
+              <ListItem button onClick={()=>this.props.getIntervalData()}>
+                <ListItemIcon><LanguageIcon /></ListItemIcon>
+                <ListItemText primary={t('language')} />
+              </ListItem>
             </List>
+            
           </Drawer>
           <main className={classes.content} >
             <div className={classes.toolbar} />
-            <Route exact path="/" component={OverviewTest} />
+            <Route exact path="/" component={Overview} />
             <Route path="/elewacja" component={Elevation} />
             <Route path="/zdarzenia" component={Events} />
           </main>
           <SlideupDialog/>
           <LanguageDialog/>
         </Router>
-        
-        
       </div>
     )
   }
@@ -161,7 +164,8 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = {
   manageLanguageDialog,
-  manageDrawerOpen
+  manageDrawerOpen,
+  getIntervalData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withTranslation()(App)))

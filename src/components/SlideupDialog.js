@@ -90,6 +90,10 @@ class SlideupDialog extends React.Component {
 
   myTween = null;
 
+  //for tabs filtering
+  topDevices = ['TR1', 'TR2', 'GEN'];
+  middleDevices = ['cb_1FP1', 'cb_1FP2', 'cb_2FP1', 'cb_2FP2'];
+
   handleChangeTabs = (event, val) => {
     this.props.manageDialogTab(val)
     if (val === 'overviewTab') {
@@ -104,15 +108,13 @@ class SlideupDialog extends React.Component {
   changeDeviceState = () => {
     let currentDevice = this.props.params.selectedDevice;
     let currentTab = this.props.params.tabIndex;
-    let middleDevices = ['cb_1FP1', 'cb_1FP2', 'cb_2FP1', 'cb_2FP2'];
-    let topDevices = ['TR1', 'TR2', 'GEN'];
     let deviceLevelRef = null;
     //check device type for showing circuit svg
-    if (topDevices.indexOf(currentDevice) !== -1) {
+    if (this.topDevices.indexOf(currentDevice) !== -1) {
       this.props.setCurrentDeviceType('topDevice')
       deviceLevelRef = this.switchRefTop.current;
     }
-    else if (middleDevices.indexOf(currentDevice) !== -1) {
+    else if (this.middleDevices.indexOf(currentDevice) !== -1) {
       this.props.setCurrentDeviceType('middleDevice')
       deviceLevelRef = this.switchRefMid.current;
     }
@@ -464,7 +466,8 @@ function mapStateToProps(state) {
     zoomMultiplier: state.chartReducer.zoom,
     chartDatasets: state.chartReducer.datasets,
     chartRewindDirection: state.chartReducer.zoomedRewindDirection,
-    chartDataLoading: state.chartReducer.isChartDataLoading
+    chartDataLoading: state.chartReducer.isChartDataLoading,
+    selectedDevice: state.dialogReducer.selectedDevice
   };
 }
 

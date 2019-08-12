@@ -14,6 +14,8 @@ const resources = {
             "elevationClosedLong": "Załączony",
             "elevationOpenShort": "Wył.",
             "elevationOpenLong": "Wyłączony",
+            "elevationTrippedShort": "Wyzw.",
+            "elevationTrippedLong": "Wyzwolony",
             //events
             "events": "Zdarzenia",
             "event": "Zdarzenie",
@@ -86,6 +88,8 @@ const resources = {
             "elevationClosedLong": "Closed",
             "elevationOpenShort": "Open",
             "elevationOpenLong": "Open",
+            "elevationTrippedShort": "Trpd.",
+            "elevationTrippedLong": "Tripped",
             //events
             "events": "Events",
             "event": "Event",

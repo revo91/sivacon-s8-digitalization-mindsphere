@@ -52,7 +52,7 @@ class Overview extends React.Component {
                 if (value.state === 0) {
                     this.myTween = TweenLite.to(this[refName].current, 1, { rotation: 0, transformOrigin: "100% 100%" })
                 }
-                else if (value.state === 1) {
+                else if (value.stateClosed === true) {
                     this.myTween = TweenLite.to(this[refName].current, 1, { rotation: 45, transformOrigin: "100% 100%" })
                 }
             }
@@ -73,15 +73,15 @@ class Overview extends React.Component {
         const t = this.props.t;
 
         //voltage to 1-3FX shortcuts
-        const breakers_2FX = (breakers.cb_Q2.state === 1 && sources.TR2.state === 1)
-            || (breakers.cb_Q1.state === 1 && breakers.cb_Q4.state === 1 && sources.TR1.state === 1)
-            || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q4.state === 1 && sources.GEN.state === 1)
-        const breakers_1FX = (breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && sources.TR2.state === 1)
-            || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1)
-            || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && sources.GEN.state === 1)
-        const breakers_3FX = (breakers.cb_Q2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q5.state === 1 && sources.TR2.state === 1)
-            || (breakers.cb_Q1.state === 1 && breakers.cb_Q5.state === 1 && sources.TR1.state === 1)
-            || (breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+        const breakers_2FX = (breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
+            || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
+            || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
+        const breakers_1FX = (breakers.cb_Q2.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR2.state === true)
+            || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
+            || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && sources.GEN.state === true)
+        const breakers_3FX = (breakers.cb_Q2.stateClosed === true && breakers.cb_Q4.stateClosed === true && breakers.cb_Q5.stateClosed === true && sources.TR2.state === true)
+            || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q5.stateClosed === true && sources.TR1.state === true)
+            || (breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
 
         return (
             <div className="minwidth">
@@ -94,7 +94,7 @@ class Overview extends React.Component {
                     </Grid>
                     <Grid item xs={12}>
                         <svg id="All" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1065.27 522.57">
-                            <g id="TR2" className={this.props.params.sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            <g id="TR2" className={this.props.params.sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="252.54" x2="252.54" y2="39" fill="#383838" strokeMiterlimit="10" strokeWidth="2" />
                                 <circle cx="252.54" cy="68.07" r="29.07" fill="none" strokeMiterlimit="10" strokeWidth="2" />
                                 <circle cx="252.54" cy="97.13" r="29.07" fill="none" strokeMiterlimit="10" strokeWidth="2" />
@@ -195,9 +195,9 @@ class Overview extends React.Component {
                                                                                                                                         fontFamily="SiemensSans-Roman, Siemens Sans">3F1</text><text transform="translate(967.85 359.07)"
                                                                                                                                             fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">3F2</text></g>
                             <g id="_2F" data-name="2F"
-                                className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1)
-                                    || (breakers.cb_Q1.state === 1 && breakers.cb_Q4.state === 1 && sources.TR1.state === 1)
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q4.state === 1 && sources.GEN.state === 1)
+                                className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
+                                    || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
+                                    || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
                                     ? "voltageApplied" : "noVoltage"}
                             >
                                 <line x1="252.54" y1="265.66" x2="252.54" y2="334.6" fill="none" strokeLinecap="round"
@@ -260,25 +260,25 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="Q4" ref={this.cb_Q4_ref}
-                                className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1)
-                                    || (breakers.cb_Q1.state === 1 && breakers.cb_Q4.state === 1 && sources.TR1.state === 1)
-                                    || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q4.state === 1 && sources.GEN.state === 1)
+                                className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
+                                    || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
+                                    || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
                                     ? "voltageApplied" : "noVoltage"}
 
                             >
                                 <line x1="358.6" y1="240.48" x2="383.85" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
-                            <g id="Q2" ref={this.cb_Q2_ref} className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1)
-                                || (breakers.cb_Q1.state === 1 && breakers.cb_Q4.state === 1 && sources.TR1.state === 1)
-                                || (breakers.cb_Q3.state === 1 && breakers.cb_Q5.state === 1 && breakers.cb_Q4.state === 1 && sources.GEN.state === 1)
+                            <g id="Q2" ref={this.cb_Q2_ref} className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
+                                || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
+                                || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
                                 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="227.28" y1="240.48" x2="252.54" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
-                            <g id="_1F" data-name="1F" className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1 && breakers.cb_Q4.state === 1)
-                                || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1)
-                                || (breakers.cb_Q5.state === 1 && breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+                            <g id="_1F" data-name="1F" className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true)
+                                || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
+                                || (breakers.cb_Q5.stateClosed === true && breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
                                 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="375.88" y1="238.68" x2="391.78" y2="222.78" fill="none" strokeLinecap="square"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -356,22 +356,22 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="Q5" ref={this.cb_Q5_ref}
-                                className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1 && breakers.cb_Q4.state === 1)
-                                    || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1)
-                                    || (breakers.cb_Q5.state === 1 && breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+                                className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true)
+                                    || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
+                                    || (breakers.cb_Q5.stateClosed === true && breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
                                     ? "voltageApplied" : "noVoltage"}
                             >
                                 <line x1="818.35" y1="240.48" x2="843.6" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
-                            <g id="Q1" ref={this.cb_Q1_ref} className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1 && breakers.cb_Q4.state === 1)
-                                || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1)
-                                || (breakers.cb_Q5.state === 1 && breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+                            <g id="Q1" ref={this.cb_Q1_ref} className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true)
+                                || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
+                                || (breakers.cb_Q5.stateClosed === true && breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
                                 ? "voltageApplied" : "noVoltage"}>
                                 <line x1="687.02" y1="240.48" x2="712.27" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
-                            <g id="TR1" className={this.props.params.sources.TR1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            <g id="TR1" className={this.props.params.sources.TR1.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="704.29" y1="238.68" x2="720.19" y2="222.78" fill="none" strokeLinecap="square"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <line x1="720.19" y1="238.68" x2="704.29" y2="222.78" fill="none" strokeLinecap="square"
@@ -429,7 +429,7 @@ class Overview extends React.Component {
                                         fontFamily="ArialMT, Arial">{this.props.params.sources.TR1.current}</text><text
                                             transform="translate(765.64 114.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                             fontFamily="ArialMT, Arial">{this.props.params.sources.TR1.capacity}</text></g>
-                            <g id="GEN" className={sources.GEN.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            <g id="GEN" className={sources.GEN.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1009.87" y1="238.68" x2="1025.77" y2="222.78" fill="none" strokeLinecap="square"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <line x1="1025.77" y1="238.68" x2="1009.87" y2="222.78" fill="none" strokeLinecap="square"
@@ -467,9 +467,9 @@ class Overview extends React.Component {
                                 <tspan x="51.88" y="0">ość</tspan>
                             </text></g>
                             <g id="_3F" data-name="3F"
-                                className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q5.state === 1)
-                                    || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1 && breakers.cb_Q5.state === 1)
-                                    || (breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+                                className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true && breakers.cb_Q5.stateClosed === true)
+                                    || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true && breakers.cb_Q5.stateClosed === true)
+                                    || (breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
                                     ? "voltageApplied" : "noVoltage"}>
                                 <line x1="835.66" y1="238.68" x2="851.56" y2="222.78" fill="none" strokeLinecap="square"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -499,9 +499,9 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="Q3" ref={this.cb_Q3_ref}
-                                className={(breakers.cb_Q2.state === 1 && sources.TR2.state === 1 && breakers.cb_Q4.state === 1 && breakers.cb_Q5.state === 1)
-                                    || (breakers.cb_Q1.state === 1 && sources.TR1.state === 1 && breakers.cb_Q5.state === 1)
-                                    || (breakers.cb_Q3.state === 1 && sources.GEN.state === 1)
+                                className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true && breakers.cb_Q5.stateClosed === true)
+                                    || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true && breakers.cb_Q5.stateClosed === true)
+                                    || (breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
                                     ? "voltageApplied" : "noVoltage"}
                             >
                                 <line x1="992.57" y1="240.48" x2="1017.82" y2="265.73" fill="none" strokeMiterlimit="10"
@@ -509,7 +509,7 @@ class Overview extends React.Component {
                             </g>
                             <g id="_1FP2_Tab" data-name="1FP2_Tab" 
                             onClick={() => this.openProperties('cb_1FP2','1FP2',`${t('slideUpDialogCircuitSection')} TR1`,'RPZOK')}
-                                className={(sources.TR1.state === 1) && (breakers.cb_1FP2.state === 1) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="592.74" y1="212.29" x2="592.74" y2="249.82" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -529,14 +529,14 @@ class Overview extends React.Component {
                                                     transform="translate(564.74 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1FP2.capacity}</text></g>
                             <g id="_1FP2" data-name="1FP2" ref={this.cb_1FP2_ref}
-                                className={(sources.TR1.state === 1) && (breakers.cb_1FP2.state === 1) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="567.49" y1="187.04" x2="592.74" y2="212.29" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP1_Tab" data-name="1FP1_Tab"
                             onClick={() => this.openProperties('cb_1FP1','1FP1',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 01 - MSF')}
-                                className={(sources.TR1.state === 1) && (breakers.cb_1FP1.state === 1) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" : "noVoltage"
                                 }>
                                 <line x1="515.81" y1="212.06" x2="515.81" y2="249.59" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -556,7 +556,7 @@ class Overview extends React.Component {
                                                     transform="translate(487.81 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1FP1.capacity}</text></g>
                             <g id="_1FP1" data-name="1FP1" ref={this.cb_1FP1_ref}
-                                className={(sources.TR1.state === 1) && (breakers.cb_1FP1.state === 1) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" : "noVoltage"
                                 }
                             >
                                 <line x1="490.56" y1="186.81" x2="515.81" y2="212.06" fill="none" strokeMiterlimit="10"
@@ -564,7 +564,7 @@ class Overview extends React.Component {
                             </g>
                             <g id="_2FP2_Tab" data-name="2FP2_Tab" 
                             onClick={() => this.openProperties('cb_2FP2','2FP2',`${t('slideUpDialogCircuitSection')} TR2`,'RPZOK')}
-                            className={breakers.cb_2FP2.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="134.29" y1="211.87" x2="134.29" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <rect x="104.29" y="270.33" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -582,13 +582,13 @@ class Overview extends React.Component {
                                                 fontFamily="ArialMT, Arial">{breakers.cb_2FP2.current}</text><text
                                                     transform="translate(106.29 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2FP2.capacity}</text></g>
-                            <g id="_2FP2" data-name="2FP2" ref={this.cb_2FP2_ref} className={breakers.cb_2FP2.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            <g id="_2FP2" data-name="2FP2" ref={this.cb_2FP2_ref} className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="109.03" y1="186.62" x2="134.29" y2="211.87" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2FP1_Tab" data-name="2FP1_Tab" 
                             onClick={() => this.openProperties('cb_2FP1','2FP1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSF')}
-                            className={breakers.cb_2FP1.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="56.07" y1="211.87" x2="56.07" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <rect x="26.07" y="270.33" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -607,13 +607,13 @@ class Overview extends React.Component {
                                                     transform="translate(28.07 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2FP1.capacity}</text></g>
                             <g id="_2FP1" data-name="2FP1" ref={this.cb_2FP1_ref}
-                                className={breakers.cb_2FP1.state === 1 && sources.TR2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="30.82" y1="186.62" x2="56.07" y2="211.87" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F2_Tab" data-name="3F2_Tab"
                             onClick={() => this.openProperties('cb_3F2','3F2','Sekcja GEN','Budynek 01 - MSG')}
-                                className={breakers_3FX && breakers.cb_3F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1017.82" y1="410.07" x2="1017.82" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="987.82" y="466.6" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -630,13 +630,13 @@ class Overview extends React.Component {
                                                 fontFamily="ArialMT, Arial">{breakers.cb_3F2.current}</text><text transform="translate(989.82 516.99) scale(1 1.1)" fontSize="12"
                                                     fill="#3c3c3b" fontFamily="ArialMT, Arial" stroke="none">{breakers.cb_3F2.capacity}</text></g>
                             <g id="_3F2" data-name="3F2" ref={this.cb_3F2_ref}
-                                className={breakers_3FX && breakers.cb_3F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="992.57" y1="384.82" x2="1017.82" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F1_Tab" data-name="3F1_Tab"
                             onClick={() => this.openProperties('cb_3F1','3F1','Sekcja GEN','Budynek 2 - serwer.')}
-                                className={breakers_3FX && breakers.cb_3F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="952.14" y1="410.07" x2="952.14" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="922.14" y="466.6" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -654,13 +654,13 @@ class Overview extends React.Component {
                                         fill="#3c3c3b" fontFamily="ArialMT, Arial" stroke="none">{breakers.cb_3F1.current}</text><text transform="translate(924.14 516.99) scale(1 1.1)"
                                             fontSize="12" fill="#3c3c3b" stroke ="none" fontFamily="ArialMT, Arial">{breakers.cb_3F1.capacity}</text></g>
                             <g id="_3F1" data-name="3F1" ref={this.cb_3F1_ref}
-                                className={breakers_3FX && breakers.cb_3F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="926.88" y1="384.82" x2="952.14" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F7_Tab" data-name="1F7_Tab"
                             onClick={() => this.openProperties('cb_1F7','1F7',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}
-                                className={breakers_1FX && breakers.cb_1F7.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="844.89" y1="410.07" x2="844.89" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="814.89" y="466.6" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -679,13 +679,13 @@ class Overview extends React.Component {
                                                     transform="translate(816.89 516.99) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1F7.capacity}</text></g>
                             <g id="_1F7" data-name="1F7" ref={this.cb_1F7_ref}
-                                className={breakers_1FX && breakers.cb_1F7.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="819.64" y1="384.82" x2="844.89" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F6_Tab" data-name="1F6_Tab"
                             onClick={() => this.openProperties('cb_1F6','1F6',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}
-                                className={breakers_1FX && breakers.cb_1F6.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="779.21" y1="410.07" x2="779.21" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="749.21" y="466.6" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -704,13 +704,13 @@ class Overview extends React.Component {
                                                     transform="translate(751.21 516.99) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1F6.capacity}</text></g>
                             <g id="_1F6" data-name="1F6" ref={this.cb_1F6_ref}
-                                className={breakers_1FX && breakers.cb_1F6.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="753.96" y1="384.82" x2="779.21" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F5_Tab" data-name="1F5_Tab"
                             onClick={() => this.openProperties('cb_1F5','1F5',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - RG')}
-                                className={breakers_1FX && breakers.cb_1F5.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="713.53" y1="410.07" x2="713.53" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="683.53" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -729,13 +729,13 @@ class Overview extends React.Component {
                                                     transform="translate(685.53 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1F5.capacity}</text></g>
                             <g id="_1F5" data-name="1F5" ref={this.cb_1F5_ref}
-                                className={breakers_1FX && breakers.cb_1F5.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="688.28" y1="384.82" x2="713.53" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F4_Tab" data-name="1F4_Tab"
                             onClick={() => this.openProperties('cb_1F4','1F4',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - klim.')}
-                                className={breakers_1FX && breakers.cb_1F4.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="647.84" y1="410.07" x2="647.84" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="617.84" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -755,13 +755,13 @@ class Overview extends React.Component {
                                             transform="translate(619.84 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                             fontFamily="ArialMT, Arial">{breakers.cb_1F4.capacity}</text></g>
                             <g id="_1F4" data-name="1F4" ref={this.cb_1F4_ref}
-                                className={breakers_1FX && breakers.cb_1F4.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="622.59" y1="384.82" x2="647.84" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F3_Tab" data-name="1F3_Tab"
                             onClick={() => this.openProperties('cb_1F3','1F3',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - komp.')}
-                                className={breakers_1FX && breakers.cb_1F3.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="582.16" y1="410.07" x2="582.16" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="552.16" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -781,13 +781,13 @@ class Overview extends React.Component {
                                             transform="translate(554.16 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                             fontFamily="ArialMT, Arial">{breakers.cb_1F3.capacity}</text></g>
                             <g id="_1F3" data-name="1F3" ref={this.cb_1F3_ref}
-                                className={breakers_1FX && breakers.cb_1F3.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="556.91" y1="384.82" x2="582.16" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F2_Tab" data-name="1F2_Tab"
                             onClick={() => this.openProperties('cb_1F2','1F2',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - komp.')}
-                                className={breakers_1FX && breakers.cb_1F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="516.48" y1="410.07" x2="516.48" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="486.48" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -806,13 +806,13 @@ class Overview extends React.Component {
                                                     transform="translate(488.48 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1F2.capacity}</text></g>
                             <g id="_1F2" data-name="1F2" ref={this.cb_1F2_ref}
-                                className={breakers_1FX && breakers.cb_1F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="491.23" y1="384.82" x2="516.48" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F1_Tab" data-name="1F1_Tab"
                             onClick={() => this.openProperties('cb_1F1','1F1',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 01 - MSB1')}
-                                className={breakers_1FX && breakers.cb_1F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="450.8" y1="410.07" x2="450.8" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="420.8" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -831,13 +831,13 @@ class Overview extends React.Component {
                                                     transform="translate(422.8 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_1F1.capacity}</text></g>
                             <g id="_1F1" data-name="1F1" ref={this.cb_1F1_ref}
-                                className={breakers_1FX && breakers.cb_1F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="425.55" y1="384.82" x2="450.8" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F6_Tab" data-name="2F6_Tab"
                             onClick={() => this.openProperties('cb_2F6','2F6',`${t('slideUpDialogCircuitSection')} TR2`,'Parking')}
-                                className={breakers_2FX && breakers.cb_2F6.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="385.12" y1="410.07" x2="385.12" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="355.12" y="466.46" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -856,13 +856,13 @@ class Overview extends React.Component {
                                                     transform="translate(357.12 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F6.capacity}</text></g>
                             <g id="_2F6" data-name="2F6" ref={this.cb_2F6_ref}
-                                className={breakers_2FX && breakers.cb_2F6.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="359.87" y1="384.82" x2="385.12" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F5_Tab" data-name="2F5_Tab" 
                             onClick={() => this.openProperties('cb_2F5','2F5',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1A')}
-                            className={breakers_2FX && breakers.cb_2F5.state === 1 ? "voltageApplied" : "noVoltage"}>
+                            className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="319.43" y1="410.07" x2="319.43" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="289.43" y="466.47" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -881,13 +881,13 @@ class Overview extends React.Component {
                                                     transform="translate(291.43 516.86) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F5.capacity}</text></g>
                             <g id="_2F5" data-name="2F5" ref={this.cb_2F5_ref}
-                                className={breakers_2FX && breakers.cb_2F5.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="294.18" y1="384.82" x2="319.43" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F4_Tab" data-name="2F4_Tab"
                             onClick={() => this.openProperties('cb_2F4','2F4',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - R1')}
-                                className={breakers_2FX && breakers.cb_2F4.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="253.75" y1="410.07" x2="253.75" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="223.75" y="466.53" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -906,13 +906,13 @@ class Overview extends React.Component {
                                                     transform="translate(225.75 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F4.capacity}</text></g>
                             <g id="_2F4" data-name="2F4" ref={this.cb_2F4_ref}
-                                className={breakers_2FX && breakers.cb_2F4.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="228.5" y1="384.82" x2="253.75" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F3_Tab" data-name="2F3_Tab"
                             onClick={() => this.openProperties('cb_2F3','2F3',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSB2')}
-                                className={breakers_2FX && breakers.cb_2F3.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="188.07" y1="410.07" x2="188.07" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="158.07" y="466.53" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -931,13 +931,13 @@ class Overview extends React.Component {
                                                     transform="translate(160.07 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F3.capacity}</text></g>
                             <g id="_2F3" data-name="2F3" ref={this.cb_2F3_ref}
-                                className={breakers_2FX && breakers.cb_2F3.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="162.82" y1="384.82" x2="188.07" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F2_Tab" data-name="2F2_Tab"
                             onClick={() => this.openProperties('cb_2F2','2F2',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - RG')}
-                                className={breakers_2FX && breakers.cb_2F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="122.39" y1="410.07" x2="122.39" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="92.39" y="466.53" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -956,13 +956,13 @@ class Overview extends React.Component {
                                                     transform="translate(94.39 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F2.capacity}</text></g>
                             <g id="_2F2" data-name="2F2" ref={this.cb_2F2_ref}
-                                className={breakers_2FX && breakers.cb_2F2.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="97.14" y1="384.82" x2="122.39" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F1_Tab" data-name="2F1_Tab"
                             onClick={() => this.openProperties('cb_2F1','2F1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1B - P2')}
-                                className={breakers_2FX && breakers.cb_2F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <rect x="26.07" y="466.53" width="60" height="18.27" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="26.07" y="484.8" width="60" height="18.6" fill="#c6c6c6" stroke="#575756" strokeLinecap="square"
@@ -981,7 +981,7 @@ class Overview extends React.Component {
                                                     transform="translate(28.07 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke ="none"
                                                     fontFamily="ArialMT, Arial">{breakers.cb_2F1.capacity}</text></g>
                             <g id="_2F1" data-name="2F1" ref={this.cb_2F1_ref}
-                                className={breakers_2FX && breakers.cb_2F1.state === 1 ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="30.81" y1="384.82" x2="56.06" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>

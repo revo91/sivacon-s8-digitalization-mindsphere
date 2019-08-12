@@ -131,34 +131,28 @@ class TimeSeriesChart extends React.Component {
         myLineChart = new Chart(myChartRef, this.processChartData());
     }
 
-    updateChart = (prevProps) => {
+    updateChart = () => {
         this.calculateMinMaxRange()
         myLineChart.options.scales.xAxes[0].time.min = this.min;
         myLineChart.options.scales.xAxes[0].time.max = this.max;
-        
-        if(myLineChart.data.datasets.length>0 && this.props.datasets.length>0)
-        {
-                if(myLineChart.data.datasets[0].label === this.props.datasets[0].label)
-                {
-                    myLineChart.data.datasets.map(dataset => {
-                        this.props.datasets.map(datasetFromStore => {
-                            if(datasetFromStore.label===dataset.label)
-                            {
-                                dataset.data = datasetFromStore.data
-                            }
-                        })
+
+        if (myLineChart.data.datasets.length > 0 && this.props.datasets.length > 0) {
+            if (myLineChart.data.datasets[0].label === this.props.datasets[0].label) {
+                myLineChart.data.datasets.map(dataset => {
+                    return this.props.datasets.map(datasetFromStore => {
+                        if (datasetFromStore.label === dataset.label) {
+                            return dataset.data = datasetFromStore.data
+                        }
                     })
-                }
-                        
-        }
-            else {
-                myLineChart.data = {
-                    datasets: [...this.props.datasets]
-                }
+                })
             }
-            myLineChart.update()
-        
-            
+        }
+        else {
+            myLineChart.data = {
+                datasets: [...this.props.datasets]
+            }
+        }
+        myLineChart.update()
     }
 
     componentDidMount() {
@@ -167,7 +161,7 @@ class TimeSeriesChart extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        this.updateChart(prevProps)
+        this.updateChart()
         //this.setLiveUpdate()
 
         if (prevProps.dataUpdateFailed === false && this.props.dataUpdateFailed === true) {

@@ -21,8 +21,6 @@ const initialState = {
 export const dialogReducer = (state = initialState, action) => {
     switch (action.type) {
         case MANAGE_DIALOG_OPEN:
-            console.log(action.deviceTitle)
-            console.log(action.deviceName)
             return {
                 ...state,
                 openDialog: action.open,
