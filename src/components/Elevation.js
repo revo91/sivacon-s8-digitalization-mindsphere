@@ -11,60 +11,65 @@ import { withTranslation } from 'react-i18next';
 class Elevation extends React.Component {
     
     manageSwitchesState = (name) => {
-        let t = this.props.t;
-        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
-        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
-        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
-        let namesToShort = ['cb_2FP1','cb_2FP2','cb_1FP1','cb_1FP2']
-
-        if(namesToShort.indexOf(name)!==-1)
-        {
-            if(deviceStateClosed === true)
+    
+            let t = this.props.t;
+            let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+            let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+            let deviceStateTripped = this.props.params.breakers[name].stateTripped;
+            let namesToShort = ['cb_2FP1','cb_2FP2','cb_1FP1','cb_1FP2']
+    
+            if(namesToShort.indexOf(name)!==-1)
             {
-                return t('elevationClosedShort')
+                if(deviceStateClosed === true)
+                {
+                    return t('elevationClosedShort')
+                }
+                else if(deviceStateOpen === true)
+                {
+                    return t('elevationOpenShort')
+                }
+                else if(deviceStateTripped === true)
+                {
+                    return t('elevationTrippedShort')
+                }
             }
-            else if(deviceStateOpen === true)
-            {
-                return t('elevationOpenShort')
+            else {
+                if(deviceStateClosed === true)
+                {
+                    return t('elevationClosedLong')
+                }
+                else if(deviceStateOpen === true)
+                {
+                    return t('elevationOpenLong')
+                }
+                else if(deviceStateTripped === true)
+                {
+                    return t('elevationTrippedLong')
+                }
             }
-            else if(deviceStateTripped === true)
-            {
-                return t('elevationTrippedShort')
-            }
-        }
-        else {
-            if(deviceStateClosed === true)
-            {
-                return t('elevationClosedLong')
-            }
-            else if(deviceStateOpen === true)
-            {
-                return t('elevationOpenLong')
-            }
-            else if(deviceStateTripped === true)
-            {
-                return t('elevationTrippedLong')
-            }
-        } 
+        
+         
     }
 
-    manageSwitchesClassName = (name) => {
-        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
-        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
-        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
-
-        if(deviceStateClosed === true)
-        {
-            return 'closed'
-        }
-        else if(deviceStateOpen === true)
-        {
-            return 'open'
-        }
-        else if(deviceStateTripped === true)
-        {
-            return 'tripped'
-        }
+    manageSwitchesClassName = (name) => {        
+            let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+            let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+            let deviceStateTripped = this.props.params.breakers[name].stateTripped;
+    
+            if(deviceStateClosed === true)
+            {
+                return 'closed'
+            }
+            else if(deviceStateOpen === true)
+            {
+                return 'open'
+            }
+            else if(deviceStateTripped === true)
+            {
+                return 'tripped'
+            }
+        
+        
     }
 
     openProperties = (name, title, section, outgoingFeeder) => {

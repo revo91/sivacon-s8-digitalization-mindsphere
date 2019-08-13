@@ -17,6 +17,7 @@
 
 .open {
     fill: $openText;
+    z-index: 9000;
     rect
     {
         fill: $openLayer;

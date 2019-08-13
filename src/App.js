@@ -29,7 +29,7 @@ import { connect } from 'react-redux';
 import { manageLanguageDialog } from './actions/languageDialog';
 import { manageDrawerOpen } from './actions/index';
 import LanguageDialog from './components/LanguageSelectionDialog';
-import { getIntervalData } from './actions/mindsphereDataUpdateInterval';
+import { getIntervalData1Min, getIntervalData15Min } from './actions/mindsphereDataUpdateInterval';
 
 const drawerWidth = 240;
 const styles = theme => ({
@@ -87,6 +87,26 @@ class App extends React.Component {
     this.props.manageDrawerOpen(open)
   }
 
+  interval15sec = null;
+  interval15min = null;
+
+  componentDidMount() {
+    this.props.getIntervalData1Min()
+    this.props.getIntervalData15Min()
+
+    this.interval15sec = setInterval(()=>{
+      this.props.getIntervalData1Min()
+    },15000)
+    this.interval15min = setInterval(()=>{
+      this.props.getIntervalData15Min()
+    },900000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval15sec)
+    clearInterval(this.interval15min)
+  }
+
   render() {
     const { classes, t } = this.props;
     let open = this.props.drawerOpen;
@@ -133,10 +153,6 @@ class App extends React.Component {
                 <ListItemIcon><LanguageIcon /></ListItemIcon>
                 <ListItemText primary={t('language')} />
               </ListItem>
-              <ListItem button onClick={()=>this.props.getIntervalData()}>
-                <ListItemIcon><LanguageIcon /></ListItemIcon>
-                <ListItemText primary={t('language')} />
-              </ListItem>
             </List>
             
           </Drawer>
@@ -158,14 +174,16 @@ function mapStateToProps(state) {
   return {
     drawerOpen: state.drawerReducer.drawerOpen,
     languageDialogOpen: state.languageDialogReducer.openDialog,
-    applicationLanguage: state.languageDialogReducer.language
+    applicationLanguage: state.languageDialogReducer.language,
+    checkStates: state.switchesStateReducer
   };
 }
 
 const mapDispatchToProps = {
   manageLanguageDialog,
   manageDrawerOpen,
-  getIntervalData
+  getIntervalData1Min,
+  getIntervalData15Min
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withTranslation()(App)))

@@ -2,14 +2,16 @@ import decoder3VA from '../utils/Decoder3VA';
 import decoder3WL from '../utils/Decoder3WL';
 
 import {
-    TOGGLE
-} from '../actions/index';
-
-import { GET_SOURCE_DATA_FROM_MS_DONE,
-    GET_3VA_BREAKER_DATA_FROM_MS_DONE,
-    GET_3WL_BREAKER_DATA_FROM_MS_DONE } from '../actions/mindsphereDataUpdateInterval';
+    GET_SOURCE_1_MIN_DATA_FROM_MS_DONE,
+    GET_3VA_BREAKER_1_MIN_DATA_FROM_MS_DONE,
+    GET_3WL_BREAKER_1_MIN_DATA_FROM_MS_DONE,
+    GET_SOURCE_15_MIN_DATA_FROM_MS_DONE,
+    GET_3VA_BREAKER_15_MIN_DATA_FROM_MS_DONE,
+    GET_DATA_INTERVAL_SYNCHRONIZE_FAILED
+} from '../actions/mindsphereDataUpdateInterval';
 
 const initialState = {
+    syncError: false,
     sources: {
         TR2: {
             state: 0,
@@ -19,7 +21,7 @@ const initialState = {
             Active_energy_import_qc: 0,
             Apparent_energy: 0,
             Apparent_energy_qc: 0,
-            Current_L1: 0,
+            Current_L1: 1,
             Current_L1_qc: 0,
             Current_L2: 0,
             Current_L2_qc: 0,
@@ -59,6 +61,9 @@ const initialState = {
             Voltage_L3_L1_qc: 0,
             Voltage_L3_N: 0,
             Voltage_L3_N_qc: 0,
+            Total_active_power_import_15_min: 0,
+            Total_reactive_power_import_15_min: 0,
+            Total_apparent_power_15_min: 0,
             _time: ''
         },
         TR1: {
@@ -109,6 +114,9 @@ const initialState = {
             Voltage_L3_L1_qc: 0,
             Voltage_L3_N: 0,
             Voltage_L3_N_qc: 0,
+            Total_active_power_import_15_min: 0,
+            Total_reactive_power_import_15_min: 0,
+            Total_apparent_power_15_min: 0,
             _time: ''
         },
         GEN: {
@@ -159,6 +167,9 @@ const initialState = {
             Voltage_L3_L1_qc: 0,
             Voltage_L3_N: 0,
             Voltage_L3_N_qc: 0,
+            Total_active_power_import_15_min: 0,
+            Total_reactive_power_import_15_min: 0,
+            Total_apparent_power_15_min: 0,
             _time: ''
         }
     },
@@ -167,9 +178,9 @@ const initialState = {
         cb_Q1: {
             positionWithdrawn: 0,
             positionInserted: 0,
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             closingFailure: 0,
             openingFailure: 0,
             alarm: 0
@@ -177,9 +188,9 @@ const initialState = {
         cb_Q2: {
             positionWithdrawn: 0,
             positionInserted: 0,
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             closingFailure: 0,
             openingFailure: 0,
             alarm: 0
@@ -187,9 +198,9 @@ const initialState = {
         cb_Q3: {
             positionWithdrawn: 0,
             positionInserted: 0,
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             closingFailure: 0,
             openingFailure: 0,
             alarm: 0
@@ -197,9 +208,9 @@ const initialState = {
         cb_Q4: {
             positionWithdrawn: 0,
             positionInserted: 0,
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             closingFailure: 0,
             openingFailure: 0,
             alarm: 0
@@ -207,17 +218,17 @@ const initialState = {
         cb_Q5: {
             positionWithdrawn: 0,
             positionInserted: 0,
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             closingFailure: 0,
             openingFailure: 0,
             alarm: 0
         },
         cb_2FP1: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -246,12 +257,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2FP2: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -280,12 +293,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F1: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -314,12 +329,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F2: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -348,12 +365,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F3: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -382,12 +401,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F4: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -416,12 +437,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F5: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -450,12 +473,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_2F6: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -484,12 +509,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F1: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -518,12 +545,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F2: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -552,12 +581,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F3: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -586,12 +617,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F4: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -620,12 +653,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F5: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -654,12 +689,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F6: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -688,12 +725,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1F7: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -722,12 +761,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_3F1: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -756,12 +797,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_3F2: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -790,12 +833,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1FP1: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -824,12 +869,14 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
         cb_1FP2: {
-            stateClosed: 0,
-            stateOpened: 0,
-            stateTripped: 0,
+            stateClosed: false,
+            stateOpened: true,
+            stateTripped: false,
             stateInvalid: 0,
             overloadWarning: 0,
             limitReached: 0,
@@ -858,31 +905,20 @@ const initialState = {
             THD_Current_L2_1_min_qc: 0,
             THD_Current_L3_1_min: 0,
             THD_Current_L3_1_min_qc: 0,
+            Active_power_import_15_min: 0,
+            Reactive_power_import_15_min: 0,
             _time: ''
         },
     }
 };
 
 export const switchesStateReducer = (state = initialState, action) => {
-
-    let device = action.device;
-    let deviceType = action.deviceType;
     switch (action.type) {
-        case TOGGLE:
+        case GET_3VA_BREAKER_1_MIN_DATA_FROM_MS_DONE:
+            let _3VAState = decoder3VA.convertValue(action.data.Breaker_status)
             return {
                 ...state,
-                [deviceType]: {
-                    ...state[deviceType],
-                    [device]: {
-                        ...state[deviceType][device],
-                        state: state[deviceType][device].state === 1 ? 0 : 1
-                    }
-                }
-            };
-        case GET_3VA_BREAKER_DATA_FROM_MS_DONE:
-                let _3VAState = decoder3VA.convertValue(action.data.Breaker_status)
-            return {
-                ...state,
+                syncError: false,
                 breakers: {
                     ...state.breakers,
                     [action.deviceName]: {
@@ -891,37 +927,71 @@ export const switchesStateReducer = (state = initialState, action) => {
                         stateClosed: _3VAState.stateClosed,
                         stateOpened: _3VAState.stateOpened,
                         stateTripped: _3VAState.stateTripped,
+                        
                     }
                 }
             }
-            case GET_3WL_BREAKER_DATA_FROM_MS_DONE:
-                let _3WLState = decoder3WL.convertValue(action.data)
-                console.log(_3WLState)
-                return {
-                    ...state,
-                    breakers: {
-                        ...state.breakers,
-                        [action.deviceName]: {
-                            ...state.breakers[action.deviceName],
-                            ...action.data,
-                            stateClosed: _3WLState.stateClosed,
-                            stateOpened: _3WLState.stateOpened,
-                            stateTripped: _3WLState.stateTripped,
+            case GET_3VA_BREAKER_15_MIN_DATA_FROM_MS_DONE:
+                    return {
+                        ...state,
+                        syncError: false,
+                        breakers: {
+                            ...state.breakers,
+                            [action.deviceName]: {
+                                ...state.breakers[action.deviceName],
+                                ...action.data,
+                                Active_power_import_15_min: action.data.Active_power_import_15_min,
+                                Reactive_power_import_15_min: action.data.Reactive_power_import_15_min
+                            }
                         }
                     }
-                }
-            case GET_SOURCE_DATA_FROM_MS_DONE: 
+        case GET_3WL_BREAKER_1_MIN_DATA_FROM_MS_DONE:
+            let _3WLState = decoder3WL.convertValue(action.data)
             return {
                 ...state,
+                syncError: false,
+                breakers: {
+                    ...state.breakers,
+                    [action.deviceName]: {
+                        ...state.breakers[action.deviceName],
+                        ...action.data,
+                        stateClosed: _3WLState.stateClosed,
+                        stateOpened: _3WLState.stateOpened,
+                        stateTripped: _3WLState.stateTripped,
+                    }
+                }
+            }
+        case GET_SOURCE_1_MIN_DATA_FROM_MS_DONE:
+            return {
+                ...state,
+                syncError: false,
                 sources: {
                     ...state.sources,
                     [action.deviceName]: {
                         ...state.sources[action.deviceName],
-                        ...action.data,
                         state: action.sourceState
                     }
                 }
             }
+        case GET_DATA_INTERVAL_SYNCHRONIZE_FAILED:
+            return {
+                ...state,
+                syncError: true
+            }
+        case GET_SOURCE_15_MIN_DATA_FROM_MS_DONE:
+            return {
+                ...state,
+                syncError: false,
+                sources: {
+                    ...state.sources,
+                    [action.deviceName]: {
+                        ...state.sources[action.deviceName],
+                        ...action.data
+                    }
+                },
+            }
+            
+        
         default:
             return state;
     }

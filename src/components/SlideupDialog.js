@@ -87,12 +87,14 @@ class SlideupDialog extends React.Component {
     this.switchRefMid = React.createRef();
     this.switchRefTop = React.createRef();
   }
-
+  //Tween for animation
   myTween = null;
 
   //for tabs filtering
   topDevices = ['TR1', 'TR2', 'GEN'];
   middleDevices = ['cb_1FP1', 'cb_1FP2', 'cb_2FP1', 'cb_2FP2'];
+
+  //
 
   handleChangeTabs = (event, val) => {
     this.props.manageDialogTab(val)
@@ -124,38 +126,69 @@ class SlideupDialog extends React.Component {
     }
 
     if (currentTab === 'overviewTab') {
-      if (currentDevice.indexOf('cb_') !== -1) {
-        let breaker = this.props.breakers[currentDevice].state;
-        if (breaker === 0) {
+      if(this.props.params.deviceTitle!=='' && this.props.params.deviceTitle!==undefined)
+      {
+        let stateClosed = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateClosed;
+        let stateOpened = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateOpened;
+        let stateTripped = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateTripped;
+
+        if (stateOpened || stateTripped) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 0, transformOrigin: "100% 100%" })
-          this.props.setCurrentDeviceStatus(0)
         }
-        else if (breaker === 1) {
+        else if (stateClosed) {
           this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 45, transformOrigin: "100% 100%" })
-          this.props.setCurrentDeviceStatus(1)
-        }
-      }
-      else {
-        let source = this.props.sources[currentDevice].state;
-        if (source === 0) {
-          this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 0, transformOrigin: "100% 100%" })
-          this.props.setCurrentDeviceStatus(0)
-        }
-        else if (source === 1) {
-          this.myTween = TweenLite.to(deviceLevelRef, 1, { rotation: 45, transformOrigin: "100% 100%" })
-          this.props.setCurrentDeviceStatus(1)
         }
       }
     }
   }
 
+  getCurrentDeviceVariables = (variable) => {
+    if(this.props.params.selectedDevice!=='' && this.props.params.selectedDevice!==undefined)
+    {
+      if(this.props.params.selectedDevice.indexOf('cb_')!==-1)
+      {
+        return this.props.breakers[this.props.params.selectedDevice][variable]
+      }
+      else {
+        return this.props.sources[this.props.params.selectedDevice][variable]
+      }
+    }
+    else {
+      return 0;
+    }
+  }
+  
+
   getCurrentDeviceStatus = () => {
-    let t = this.props.t;
-    return this.props.params.currentDeviceStatus === 0 ? t('slideUpDialogBreakerStateOpen') : t('slideUpDialogBreakerStateClosed')
+    if(this.props.params.deviceTitle!=='' && this.props.params.deviceTitle!==undefined)
+    {
+      let t = this.props.t;
+      let closed = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateClosed;
+      let open = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateOpened;
+      let tripped = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateTripped;
+      if(open)
+      {
+        return t('slideUpDialogBreakerStateOpen')
+      }
+      else if(tripped)
+      {
+        return t('elevationTrippedLong')
+      }
+      else {
+        return t('slideUpDialogBreakerStateClosed')
+      }
+    }
   }
 
   getCurrentDeviceStatusTextColor = () => {
-    return this.props.params.currentDeviceStatus === 0 ? 'secondary' : 'primary'
+    if(this.props.params.deviceTitle!=='' && this.props.params.deviceTitle!==undefined)
+    {
+      //let closed = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateClosed;
+      let open = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateOpened;
+      let tripped = this.props.breakers[`cb_${this.props.params.deviceTitle}`].stateTripped;
+    return (open || tripped) ? 'secondary' : 'primary'
+    }
+    
   }
 
   chartZoomDateRange = (InOut) => {
@@ -183,6 +216,10 @@ class SlideupDialog extends React.Component {
 
   getCurrentDeviceType = () => {
     return this.props.params.currentDeviceType
+  }
+
+  componentDidMount() {
+    
   }
 
   render() {
@@ -369,15 +406,15 @@ class SlideupDialog extends React.Component {
                     </Typography>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L1</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L2</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L3</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
                     </div>
                   </Paper>
                 </Grid>

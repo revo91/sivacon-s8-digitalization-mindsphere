@@ -14,7 +14,6 @@ const initialState = {
     deviceOutgoingFeeder: '',
     //device type for showing circuit type
     currentDeviceType: '',
-    currentDeviceStatus: 0,
     tabIndex: 'overviewTab',
 };
 
