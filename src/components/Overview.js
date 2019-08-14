@@ -140,60 +140,60 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="303.91" y="44.07" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(307.23 55.99)" fontSize="12" fill="#fff"
-                                        fontFamily="ArialMT, Arial">
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     <tspan letterSpacing="-0.04em">T</tspan>
                                     <tspan x="6.88" y="0">rafo</tspan>
                                     <tspan x="27.56" y="0" letterSpacing="-0.02em"> </tspan>
                                     <tspan x="30.68" y="0">TR2</tspan>
-                                </text><text transform="translate(305.91 77.52) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="ArialMT, Arial">{(this.props.sources.TR2.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                        transform="translate(305.91 96.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="ArialMT, Arial">{(this.props.sources.TR2.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
-                                            transform="translate(305.91 114.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{this.props.sources.TR2.Total_apparent_power_15_min !== 0 ?
+                                </text><text transform="translate(305.91 77.52)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                        transform="translate(305.91 96.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
+                                            transform="translate(305.91 114.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR2.Total_apparent_power_15_min !== 0 ?
                                                 (this.props.sources.TR2.Total_active_power_import_15_min / this.props.sources.TR2.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
-                            <g id="Opisy"><text transform="translate(76.93 161.2)" fontSize="24" fill="#1d1d1b"
-                                fontFamily="SiemensSans-Roman, Siemens Sans">2FP2</text><text transform="translate(0 161.2)" fontSize="24"
-                                    fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">2FP1</text><text
+                            <g id="Opisy"><text transform="translate(73.93 161.2)" fontSize="24" fill="#1d1d1b"
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">2FP2</text><text transform="translate(-1 161.2)" fontSize="24"
+                                    fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2FP1</text><text
                                         transform="translate(170.28 32.33)" fontSize="36" fill="#1d1d1b"
-                                        fontFamily="SiemensSans-Roman, Siemens Sans">TR2</text><text transform="translate(206.98 219.27)"
-                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">Q2</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">TR2</text><text transform="translate(206.98 219.27)"
+                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q2</text><text
                                                 transform="translate(629.86 32.33)" fontSize="36" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans">TR1</text><text transform="translate(1005.19 109.3)"
-                                                    fontSize="36" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">G</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">TR1</text><text transform="translate(1005.19 109.3)"
+                                                    fontSize="36" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">G</text><text
                                                         transform="translate(952.14 32.33)" fontSize="36" fill="#1d1d1b"
-                                                        fontFamily="SiemensSans-Roman, Siemens Sans">GEN</text><text transform="translate(338.28 219.27)"
-                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">Q4</text><text
+                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">GEN</text><text transform="translate(338.28 219.27)"
+                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q4</text><text
                                                                 transform="translate(666.69 219.27)" fontSize="24" fill="#1d1d1b"
-                                                                fontFamily="SiemensSans-Roman, Siemens Sans">Q1</text><text transform="translate(798.05 219.27)"
-                                                                    fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">Q5</text><text
+                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">Q1</text><text transform="translate(798.05 219.27)"
+                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q5</text><text
                                                                         transform="translate(1032.26 219.27)" fontSize="24" fill="#1d1d1b"
-                                                                        fontFamily="SiemensSans-Roman, Siemens Sans">Q3</text><text transform="translate(459.74 161.2)"
-                                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">1FP1</text><text
-                                                                                transform="translate(536.67 161.2)" fontSize="24" fill="#1d1d1b"
-                                                                                fontFamily="SiemensSans-Roman, Siemens Sans">1FP2</text><text transform="translate(6.11 359.07)"
-                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">2F1</text><text
+                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">Q3</text><text transform="translate(456.74 161.2)"
+                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1FP1</text><text
+                                                                                transform="translate(533.67 161.2)" fontSize="24" fill="#1d1d1b"
+                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">1FP2</text><text transform="translate(6.11 359.07)"
+                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F1</text><text
                                                                                         transform="translate(71.14 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                        fontFamily="SiemensSans-Roman, Siemens Sans">2F2</text><text transform="translate(136.82 359.07)"
-                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">2F3</text><text
+                                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">2F2</text><text transform="translate(136.82 359.07)"
+                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F3</text><text
                                                                                                 transform="translate(202.51 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                fontFamily="SiemensSans-Roman, Siemens Sans">2F4</text><text transform="translate(268.19 359.07)"
-                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">2F5</text><text
+                                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">2F4</text><text transform="translate(268.19 359.07)"
+                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F5</text><text
                                                                                                         transform="translate(333.87 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                        fontFamily="SiemensSans-Roman, Siemens Sans">2F6</text><text transform="translate(399.55 359.07)"
-                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">1F1</text><text
+                                                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">2F6</text><text transform="translate(399.55 359.07)"
+                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F1</text><text
                                                                                                                 transform="translate(465.23 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                                fontFamily="SiemensSans-Roman, Siemens Sans">1F2</text><text transform="translate(530.92 359.07)"
-                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">1F3</text><text
+                                                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">1F2</text><text transform="translate(530.92 359.07)"
+                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F3</text><text
                                                                                                                         transform="translate(596.6 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                                        fontFamily="SiemensSans-Roman, Siemens Sans">1F4</text><text transform="translate(662.28 359.07)"
-                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">1F5</text><text
+                                                                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">1F4</text><text transform="translate(662.28 359.07)"
+                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F5</text><text
                                                                                                                                 transform="translate(727.96 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                                                fontFamily="SiemensSans-Roman, Siemens Sans">1F6</text><text transform="translate(793.65 359.07)"
-                                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">1F7</text><text
+                                                                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">1F6</text><text transform="translate(793.65 359.07)"
+                                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F7</text><text
                                                                                                                                         transform="translate(902.17 359.07)" fontSize="24" fill="#1d1d1b"
-                                                                                                                                        fontFamily="SiemensSans-Roman, Siemens Sans">3F1</text><text transform="translate(967.85 359.07)"
-                                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">3F2</text></g>
+                                                                                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">3F1</text><text transform="translate(967.85 359.07)"
+                                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">3F2</text></g>
                             <g id="_2F" data-name="2F"
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
                                     || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
@@ -417,17 +417,17 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="763.65" y="44.07" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(766.97 55.99)" fontSize="12" fill="#fff"
-                                        fontFamily="ArialMT, Arial">
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     <tspan letterSpacing="-0.04em">T</tspan>
                                     <tspan x="6.88" y="0">rafo</tspan>
                                     <tspan x="27.56" y="0" letterSpacing="-0.02em"> </tspan>
                                     <tspan x="30.68" y="0">TR1</tspan>
-                                </text><text transform="translate(765.64 77.52) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="ArialMT, Arial">{(this.props.sources.TR1.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                        transform="translate(765.64 96.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="ArialMT, Arial">{(this.props.sources.TR1.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
-                                            transform="translate(765.64 114.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{this.props.sources.TR1.Total_apparent_power_15_min !== 0 ?
+                                </text><text transform="translate(765.64 77.52)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                        transform="translate(765.64 96.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
+                                            transform="translate(765.64 114.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR1.Total_apparent_power_15_min !== 0 ?
                                                 (this.props.sources.TR1.Total_active_power_import_15_min / this.props.sources.TR1.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
                             <g id="GEN" className={sources.GEN.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1009.87" y1="238.68" x2="1025.77" y2="222.78" fill="none" strokeLinecap="square"
@@ -448,21 +448,21 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="937.85" y="134.94" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(940.84 146.86)" fontSize="12" fill="#fff"
-                                        fontFamily="ArialMT, Arial">Generator</text><text transform="translate(939.85 168.39) scale(1 1.1)"
-                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="ArialMT, Arial">
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">Generator</text><text transform="translate(939.85 168.39)"
+                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {(this.props.sources.GEN.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                        transform="translate(939.85 186.99) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="ArialMT, Arial">{(this.props.sources.GEN.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text transform="translate(939.85 205.59) scale(1 1.1)" fontSize="12"
-                                            fill="#3c3c3b" fontFamily="ArialMT, Arial" stroke="none">{this.props.sources.GEN.Total_apparent_power_15_min !== 0 ?
+                                        transform="translate(939.85 186.99)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.GEN.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text transform="translate(939.85 205.59)" fontSize="12"
+                                            fill="#3c3c3b" fontFamily="Roboto, Helvetica, Arial, sans-serif" stroke="none">{this.props.sources.GEN.Total_apparent_power_15_min !== 0 ?
                                                 (this.props.sources.GEN.Total_active_power_import_15_min / this.props.sources.GEN.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
                             <g id="GEN_Stop"><text transform="translate(942.88 114.67)" fontSize="18" fill="#1d1d1b"
-                                fontFamily="SiemensSans-Roman, Siemens Sans">
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                 <tspan letterSpacing="-0.03em">S</tspan>
                                 <tspan x="8.88" y="0" letterSpacing="-0.02em">t</tspan>
                                 <tspan x="14.79" y="0">op</tspan>
                             </text></g>
                             <g id="GEN_Gotowosc"><text transform="translate(900.01 90.3)" fontSize="18" fill="#1d1d1b"
-                                fontFamily="SiemensSans-Roman, Siemens Sans">G<tspan x="12.11" y="0" letterSpacing="-0.02em">o</tspan>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">G<tspan x="12.11" y="0" letterSpacing="-0.02em">o</tspan>
                                 <tspan x="21.97" y="0" letterSpacing="-0.02em">t</tspan>
                                 <tspan x="27.89" y="0" letterSpacing="-0.01em">o</tspan>
                                 <tspan x="37.92" y="0" letterSpacing="-0.01em">w</tspan>
@@ -523,13 +523,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="562.74" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(572.07 261.98)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">RPZOK</text><text transform="translate(564.74 283.52) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">RPZOK</text><text transform="translate(564.74 283.52)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(564.74 302.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1FP2.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(564.74 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(564.74 302.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1FP2.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(564.74 320.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1FP2" data-name="1FP2" ref={this.cb_1FP2_ref}
@@ -552,13 +552,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="485.81" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(490.8 261.98)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B01 MSF</text><text transform="translate(487.81 283.52) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B01 MSF</text><text transform="translate(487.81 283.52)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(487.81 302.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1FP2.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(487.81 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(487.81 302.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1FP2.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(487.81 320.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1FP1" data-name="1FP1" ref={this.cb_1FP1_ref}
@@ -581,13 +581,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="104.29" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(113.62 261.98)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">RPZOK</text><text transform="translate(106.29 283.52) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">RPZOK</text><text transform="translate(106.29 283.52)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(106.29 302.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2FP2.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(106.29 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2FP2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(106.29 302.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2FP2.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(106.29 320.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2FP2" data-name="2FP2" ref={this.cb_2FP2_ref} className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
@@ -607,13 +607,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="26.07" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(31.06 261.98)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B01 MSF</text><text transform="translate(28.07 283.52) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B01 MSF</text><text transform="translate(28.07 283.52)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2FP1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(28.07 302.12) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2FP1.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(28.07 320.72) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2FP1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(28.07 302.12)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2FP1.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(28.07 320.72)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2FP1" data-name="2FP1" ref={this.cb_2FP1_ref}
@@ -634,11 +634,11 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="987.82" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(991.81 458.26)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B01 MSG</text><text transform="translate(989.82 479.79) scale(1 1.1)"
-                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="ArialMT, Arial">{(breakers.cb_3F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(989.82 498.39) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_3F2.Current_L1).toFixed(1)} A</text><text transform="translate(989.82 516.99) scale(1 1.1)" fontSize="12"
-                                                    fill="#3c3c3b" fontFamily="ArialMT, Arial" stroke="none">
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B01 MSG</text><text transform="translate(989.82 479.79)"
+                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_3F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(989.82 498.39)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_3F2.Current_L1).toFixed(1)} A</text><text transform="translate(989.82 516.99)" fontSize="12"
+                                                    fill="#3c3c3b" fontFamily="Roboto, Helvetica, Arial, sans-serif" stroke="none">
                                     {!isNaN((breakers.cb_3F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_3F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_3F2" data-name="3F2" ref={this.cb_3F2_ref}
@@ -659,12 +659,12 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="922.14" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(923.79 458.26)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B2 serwe<tspan x="50.02" y="0" letterSpacing="-0.06em">r</tspan>
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 serwe<tspan x="50.02" y="0" letterSpacing="-0.06em">r</tspan>
                                     <tspan x="53.36" y="0">.</tspan>
-                                </text><text transform="translate(924.14 479.79) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="ArialMT, Arial">{(breakers.cb_3F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text transform="translate(924.14 498.39) scale(1 1.1)" fontSize="12"
-                                        fill="#3c3c3b" fontFamily="ArialMT, Arial" stroke="none">{(breakers.cb_3F1.Current_L1).toFixed(1)} A</text><text transform="translate(924.14 516.99) scale(1 1.1)"
-                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="ArialMT, Arial">
+                                </text><text transform="translate(924.14 479.79)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_3F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text transform="translate(924.14 498.39)" fontSize="12"
+                                        fill="#3c3c3b" fontFamily="Roboto, Helvetica, Arial, sans-serif" stroke="none">{(breakers.cb_3F1.Current_L1).toFixed(1)} A</text><text transform="translate(924.14 516.99)"
+                                            fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_3F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_3F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_3F1" data-name="3F1" ref={this.cb_3F1_ref}
@@ -685,13 +685,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="814.89" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(826.89 458.26)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B2 RG</text><text transform="translate(816.89 479.79) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 RG</text><text transform="translate(816.89 479.79)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1F7.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(816.89 498.39) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1F7.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(816.89 516.99) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F7.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(816.89 498.39)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F7.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(816.89 516.99)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F7.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F7.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F7.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F7.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F7.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F7.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F7" data-name="1F7" ref={this.cb_1F7_ref}
@@ -712,13 +712,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="749.21" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(761.2 458.26)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B2 RG</text><text transform="translate(751.21 479.79) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 RG</text><text transform="translate(751.21 479.79)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1F6.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(751.21 498.39) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1F6.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(751.21 516.99) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F6.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(751.21 498.39)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F6.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(751.21 516.99)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F6.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F6.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F6" data-name="1F6" ref={this.cb_1F6_ref}
@@ -739,13 +739,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="683.53" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(695.52 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B3 RG</text><text transform="translate(685.53 479.65) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B3 RG</text><text transform="translate(685.53 479.65)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1F5.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(685.53 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1F5.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(685.53 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F5.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(685.53 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F5.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(685.53 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F5.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F5.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F5" data-name="1F5" ref={this.cb_1F5_ref}
@@ -766,14 +766,14 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="617.84" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(622.84 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan>
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan>
                                     <tspan x="22.02" y="0"> klim.</tspan>
-                                </text><text transform="translate(619.84 479.65) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="ArialMT, Arial">{(breakers.cb_1F4.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                        transform="translate(619.84 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="ArialMT, Arial">{(breakers.cb_1F4.Current_L1).toFixed(1)} A</text><text
-                                            transform="translate(619.84 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{!isNaN((breakers.cb_1F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
+                                </text><text transform="translate(619.84 479.65)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F4.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                        transform="translate(619.84 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F4.Current_L1).toFixed(1)} A</text><text
+                                            transform="translate(619.84 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{!isNaN((breakers.cb_1F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                                 (breakers.cb_1F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F4.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F4" data-name="1F4" ref={this.cb_1F4_ref}
                                 className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
@@ -793,14 +793,14 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="552.16" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(553.15 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan>
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan>
                                     <tspan x="22.02" y="0" > komp.</tspan>
-                                </text><text transform="translate(554.16 479.65) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="ArialMT, Arial">{(breakers.cb_1F3.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                        transform="translate(554.16 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="ArialMT, Arial">{(breakers.cb_1F3.Current_L1).toFixed(1)} A</text><text
-                                            transform="translate(554.16 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">
+                                </text><text transform="translate(554.16 479.65)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F3.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                        transform="translate(554.16 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F3.Current_L1).toFixed(1)} A</text><text
+                                            transform="translate(554.16 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F3.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F3.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F3" data-name="1F3" ref={this.cb_1F3_ref}
@@ -821,13 +821,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="486.48" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(491.14 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B3 komp.</text><text transform="translate(488.48 479.65) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B3 komp.</text><text transform="translate(488.48 479.65)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(488.48 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1F2.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(488.48 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(488.48 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F2.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(488.48 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F2" data-name="1F2" ref={this.cb_1F2_ref}
@@ -848,13 +848,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="420.8" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(422.12 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B01 MSB1</text><text transform="translate(422.8 479.65) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B01 MSB1</text><text transform="translate(422.8 479.65)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_1F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(422.8 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_1F1.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(422.8 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(422.8 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F1.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(422.8 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_1F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F1" data-name="1F1" ref={this.cb_1F1_ref}
@@ -875,13 +875,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="355.12" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(364.77 458.12)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">Parking</text><text transform="translate(357.12 479.65) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">Parking</text><text transform="translate(357.12 479.65)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F6.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(357.12 498.25) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F6.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(357.12 516.85) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F6.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(357.12 498.25)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F6.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(357.12 516.85)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F6.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F6.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F6" data-name="2F6" ref={this.cb_2F6_ref}
@@ -902,13 +902,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="289.43" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(308.42 458.13)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan></text><text
-                                            transform="translate(291.43 479.66) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F5.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(291.43 498.26) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F5.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(291.43 516.86) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B1<tspan x="14.68" y="0" letterSpacing="-0.06em">A</tspan></text><text
+                                            transform="translate(291.43 479.66)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F5.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(291.43 498.26)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F5.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(291.43 516.86)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F5.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F5.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F5" data-name="2F5" ref={this.cb_2F5_ref}
@@ -929,13 +929,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="223.75" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(237.08 458.19)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B2 R1</text><text transform="translate(225.75 479.72) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 R1</text><text transform="translate(225.75 479.72)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F4.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(225.75 498.32) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F4.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(225.75 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">{!isNaN((breakers.cb_2F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F4.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(225.75 498.32)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F4.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(225.75 516.93)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{!isNaN((breakers.cb_2F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                                         (breakers.cb_2F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F4.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F4" data-name="2F4" ref={this.cb_2F4_ref}
                                 className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
@@ -955,13 +955,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="158.07" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(159.39 458.19)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B01 MSB2</text><text transform="translate(160.07 479.72) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B01 MSB2</text><text transform="translate(160.07 479.72)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F3.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(160.07 498.32) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F3.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(160.07 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F3.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(160.07 498.32)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F3.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(160.07 516.93)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F3.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F3.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F3" data-name="2F3" ref={this.cb_2F3_ref}
@@ -982,13 +982,13 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" />
                                 <rect x="92.39" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(104.38 458.19)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B2 RG</text><text transform="translate(94.39 479.72) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 RG</text><text transform="translate(94.39 479.72)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(94.39 498.32) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F2.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(94.39 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F2.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(94.39 498.32)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F2.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(94.39 516.93)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F2" data-name="2F2" ref={this.cb_2F2_ref}
@@ -1009,13 +1009,13 @@ class Overview extends React.Component {
                                     strokeWidth="2" />
                                 <rect x="26.07" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(35.72 458.19)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="ArialMT, Arial">B1B P2</text><text transform="translate(28.07 479.72) scale(1 1.1)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B1B P2</text><text transform="translate(28.07 479.72)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="ArialMT, Arial">{(breakers.cb_2F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
-                                                transform="translate(28.07 498.32) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                fontFamily="ArialMT, Arial">{(breakers.cb_2F1.Current_L1).toFixed(1)} A</text><text
-                                                    transform="translate(28.07 516.93) scale(1 1.1)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                                    fontFamily="ArialMT, Arial">
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F1.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                                transform="translate(28.07 498.32)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_2F1.Current_L1).toFixed(1)} A</text><text
+                                                    transform="translate(28.07 516.93)" fontSize="12" fill="#3c3c3b" stroke="none"
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F1" data-name="2F1" ref={this.cb_2F1_ref}

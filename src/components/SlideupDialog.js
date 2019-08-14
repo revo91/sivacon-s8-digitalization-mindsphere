@@ -143,6 +143,9 @@ class SlideupDialog extends React.Component {
   }
 
   getCurrentDeviceVariables = (variable) => {
+    let activePower15Min = null;
+    let reactivePower15Min = null;
+    let apparentPower15Min =null;
     if(this.props.params.selectedDevice!=='' && this.props.params.selectedDevice!==undefined)
     {
       if(this.props.params.selectedDevice.indexOf('cb_')!==-1)

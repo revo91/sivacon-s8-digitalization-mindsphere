@@ -208,9 +208,22 @@ const marks = [
 
 class ChartDataRangeTimeSlider extends React.Component {
     formattedMarks = [];
-    
+
     valuetext = (value) => {
         return `${value}`;
+    }
+
+    getDeviceNameForApiCall = () => {
+        switch (this.props.deviceNameForApiCall) {
+            case 'Q1':
+                return 'TR1'
+            case 'Q2':
+                return 'TR2'
+            case 'Q3':
+                return 'GEN'
+            default:
+                return this.props.deviceNameForApiCall
+        }
     }
 
     componentDidMount() {
@@ -220,63 +233,60 @@ class ChartDataRangeTimeSlider extends React.Component {
     checkWidth = () => {
         let divider = null;
         let formattedMarks = []
-        if(window.innerWidth<=1023)
-        {
+        if (window.innerWidth <= 1023) {
             divider = 12
         }
-        else if(window.innerWidth>1023)
-        {
+        else if (window.innerWidth > 1023) {
             divider = 2
         }
-        marks.map((mark,index)=>{
-            return index%divider===0? formattedMarks.push(mark) : null
+        marks.map((mark, index) => {
+            return index % divider === 0 ? formattedMarks.push(mark) : null
         })
         return formattedMarks;
     }
 
-    setCurrentTime = (updateCurrentTime=false) => {
+    setCurrentTime = (updateCurrentTime = false) => {
         let sliderValue = 0;
         let timeRange = null;
-        if(updateCurrentTime===true)
-        {
+        if (updateCurrentTime === true) {
             timeRange = new Date().toISOString()
         }
-        else 
-        {
-            timeRange = this.props.timeRange
+        else {
+            timeRange = moment(this.props.timeRange).add(30, 'minute').toISOString()
         }
         let currentTimeInHHmmFormat = moment(timeRange).format('HH:mm');
-        let hours = currentTimeInHHmmFormat.substring(0,2)
-        let minutes = currentTimeInHHmmFormat.substring(3,currentTimeInHHmmFormat.length)
-        sliderValue = hours*2;
-        if(parseInt(minutes[0])>=3)
-        {
+        let hours = currentTimeInHHmmFormat.substring(0, 2)
+        let minutes = currentTimeInHHmmFormat.substring(3, currentTimeInHHmmFormat.length)
+        sliderValue = hours * 2;
+        if (parseInt(minutes[0]) >= 3) {
             sliderValue++
         }
         return sliderValue
     }
 
-    setTimeRange = (value, turnOnLiveUpdate=false) => {
+    setTimeRange = (value, turnOnLiveUpdate = false) => {
+        //turn off liveupdate on change slider
+        if (turnOnLiveUpdate === false) {
+            this.props.chartLiveUpdate(false);
+        }
         let multiplier = value;
-        let addMinutes = multiplier*30;
+        let addMinutes = multiplier * 30;
         let timeRange = this.props.timeRange;
         let startOfDay = moment(timeRange).startOf("day");
-        let addedMinutes = startOfDay.add(addMinutes,"minutes").toISOString()
-
+        let addedMinutes = startOfDay.add(addMinutes, "minutes").toISOString()
         this.props.sliderSetTimerange(addedMinutes);
         this.props.sliderSetStepValue(value)
-        this.props.getData(this.props.tabIndex, addedMinutes);
-        //turn off liveupdate on change slider
-        if(turnOnLiveUpdate===false)
-        {
-            this.props.chartLiveUpdate(false); 
+        if (this.props.liveUpdate === false) {
+            this.props.getData(this.getDeviceNameForApiCall(), this.props.tabIndex, addedMinutes);
+        }
+        else {
+            this.props.getData(this.getDeviceNameForApiCall(), this.props.tabIndex, moment().toISOString());
         }
     }
 
     componentDidUpdate(prevProps) {
-        if((prevProps.liveUpdate===false && this.props.liveUpdate===true))
-        {
-            this.setTimeRange(this.setCurrentTime(true),true)
+        if ((prevProps.liveUpdate === false && this.props.liveUpdate === true)) {
+            this.setTimeRange(this.setCurrentTime(true), true)
         }
     }
 
@@ -291,8 +301,8 @@ class ChartDataRangeTimeSlider extends React.Component {
                 valueLabelDisplay="auto"
                 max={47}
                 min={0}
-                valueLabelFormat={(x)=>``}
-                onChangeCommitted={(x,value)=>this.setTimeRange(value)}
+                valueLabelFormat={(x) => ``}
+                onChangeCommitted={(x, value) => this.setTimeRange(value)}
                 value={this.props.sliderStepValue || this.setCurrentTime()}
             />
         )
@@ -304,7 +314,8 @@ function mapStateToProps(state) {
         timeRange: state.chartReducer.timeRangeSlider,
         sliderStepValue: state.chartReducer.timeRangeStepValue,
         tabIndex: state.dialogReducer.tabIndex,
-        liveUpdate: state.chartReducer.liveDataUpdate
+        liveUpdate: state.chartReducer.liveDataUpdate,
+        deviceNameForApiCall: state.dialogReducer.deviceTitle
     };
 }
 

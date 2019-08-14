@@ -15,7 +15,7 @@ class TimeSeriesChart extends React.Component {
     min = null;
     max = null;
     updateInterval = null;
-    tabIndex = this.props.tabIndex
+    tabIndex = this.props.tabIndex;
 
     translatedLabels = {
         Voltage_L1_L2: this.props.t('voltageL1L2'),
@@ -27,6 +27,19 @@ class TimeSeriesChart extends React.Component {
         Current_L1: this.props.t('currentL1'),
         Current_L2: this.props.t('currentL2'),
         Current_L3: this.props.t('currentL3'),
+    }
+
+    getDeviceNameForApiCall = () => {
+        switch(this.props.deviceNameForApiCall) {
+            case 'Q1':
+                return 'TR1'
+            case 'Q2':
+                return 'TR2'
+            case 'Q3':
+                return 'GEN'
+            default:
+                return this.props.deviceNameForApiCall
+        }
     }
 
     calculateMinMaxRange = () => {
@@ -177,11 +190,15 @@ class TimeSeriesChart extends React.Component {
     }
 
     updateChartWithInterval = () => {
-        this.props.getData(this.tabIndex, this.props.timeRangeSlider)
+        if(this.props.liveDataUpdate === false)
+        {
+            clearInterval(this.updateInterval)
+        }
+        this.props.getData(this.getDeviceNameForApiCall(),this.tabIndex, this.props.timeRangeSlider)
         this.updateInterval = setInterval(() => {
             if (this.props.liveDataUpdate === true) {
                 this.props.sliderSetTimerange(new Date().toISOString())
-                this.props.getData(this.tabIndex, moment().subtract(30, 'minutes').toISOString())
+                this.props.getData(this.getDeviceNameForApiCall(),this.tabIndex, moment().toISOString())
             }
         }, 30000)
     }
@@ -206,7 +223,8 @@ function mapStateToProps(state) {
         dataUpdateFailed: state.chartReducer.isError,
         dataUpdateAwaiting: state.chartReducer.isChartDataLoading,
         zoom: state.chartReducer.zoom,
-        selectedDevice: state.dialogReducer.selectedDevice
+        selectedDevice: state.dialogReducer.selectedDevice,
+        deviceNameForApiCall: state.dialogReducer.deviceTitle
     };
 }
 

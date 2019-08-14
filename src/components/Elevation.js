@@ -232,12 +232,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="117.89 49.41 69.25 49.41 69.25 36.35 117.89 36.35 117.89 49.41 117.89 49.41" fill="#006174" />
                                 <text transform="translate(71.72 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                    fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(71.51 60.52)" fontSize="11.3"
-                                        fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(71.51 60.52)" fontSize="11.3"
+                                        fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                             transform="translate(86.7 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                            fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                 transform="translate(99.73 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="65.39" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="416.57 63 361.3 63 361.3 33.84 416.57 33.84 416.57 63 416.57 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-2)">
@@ -246,12 +246,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="413.39 49.41 364.75 49.41 364.75 36.35 413.39 36.35 413.39 49.41 413.39 49.41"
                                     fill="#006174" /><text transform="translate(367.22 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(367.01 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(367.01 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(382.2 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(395.23 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="360.89" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="553.57 63 498.3 63 498.3 33.84 553.57 33.84 553.57 63 553.57 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-3)">
@@ -260,12 +260,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="550.39 49.41 501.75 49.41 501.75 36.35 550.39 36.35 550.39 49.41 550.39 49.41"
                                     fill="#006174" /><text transform="translate(504.22 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(504.01 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(504.01 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(519.2 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(532.23 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="497.89" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="712.07 63 656.8 63 656.8 33.84 712.07 33.84 712.07 63 712.07 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-4)">
@@ -274,12 +274,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="708.89 49.41 660.25 49.41 660.25 36.35 708.89 36.35 708.89 49.41 708.89 49.41"
                                     fill="#006174" /><text transform="translate(662.72 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(662.51 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(662.51 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(677.7 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(690.73 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="656.39" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="870.37 63 815.1 63 815.1 33.84 870.37 33.84 870.37 63 870.37 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-5)">
@@ -288,12 +288,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="867.19 49.41 818.55 49.41 818.55 36.35 867.19 36.35 867.19 49.41 867.19 49.41"
                                     fill="#006174" /><text transform="translate(821.02 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(820.81 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(820.81 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(836 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(849.03 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="814.69" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="1028.87 63 973.6 63 973.6 33.84 1028.87 33.84 1028.87 63 1028.87 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-6)">
@@ -302,12 +302,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="1025.69 49.41 977.05 49.41 977.05 36.35 1025.69 36.35 1025.69 49.41 1025.69 49.41"
                                     fill="#006174" /><text transform="translate(979.52 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(979.31 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(979.31 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(994.5 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(1007.53 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="973.19" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="1324.57 63 1269.3 63 1269.3 33.84 1324.57 33.84 1324.57 63 1324.57 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-7)">
@@ -316,12 +316,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="1321.39 49.41 1272.75 49.41 1272.75 36.35 1321.39 36.35 1321.39 49.41 1321.39 49.41"
                                     fill="#006174" /><text transform="translate(1275.22 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(1275.01 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(1275.01 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(1290.2 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(1303.23 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="1268.89" y="33.62" width="56.1" height="29.6" fill="none" />
                                 <polygon points="1483.07 63 1427.8 63 1427.8 33.84 1483.07 33.84 1483.07 63 1483.07 63" fill="#e5f3f8" />
                                 <g clipPath="url(#clip-path-8)">
@@ -330,12 +330,12 @@ class Elevation extends React.Component {
                                 </g>
                                 <polygon points="1479.89 49.41 1431.25 49.41 1431.25 36.35 1479.89 36.35 1479.89 49.41 1479.89 49.41"
                                     fill="#006174" /><text transform="translate(1433.72 46.14)" fontSize="9.63" fill="#e5f3f8"
-                                        fontFamily="SiemensLogo, Siemens Logo">s</text><text transform="translate(1433.51 60.52)" fontSize="11.3"
-                                            fill="#1d1d1b" fontFamily="SiemensSans-Roman, Siemens Sans">SIV</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">SIEMENS</text><text transform="translate(1433.51 60.52)" fontSize="11.3"
+                                            fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">SIV</text><text
                                                 transform="translate(1448.7 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                fontFamily="SiemensSans-Roman, Siemens Sans" letterSpacing="-0.02em">AC</text><text
+                                                fontFamily="Roboto, Helvetica, Arial, sans-serif" letterSpacing="-0.02em">AC</text><text
                                                     transform="translate(1461.73 60.52)" fontSize="11.3" fill="#1d1d1b"
-                                                    fontFamily="SiemensSans-Roman, Siemens Sans">ON</text>
+                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">ON</text>
                                 <rect x="1427.39" y="33.62" width="56.1" height="29.6" fill="none" />
                             </g>
                             <g id="PAC">
@@ -671,44 +671,44 @@ class Elevation extends React.Component {
                                     fill="#d9e7ed" />
                             </g>
                             <g id="Etykiety"><text transform="translate(380.27 400.68)" fontSize="22" fill="#055f87"
-                                fontFamily="ArialMT, Arial">S2P3.1</text><text transform="translate(517.27 400.68)" fontSize="22"
-                                    fill="#055f87" fontFamily="ArialMT, Arial">S2P1.1</text><text transform="translate(697.27 400.68)"
-                                        fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S0P0.1</text><text
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P3.1</text><text transform="translate(517.27 400.68)" fontSize="22"
+                                    fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P1.1</text><text transform="translate(697.27 400.68)"
+                                        fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S0P0.1</text><text
                                             transform="translate(833.87 400.68)" fontSize="22" fill="#055f87"
-                                            fontFamily="ArialMT, Arial">S1P1.1</text><text transform="translate(106.27 158.07)" fontSize="22"
-                                                fill="#055f87" fontFamily="ArialMT, Arial">S2P2.1</text><text transform="translate(106.27 237.78)"
-                                                    fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S2P2.2</text><text
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P1.1</text><text transform="translate(106.27 158.07)" fontSize="22"
+                                                fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.1</text><text transform="translate(106.27 237.78)"
+                                                    fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.2</text><text
                                                         transform="translate(106.27 319.81)" fontSize="22" fill="#055f87"
-                                                        fontFamily="ArialMT, Arial">S2P2.3</text><text transform="translate(106.27 400.68)" fontSize="22"
-                                                            fill="#055f87" fontFamily="ArialMT, Arial">S2P2.4</text><text transform="translate(106.27 481.55)"
-                                                                fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S2P2.5</text><text
+                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.3</text><text transform="translate(106.27 400.68)" fontSize="22"
+                                                            fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.4</text><text transform="translate(106.27 481.55)"
+                                                                fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.5</text><text
                                                                     transform="translate(94.03 885.08)" fontSize="22" fill="#055f87"
-                                                                    fontFamily="ArialMT, Arial">S2P2.10</text><text transform="translate(1288.27 400.68)" fontSize="22"
-                                                                        fill="#055f87" fontFamily="ArialMT, Arial">S1P3.1</text><text transform="translate(1468.27 562.42)"
-                                                                            fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S1P4.3</text><text
+                                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2.10</text><text transform="translate(1288.27 400.68)" fontSize="22"
+                                                                        fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P3.1</text><text transform="translate(1468.27 562.42)"
+                                                                            fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P4.3</text><text
                                                                                 transform="translate(1468.27 643.29)" fontSize="22" fill="#055f87"
-                                                                                fontFamily="ArialMT, Arial">S1P4.4</text><text transform="translate(1013.87 158.07)" fontSize="22"
-                                                                                    fill="#055f87" fontFamily="ArialMT, Arial">S1P2.1</text><text transform="translate(1014.27 238.44)"
-                                                                                        fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S1P2.2</text><text
+                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P4.4</text><text transform="translate(1013.87 158.07)" fontSize="22"
+                                                                                    fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.1</text><text transform="translate(1014.27 238.44)"
+                                                                                        fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.2</text><text
                                                                                             transform="translate(1014.27 319.81)" fontSize="22" fill="#055f87"
-                                                                                            fontFamily="ArialMT, Arial">S1P2.3</text><text transform="translate(1014.27 400.68)" fontSize="22"
-                                                                                                fill="#055f87" fontFamily="ArialMT, Arial">S1P2.4</text><text transform="translate(1014.27 481.55)"
-                                                                                                    fontSize="22" fill="#055f87" fontFamily="ArialMT, Arial">S1P2.5</text><text
+                                                                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.3</text><text transform="translate(1014.27 400.68)" fontSize="22"
+                                                                                                fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.4</text><text transform="translate(1014.27 481.55)"
+                                                                                                    fontSize="22" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.5</text><text
                                                                                                         transform="translate(1014.27 562.42)" fontSize="22" fill="#055f87"
-                                                                                                        fontFamily="ArialMT, Arial">S1P2.6</text><text transform="translate(1002.03 885.9)" fontSize="22"
-                                                                                                            fill="#055f87" fontFamily="ArialMT, Arial">S1P2.10</text><text transform="translate(54.3 990.43)"
-                                                                                                                fontSize="32" fill="#055f87" fontFamily="ArialMT, Arial">S2P2</text><text
+                                                                                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.6</text><text transform="translate(1002.03 885.9)" fontSize="22"
+                                                                                                            fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2.10</text><text transform="translate(54.3 990.43)"
+                                                                                                                fontSize="32" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P2</text><text
                                                                                                                     transform="translate(349.8 990.43)" fontSize="32" fill="#055f87"
-                                                                                                                    fontFamily="ArialMT, Arial">S2P3</text><text transform="translate(486.8 990.43)" fontSize="32"
-                                                                                                                        fill="#055f87" fontFamily="ArialMT, Arial">S2P1</text><text transform="translate(645.1 990.43)"
-                                                                                                                            fontSize="32" fill="#055f87" fontFamily="ArialMT, Arial">S0P0</text><text
+                                                                                                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P3</text><text transform="translate(486.8 990.43)" fontSize="32"
+                                                                                                                        fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S2P1</text><text transform="translate(645.1 990.43)"
+                                                                                                                            fontSize="32" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S0P0</text><text
                                                                                                                                 transform="translate(803.8 990.43)" fontSize="32" fill="#055f87"
-                                                                                                                                fontFamily="ArialMT, Arial">S1P1</text><text transform="translate(962.1 990.43)" fontSize="32"
-                                                                                                                                    fill="#055f87" fontFamily="ArialMT, Arial">S1P2</text><text transform="translate(1257.8 987.03)"
-                                                                                                                                        fontSize="32" fill="#055f87" fontFamily="ArialMT, Arial">S1P3</text><text
+                                                                                                                                fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P1</text><text transform="translate(962.1 990.43)" fontSize="32"
+                                                                                                                                    fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P2</text><text transform="translate(1257.8 987.03)"
+                                                                                                                                        fontSize="32" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P3</text><text
                                                                                                                                             transform="translate(1416.3 987.03)" fontSize="32" fill="#055f87"
-                                                                                                                                            fontFamily="ArialMT, Arial">S1P4</text><text transform="translate(644.74 836.48)" fontSize="40"
-                                                                                                                                                fill="#055f87" fontFamily="ArialMT, Arial">SZR</text></g>
+                                                                                                                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">S1P4</text><text transform="translate(644.74 836.48)" fontSize="40"
+                                                                                                                                                fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">SZR</text></g>
                             <g id="S1P4.3_rotary">
                                 <path d="M1504.8,599.24h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1460.76,649.05h49.52V599.52h-49.52v49.53Zm50.09.57h-50.66V599h50.66v50.67Z"
@@ -729,7 +729,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P4.3_rotary_status" className={this.manageSwitchesClassName('cb_3F1')}><text transform="translate(1433.04 598.59)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_3F1')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_3F1')}</text></g>
                             <g id="S1P4.4_rotary">
                                 <path d="M1504.8,680.11h5.77V730.2h-50.1V680.11h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1460.76,729.92h49.52V680.39h-49.52v49.53Zm50.09.57h-50.66V679.82h50.66v50.67Z"
@@ -750,7 +750,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P4.4_rotary_status" className={this.manageSwitchesClassName('cb_3F2')}><text transform="translate(1433.04 680.39)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_3F2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_3F2')}</text></g>
                             <g id="S2P2.1_rotary">
                                 <path d="M144.41,195.15h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,245h49.52V195.43H100.37V245Zm50.1.57H99.8V194.86h50.67v50.67Z"
@@ -770,7 +770,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P2.1_rotary_status" className={this.manageSwitchesClassName('cb_2F1')}><text transform="translate(71.04 194.46)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F1')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F1')}</text></g>
                             <g id="S2P2.2_rotary">
                                 <path d="M144.41,275.76h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,325.57h49.52V276H100.37v49.53Zm50.1.57H99.8V275.47h50.67v50.67Z"
@@ -788,7 +788,7 @@ class Elevation extends React.Component {
                                 <polygon points="46.35 242.16 45.78 242.16 45.78 237 46.35 237 46.35 242.16 46.35 242.16" fill="#055f87" />
                             </g>
                             <g id="S2P2.2_rotary_status" className={this.manageSwitchesClassName('cb_2F2')}><text transform="translate(71.04 275.18)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F2')}</text></g>
                             <g id="S2P2.3_rotary">
                                 <path d="M144.41,356.68h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,406.49h49.52V357H100.37v49.52Zm50.1.58H99.8V356.39h50.67v50.68Z"
@@ -808,7 +808,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P2.3_rotary_status" className={this.manageSwitchesClassName('cb_2F4')}><text transform="translate(71.04 356.04)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F4')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F4')}</text></g>
                             <g id="S2P2.4_rotary">
                                 <path d="M144.41,437.55h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,487.36h49.52V437.84H100.37v49.52Zm50.1.58H99.8V437.26h50.67v50.68Z"
@@ -828,7 +828,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P2.4_rotary_status" className={this.manageSwitchesClassName('cb_2F5')}><text transform="translate(71.04 436.91)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F5')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F5')}</text></g>
                             <g id="S2P2.5_rotary">
                                 <path d="M144.41,518.42h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,568.23h49.52V518.71H100.37v49.52Zm50.1.58H99.8V518.13h50.67v50.68Z"
@@ -848,7 +848,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P2.5_rotary_status" className={this.manageSwitchesClassName('cb_2F6')}><text transform="translate(71.04 517.78)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F6')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F6')}</text></g>
                             <g id="S2P2.10_rotary">
                                 <path d="M144.41,922.77h5.77v50.1H100.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M100.37,972.58h49.52V923.06H100.37v49.52Zm50.1.57H99.8V922.48h50.67v50.67Z"
@@ -868,7 +868,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P2.10_rotary_status" className='closed'><text transform="translate(71.04 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{t('elevationClosedLong')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedLong')}</text></g>
                             <g id="S1P2.1_rotary">
                                 <path d="M1051.1,195.15h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,245h49.52V195.43h-49.52V245Zm50.09.57h-50.66V194.86h50.66v50.67Z"
@@ -888,7 +888,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.1_rotary_status" className={this.manageSwitchesClassName('cb_1F2')}><text transform="translate(979.04 194.5)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F2')}</text></g>
                             <g id="S1P2.2_rotary">
                                 <path d="M1051.1,275.31h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,325.12h49.52V275.6h-49.52v49.52Zm50.09.58h-50.66V275h50.66V325.7Z"
@@ -908,7 +908,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.2_rotary_status" className={this.manageSwitchesClassName('cb_1F3')}><text transform="translate(979.04 275.33)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F3')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F3')}</text></g>
                             <g id="S1P2.3_rotary">
                                 <path d="M1051.1,356.35h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,406.16h49.52V356.63h-49.52v49.53Zm50.09.57h-50.66V356.06h50.66v50.67Z"
@@ -928,7 +928,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.3_rotary_status" className={this.manageSwitchesClassName('cb_1F4')}><text transform="translate(979.04 356.2)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F4')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F4')}</text></g>
                             <g id="S1P2.4_rotary">
                                 <path d="M1051.1,437.5h5.77v50.1h-50.1V437.5h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,487.31h49.52V437.78h-49.52v49.53Zm50.09.57h-50.66V437.21h50.66v50.67Z"
@@ -948,7 +948,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.4_rotary_status" className={this.manageSwitchesClassName('cb_1F5')}><text transform="translate(979.04 437.06)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F5')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F5')}</text></g>
                             <g id="S1P2.5_rotary">
                                 <path d="M1051.1,518.37h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,568.18h49.52V518.65h-49.52v49.53Zm50.09.57h-50.66V518.08h50.66v50.67Z"
@@ -968,7 +968,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.5_rotary_status" className={this.manageSwitchesClassName('cb_1F6')}><text transform="translate(978.64 517.93)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F6')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F6')}</text></g>
                             <g id="S1P2.6_rotary">
                                 <path d="M1051.1,599.24h5.77v50.1h-50.1v-50.1h44.33Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1007.06,649.05h49.52V599.52h-49.52v49.53Zm50.09.57h-50.66V599h50.66v50.67Z"
@@ -988,7 +988,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.6_rotary_status" className={this.manageSwitchesClassName('cb_1F7')}><text transform="translate(978.64 598.8)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F7')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F7')}</text></g>
                             <g id="S1P2.10_rotary">
                                 <path d="M1049.76,922.77h5.77v50.1h-50.09v-50.1h44.32Z" transform="translate(-83.96 -51.18)" fill="#a6c7d5" />
                                 <path d="M1005.72,972.58h49.53V923.06h-49.53v49.52Zm50.1.57h-50.67V922.48h50.67v50.67Z"
@@ -1009,7 +1009,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P2.10_rotary_status" className='static'><text transform="translate(979.04 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{t('elevationClosedLong')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedLong')}</text></g>
                             <g id="S2P3.1">
                                 <path d="M476.63,620.16H513.7V595H476.63v25.16Zm37.41.34H476.29V594.66H514V620.5Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1089,7 +1089,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P3.1_status" className={this.manageSwitchesClassName('cb_2F3')}><text transform="translate(345.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2F3')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2F3')}</text></g>
                             <g id="S2P1.1">
                                 <g clipPath="url(#clip-path-15)">
                                     <polygon points="466.71 455.55 585.16 455.55 585.16 609.8 466.71 609.8 466.71 455.55 466.71 455.55"
@@ -1251,7 +1251,7 @@ class Elevation extends React.Component {
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
                             <g id="S2P1.1_status" className={this.manageSwitchesClassName('cb_Q2')}><text transform="translate(482.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q2')}</text></g>
                             <g id="S1P3.1">
                                 <path d="M1384.63,620.16h37.07V595h-37.07v25.16Zm37.41.34h-37.75V594.66H1422V620.5Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1331,7 +1331,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P3.1_status" className={this.manageSwitchesClassName('cb_1F1')}><text transform="translate(1253.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1F1')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1F1')}</text></g>
                             <g id="S1P4_3VA_1">
                                 <path d="M1499,416.66h26.87V398.42H1499v18.24Zm27.11.24h-27.35V398.18h27.35V416.9Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1489,9 +1489,9 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P4_3VA_1_status" className='closed'><text transform="translate(1379.57 437.07)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{t('elevationClosedShort')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedShort')}</text></g>
                             <g id="S1P4_3VA_2_status" className='closed'><text transform="translate(1465.7 437.07)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{t('elevationClosedShort')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedShort')}</text></g>
                             <g id="S2P1_3VA_1">
                                 <path d="M579.22,914.88h22.83V899.39H579.22v15.49Zm23,.21H579V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1571,7 +1571,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P1_3VA_1_status" className={this.manageSwitchesClassName('cb_2FP1')}><text transform="translate(465.15 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2FP1')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2FP1')}</text></g>
                             <g id="S2P1_3VA_2" onClick={() => this.openProperties('cb_2FP2','2FP2',`${t('slideUpDialogCircuitSection')} TR2`,'RPZOK')} 
                             className={this.manageSwitchesClassName('cb_2FP2')}>
                                 <path d="M645.22,914.88h22.83V899.39H645.22v15.49Zm23,.21H645V899.18h23.24v15.91Z"
@@ -1652,7 +1652,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S2P1_3VA_2_status" className={this.manageSwitchesClassName('cb_2FP2')}><text transform="translate(531.15 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_2FP2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2FP2')}</text></g>
                             <g id="S1P1_3VA_1">
                                 <path d="M896.79,914.88h22.82V899.39H896.79v15.49Zm23,.21H896.58V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1732,7 +1732,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P1_3VA_1_status" className={this.manageSwitchesClassName('cb_1FP1')}><text transform="translate(782.72 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1FP2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1FP2')}</text></g>
                             <g id="S1P1_3VA_2">
                                 <path d="M960.69,914.88h22.82V899.39H960.69v15.49Zm23,.21H960.48V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1812,7 +1812,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P1_3VA_2_status" className={this.manageSwitchesClassName('cb_1FP2')}><text transform="translate(848.2 929.28)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_1FP2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1FP2')}</text></g>
                             <g id="S0P0.1">
                                 <g clipPath="url(#clip-path-23)">
                                     <polygon points="625.21 455.55 743.66 455.55 743.66 609.8 625.21 609.8 625.21 455.55 625.21 455.55"
@@ -1974,7 +1974,7 @@ class Elevation extends React.Component {
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
                             <g id="S0P0.1_status" className={this.manageSwitchesClassName('cb_Q4')}><text transform="translate(662.04 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q4')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q4')}</text></g>
                             <g id="S1P1.1">
                                 <g clipPath="url(#clip-path-24)">
                                     <polygon points="783.51 455.55 901.96 455.55 901.96 609.8 783.51 609.8 783.51 455.55 783.51 455.55"
@@ -2137,7 +2137,7 @@ class Elevation extends React.Component {
                                     fill="#e5f3f8" fillRule="evenodd" />
                             </g>
                             <g id="S1P1.1_status" className={this.manageSwitchesClassName('cb_Q1')}><text transform="translate(798.64 679.67)" fontSize="21"
-                                fontFamily="ArialMT, Arial">{this.manageSwitchesState('cb_Q1')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q1')}</text></g>
                             <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('cb_2F1')} 
                             onClick={() => this.openProperties('cb_2F1','2F1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1B - P2')}>
                                 <rect x="3.44" y="128.32" width="180" height="80.87" />

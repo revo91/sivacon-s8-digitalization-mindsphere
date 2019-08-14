@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
     GENERATE_RANDOM_DATA,
     MANAGE_ZOOM
@@ -21,7 +22,7 @@ const initialState = {
     zoom: 1,
     zoomedUnixTimeMargin: 0,
     zoomedRewindDirection: 0,
-    timeRangeSlider: new Date().toISOString(),
+    timeRangeSlider: moment().toISOString(),
     timeRangeStepValue: false,
     liveDataUpdate: true,
     datasets: [],

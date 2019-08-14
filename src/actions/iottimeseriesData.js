@@ -21,9 +21,11 @@ export const sliderSetStepValue = (stepValue) => ({ type: SLIDER_SET_STEP_VALUE,
 export const chartSetMarginToRewind = (marginRange) => ({ type: CHART_SET_MARGIN_TO_REWIND, marginRange })
 export const chartSetRewindDirection = (direction) => ({ type: CHART_SET_REWIND_DIRECTION, direction })
 
-export const getData = (tabIndex, fromTime) => {
-    let from = moment(fromTime).toISOString()
-    let to = moment(from).add(30, 'minutes').toISOString();
+export const getData = (device, tabIndex, toTime) => {
+    let from = moment(toTime).subtract(30,'minute').toISOString();
+    let to = moment(toTime).toISOString();
+    console.log(from)
+    console.log(to)
     return dispatch => {
         let datasets = [];
         let colors = ['#ff4000',
@@ -68,7 +70,7 @@ export const getData = (tabIndex, fromTime) => {
         // set state to "loading"
         dispatch(getDataRequested());
         axios({
-            url: `/api/iottimeseries/v3/timeseries/be32c81e40b541dab543f139a9f99eee/PAC2200?select=${variablesToGET}&from=${from}&to=${to}&sort=desc&limit=2000`,
+            url: `/api/iottimeseries/v3/timeseries/7e7105980c05449fae4e63a89b3952a4/${device}?select=${variablesToGET}&from=${from}&to=${to}&sort=desc&limit=2000`,
             header: 'application/json',
             method: 'GET',
             withCredentials: true,
