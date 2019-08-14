@@ -3,7 +3,11 @@
 @import '_variables.scss';
 
 .minwidth {
-    min-width: $svgMinWidth
+    min-width: $svgMinWidth;
+}
+
+.maxheight {
+    max-height: $svgMaxHeight;
 }
 
 .voltageApplied {
@@ -15,7 +19,12 @@
 }
 
 .overlay {
-    &:hover {
-        @include strokeParams
+    fill: $opacityZero;
+    rect
+    {
+        fill: $opacityZero;
+        &:hover {
+            @include smallStrokeParams
+        }
     }
 }

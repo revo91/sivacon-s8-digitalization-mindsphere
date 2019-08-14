@@ -88,7 +88,7 @@ class Elevation extends React.Component {
                         <Divider />
                     </Grid>
                     <Grid item xs={12}>
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1722.85 1008.01">
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 1722.85 1008.01" className="maxheight">
                             <defs>
                                 <clipPath id="clip-path" transform="translate(-83.96 -51.18)">
                                     <rect x="149.42" y="84.67" width="55.95" height="29.86" fill="none" />

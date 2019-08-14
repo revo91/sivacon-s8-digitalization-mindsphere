@@ -218,12 +218,8 @@ class SlideupDialog extends React.Component {
     return this.props.params.currentDeviceType
   }
 
-  componentDidMount() {
-    
-  }
-
   render() {
-    const { classes, params, zoomMultiplier, chartRewindDirection, t } = this.props;
+    const { classes, params, zoomMultiplier, chartRewindDirection, t, selectedDevice, breakers , selectedDeviceType } = this.props;
     const overviewDeviceCircuitMid = <svg id="main" className={params.currentDeviceType !== 'middleDevice' ? 'invisibleCircuit' : 'visibleCircuit'} data-name="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 158.76 291.11" >
       <line x1="107.98" x2="107.98" y2="39" fill="#383838" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
       <circle cx="107.98" cy="68.07" r="29.07" fill="none" stroke="#1d1d1b" strokeMiterlimit="10" strokeWidth="2" />
@@ -314,6 +310,7 @@ class SlideupDialog extends React.Component {
         <Dialog fullScreen open={params.openDialog} onClose={() => this.handleDialogOpen(false)}
           TransitionComponent={Transition} transitionDuration={300}
           onEnter={this.changeDeviceState}
+          onExit={()=> this.handleChangeTabs(null, 'overviewTab')}
         >
           <AppBar className={classes.sliderBar}>
             <Toolbar>
@@ -323,7 +320,7 @@ class SlideupDialog extends React.Component {
               <Typography variant="h6" className={classes.title}>
                 {t('slideUpDialogTitlebarBreaker')} {params.deviceTitle}
               </Typography>
-              {params.tabIndex !== 0 ?
+              {params.tabIndex !== 'overviewTab' ?
                 <div>
                   <Tooltip title={t('slideUpDialogTooltipBackToPreview')} >
                     <IconButton color="inherit" onClick={() => this.handleChangeTabs(null, 'overviewTab')}>
@@ -406,15 +403,15 @@ class SlideupDialog extends React.Component {
                     </Typography>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L1</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Current_L1').toFixed(2)} A</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L2</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Current_L2').toFixed(2)} A</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogTabCurrent')} L3</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0 A</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Current_L3').toFixed(2)} A</Typography>
                     </div>
                   </Paper>
                 </Grid>
@@ -504,7 +501,8 @@ function mapStateToProps(state) {
     chartDatasets: state.chartReducer.datasets,
     chartRewindDirection: state.chartReducer.zoomedRewindDirection,
     chartDataLoading: state.chartReducer.isChartDataLoading,
-    selectedDevice: state.dialogReducer.selectedDevice
+    selectedDevice: state.dialogReducer.selectedDevice,
+    selectedDeviceType: state.dialogReducer.currentDeviceType
   };
 }
 

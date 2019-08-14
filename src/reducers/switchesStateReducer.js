@@ -21,7 +21,7 @@ const initialState = {
             Active_energy_import_qc: 0,
             Apparent_energy: 0,
             Apparent_energy_qc: 0,
-            Current_L1: 1,
+            Current_L1: 0,
             Current_L1_qc: 0,
             Current_L2: 0,
             Current_L2_qc: 0,
@@ -969,6 +969,7 @@ export const switchesStateReducer = (state = initialState, action) => {
                     ...state.sources,
                     [action.deviceName]: {
                         ...state.sources[action.deviceName],
+                        ...action.data,
                         state: action.sourceState
                     }
                 }
