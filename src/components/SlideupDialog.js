@@ -93,9 +93,7 @@ class SlideupDialog extends React.Component {
   //for tabs filtering
   topDevices = ['TR1', 'TR2', 'GEN'];
   middleDevices = ['cb_1FP1', 'cb_1FP2', 'cb_2FP1', 'cb_2FP2'];
-
-  //
-
+ 
   handleChangeTabs = (event, val) => {
     this.props.manageDialogTab(val)
     if (val === 'overviewTab') {
@@ -143,17 +141,50 @@ class SlideupDialog extends React.Component {
   }
 
   getCurrentDeviceVariables = (variable) => {
-    let activePower15Min = null;
-    let reactivePower15Min = null;
-    let apparentPower15Min =null;
     if(this.props.params.selectedDevice!=='' && this.props.params.selectedDevice!==undefined)
     {
       if(this.props.params.selectedDevice.indexOf('cb_')!==-1)
       {
-        return this.props.breakers[this.props.params.selectedDevice][variable]
+        //case breaker
+        if(variable === 'Total_apparent_power_15_min')
+        {
+          return !isNaN(Math.sqrt(Math.pow(this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min,2)+
+          Math.pow(this.props.breakers[this.props.params.selectedDevice].Reactive_power_import_15_min,2))) ?
+          (Math.sqrt(Math.pow(this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min,2)+
+          Math.pow(this.props.breakers[this.props.params.selectedDevice].Reactive_power_import_15_min,2)))/1000
+          : 0.00
+        }
+        else if(variable === 'Total_power_factor_1_min')
+        {
+          return !isNaN(this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min / 
+            Math.sqrt(Math.pow(this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min,2)+
+            Math.pow(this.props.breakers[this.props.params.selectedDevice].Reactive_power_import_15_min,2))) ? 
+            (this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min / 
+              Math.sqrt(Math.pow(this.props.breakers[this.props.params.selectedDevice].Active_power_import_15_min,2)+
+              Math.pow(this.props.breakers[this.props.params.selectedDevice].Reactive_power_import_15_min,2)))
+              : 0.00
+        }
+        else {
+          return this.props.breakers[this.props.params.selectedDevice][variable]/1000
+        }
       }
       else {
-        return this.props.sources[this.props.params.selectedDevice][variable]
+        let divider = 1000;
+        //modify params in case of infeed
+        if(variable === 'Active_power_import_15_min')
+        {
+          variable = 'Total_active_power_import_15_min'
+        }
+        else if(variable === 'Reactive_power_import_15_min')
+        {
+          variable = 'Total_reactive_power_import_15_min'
+        }
+        else if(variable === 'Total_power_factor_1_min')
+        {
+          divider = 1
+        }
+        
+        return this.props.sources[this.props.params.selectedDevice][variable]/divider
       }
     }
     else {
@@ -359,7 +390,6 @@ class SlideupDialog extends React.Component {
           </AppBar>
           <div className={`${classes.sliderContent}`}>
             <AppBar position="static" color="default">
-
               <Tabs
                 value={params.tabIndex}
                 onChange={this.handleChangeTabs}
@@ -429,19 +459,19 @@ class SlideupDialog extends React.Component {
                     </Typography>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogActivePower')}</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kW</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Active_power_import_15_min').toFixed(2)} kW</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogReactivePower')}</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kvar</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Reactive_power_import_15_min').toFixed(2)} kvar</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogApparentPower')}</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0 kVa</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Total_apparent_power_15_min').toFixed(2)} kVa</Typography>
                     </div>
                     <div>
                       <Typography variant="body1" display="inline">{t('slideUpDialogCosTotal')}</Typography>
-                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">0.0</Typography>
+                      <Typography className={classes.floatRight} variant="body1" display="inline" color="primary">{this.getCurrentDeviceVariables('Total_power_factor_1_min').toFixed(2)} PF</Typography>
                     </div>
                   </Paper>
                 </Grid>

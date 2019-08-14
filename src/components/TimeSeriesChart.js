@@ -179,7 +179,7 @@ class TimeSeriesChart extends React.Component {
 
         if (prevProps.dataUpdateFailed === false && this.props.dataUpdateFailed === true) {
             this.props.chartLiveUpdate(false)
-            this.props.enqueueSnackbar("Błąd połączenia", {
+            this.props.enqueueSnackbar(this.props.t('snackbarsConnectionError'), {
                 variant: 'error',
             });
         }

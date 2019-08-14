@@ -18,7 +18,8 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom';
 import { withTranslation } from 'react-i18next';
 import Overview from './components/Overview';
@@ -94,12 +95,12 @@ class App extends React.Component {
     this.props.getIntervalData1Min()
     this.props.getIntervalData15Min()
 
-    this.interval15sec = setInterval(()=>{
+    this.interval15sec = setInterval(() => {
       this.props.getIntervalData1Min()
-    },15000)
-    this.interval15min = setInterval(()=>{
+    }, 15000)
+    this.interval15min = setInterval(() => {
       this.props.getIntervalData15Min()
-    },900000)
+    }, 900000)
   }
 
   componentWillUnmount() {
@@ -149,21 +150,23 @@ class App extends React.Component {
                 <ListItemText primary={t('events')} />
               </ListItem>
               <Divider />
-              <ListItem button onClick={()=>this.props.manageLanguageDialog(true)}>
+              <ListItem button onClick={() => this.props.manageLanguageDialog(true)}>
                 <ListItemIcon><LanguageIcon /></ListItemIcon>
                 <ListItemText primary={t('language')} />
               </ListItem>
             </List>
-            
           </Drawer>
           <main className={classes.content} >
             <div className={classes.toolbar} />
-            <Route exact path="/" component={Overview} />
-            <Route path="/elewacja" component={Elevation} />
-            <Route path="/zdarzenia" component={Events} />
+            <Switch>
+              <Route exact path="/" component={Overview} />
+              <Route path="/elewacja" component={Elevation} />
+              <Route path="/zdarzenia" component={Events} />
+              <Route component={Overview} />
+            </Switch>
           </main>
-          <SlideupDialog/>
-          <LanguageDialog/>
+          <SlideupDialog />
+          <LanguageDialog />
         </Router>
       </div>
     )
