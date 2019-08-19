@@ -1,0 +1,1 @@
+# sivacon-s8-digitalization-mindsphere
