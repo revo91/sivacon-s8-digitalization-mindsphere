@@ -162,6 +162,7 @@ class App extends React.Component {
               <Route exact path="/" component={Overview} />
               <Route path="/elewacja" component={Elevation} />
               <Route path="/zdarzenia" component={Events} />
+              <Route path="/powermonitor" component={Powermonitor} />
               <Route component={Overview} />
             </Switch>
           </main>
