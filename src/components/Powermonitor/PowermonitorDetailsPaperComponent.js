@@ -9,42 +9,15 @@ import Grid from "@material-ui/core/Grid";
 import ListItem from "@material-ui/core/ListItem";
 import { withStyles } from "@material-ui/core/styles";
 import moment from "moment";
+import { Typography } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
-    height: "100% "
-  },
-  listHeader: {
-    fontSize: 14,
-    fontWeight: "bold",
-    padding: 15
+    padding: theme.spacing(2)
   },
   powerListItem: {},
-  powerListItemWarning: { backgroundColor: "rgba(255,150,0,1)" },
-  powerListItemAlarm: { backgroundColor: "red" },
-  mainGrid: {
-    height: "100%"
-  },
-  minutePowerDescription: {
-    fontSize: 10
-  },
-  minutePowerValue: {
-    fontSize: 10
-  },
-  predictedPowerDescription: {
-    fontSize: 12
-  },
-  predictedPowerValue: {
-    fontSize: 14,
-    fontWeight: "bold"
-  },
-  limitDescription: {
-    fontSize: 12
-  },
-  limitValue: {
-    fontSize: 12
-  }
+  powerListItemWarning: { backgroundColor: "rgba(255,150,0,0.4)" },
+  powerListItemAlarm: { backgroundColor: "rgba(255,0,0,0.4)" }
 });
 
 class PowermonitorDetailsComponent extends Component {
@@ -60,14 +33,14 @@ class PowermonitorDetailsComponent extends Component {
       <ListItem className={itemClassName} key={date.toString()}>
         <Grid container>
           <Grid item xs>
-            <div className={classes.minutePowerDescription}>
+            <Typography variant={"body2"} gutterBottom>
               {moment(date).format("HH:mm:ss")}
-            </div>
+            </Typography>
           </Grid>
           <Grid item>
-            <div className={classes.minutePowerValue}>
+            <Typography variant={"body2"} gutterBottom>
               {value.toFixed(2)} kW
-            </div>
+            </Typography>
           </Grid>
         </Grid>
       </ListItem>
@@ -101,17 +74,17 @@ class PowermonitorDetailsComponent extends Component {
   };
 
   renderWarningLimitListItem = value => {
-    let { t, classes } = this.props;
+    let { t } = this.props;
     return (
       <ListItem>
         <Grid container>
           <Grid item xs>
-            <div className={classes.limitDescription}>
+            <Typography gutterBottom>
               {`${t("powermonitorDetailsWarningLimit")}: `}
-            </div>
+            </Typography>
           </Grid>
           <Grid item>
-            <div className={classes.limitValue}>{value.toFixed(2)} kW</div>
+            <Typography gutterBottom>{value.toFixed(2)} kW</Typography>
           </Grid>
         </Grid>
       </ListItem>
@@ -119,17 +92,17 @@ class PowermonitorDetailsComponent extends Component {
   };
 
   renderAlarmLimitListItem = value => {
-    let { t, classes } = this.props;
+    let { t } = this.props;
     return (
       <ListItem>
         <Grid container>
           <Grid item xs>
-            <div className={classes.limitDescription}>
+            <Typography gutterBottom>
               {`${t("powermonitorDetailsAlarmLimit")}: `}
-            </div>
+            </Typography>
           </Grid>
           <Grid item>
-            <div className={classes.limitValue}>{value.toFixed(2)} kW</div>
+            <Typography gutterBottom>{value.toFixed(2)} kW</Typography>
           </Grid>
         </Grid>
       </ListItem>
@@ -147,14 +120,14 @@ class PowermonitorDetailsComponent extends Component {
       <ListItem className={itemClassName}>
         <Grid container>
           <Grid item xs>
-            <div className={classes.predictedPowerDescription}>
+            <Typography variant="h6" gutterBottom>
               {`${t("powermonitorDetailsTotalPredictedPower")}: `}
-            </div>
+            </Typography>
           </Grid>
           <Grid item>
-            <div className={classes.predictedPowerValue}>
+            <Typography variant="h6" gutterBottom>
               {value.toFixed(2)} kW
-            </div>
+            </Typography>
           </Grid>
         </Grid>
       </ListItem>
@@ -175,19 +148,14 @@ class PowermonitorDetailsComponent extends Component {
           wrap="nowrap"
         >
           <Grid item>
-            <List>
-              <ListItem className={classes.listHeader}>
-                {t("powermonitorDetailsCurrentInterval")}
-              </ListItem>
-              <Divider />
-            </List>
+            <Typography variant="h5" gutterBottom>
+              {t("powermonitorDetailsCurrentInterval")}
+            </Typography>
           </Grid>
           <Grid item xs={12}>
-            <List style={{ overflow: "auto" }}>
-              {exists(powermonitor.data)
-                ? this.renderPowerList(powermonitor.data)
-                : null}
-            </List>
+            {exists(powermonitor.data)
+              ? this.renderPowerList(powermonitor.data)
+              : null}
           </Grid>
           <Grid item>
             <List>

@@ -1,72 +1,74 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { sliderSetTimerange, chartLiveUpdate } from '../actions/iottimeseriesData';
+import { sliderSetTimerange, chartLiveUpdate, getData } from '../actions/iottimeseriesData';
 import { withTranslation } from 'react-i18next';
+import { DatePicker, TimePicker } from "@material-ui/pickers";
+import Grid from '@material-ui/core/Grid';
+import { getDeviceNameForApiCall } from '../utils/getDeviceNameForApiCall';
 
-const styles = theme => ({
-    container: {
-        display: 'flex',
-        flexWrap: 'wrap',
-    },
-    textField: {
-        width: '100%',
-    },
-});
 class ChartDataRangeTimePicker extends React.Component {
-    getTodayDate = () => {
-        return moment().format('YYYY-MM-DD')
-    }
 
-    handleChangeTime = (event) => {
-        this.props.sliderSetTimerange(moment(event.target.value).toISOString())
+    handleChangeTime = (value) => {
+        let device = getDeviceNameForApiCall(this.props.tabIndex, this.props.deviceNameForApiCall)
+        this.props.sliderSetTimerange(moment(value).toISOString())
         this.props.chartLiveUpdate(false)
+        this.props.getData(device, this.props.tabIndex, moment(value).toISOString(), false);
     }
 
     componentDidUpdate(prevProps) {
-        if(prevProps.liveUpdate===false && this.props.liveUpdate===true)
-        {
+        if (prevProps.liveUpdate === false && this.props.liveUpdate === true) {
             this.props.sliderSetTimerange(moment().toISOString())
         }
     }
 
     render() {
-        const { classes, t } = this.props;
         return (
-            <form className={classes.container} noValidate>
-                <TextField
-                    id="date"
-                    label={t('chartDataPickerTitle')}
-                    type="date"
-                    //defaultValue={this.getTodayDate()}
-                    className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    onChange={this.handleChangeTime}
-                    value={moment(this.props.timeRange).format('YYYY-MM-DD')}
-                />
-            </form>
+            <React.Fragment>
+                <Grid item xs={12} sm={12} md={6}>
+                    <DatePicker
+                        autoOk
+                        orientation="landscape"
+                        variant="static"
+                        openTo="date"
+                        value={this.props.timeRange}
+                        onChange={this.handleChangeTime}
+                    />
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} style={{ display: this.props.tabIndex !== 'powerTab' &&
+                this.props.tabIndex !== 'THDUtab' &&
+                this.props.tabIndex !== 'THDItab' ?
+                 'block' : 'none' }}>
+                    <TimePicker
+                        autoOk
+                        ampm={false}
+                        variant="static"
+                        orientation="landscape"
+                        openTo="minutes"
+                        value={this.props.timeRange}
+                        onChange={this.handleChangeTime}
+                        views={['hours', 'minutes']}
+                    />
+                </Grid>
+            </React.Fragment>
         )
     }
 }
-
-
 
 function mapStateToProps(state) {
     return {
         params: state.chartReducer,
         tabIndex: state.dialogReducer.tabIndex,
         timeRange: state.chartReducer.timeRangeSlider,
-        liveUpdate: state.chartReducer.liveDataUpdate
+        liveUpdate: state.chartReducer.liveDataUpdate,
+        deviceNameForApiCall: state.dialogReducer.deviceTitle
     };
 }
 
 const mapDispatchToProps = {
     sliderSetTimerange,
-    chartLiveUpdate
+    chartLiveUpdate,
+    getData
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withTranslation()(ChartDataRangeTimePicker)))
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(ChartDataRangeTimePicker))

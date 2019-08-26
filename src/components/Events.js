@@ -6,7 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withTranslation } from 'react-i18next';
-
+import { connect } from 'react-redux';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
 import Check from '@material-ui/icons/Check';
@@ -22,6 +22,24 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import InfoIcon from '@material-ui/icons/Info';
+import WarningIcon from '@material-ui/icons/Warning';
+import ErrorIcon from '@material-ui/icons/Error';
+import { getEvents, setEventsFilterFromDate, setEventsFilterToDate } from '../actions/eventManagementApi';
+import { styled } from '@material-ui/styles';
+import { DateTimePicker } from "@material-ui/pickers";
+
+const BlueInfoIcon = styled(InfoIcon)({
+    color: '#0084ff',
+});
+
+const OrangeWarningIcon = styled(WarningIcon)({
+    color: 'orange',
+});
+
+const RedErrorIcon = styled(ErrorIcon)({
+    color: 'red',
+});
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -45,13 +63,42 @@ const tableIcons = {
 
 class Events extends React.Component {
 
-    generateRandomData = () => {
-        let array = [];
-        for (let i = 0; i < 100; i++) {
-            array.push({ event: 'Załączenie', device: `Q${i}`, time: moment().subtract(i, 'minutes').toISOString() })
+    events = () => {
+        let filteredEventsJSON = [];
+        if(this.props.events.length>0)
+        {
+            this.props.events.map(event => {
+                if(event.description!=='SZR – przejście w tryb odstawiony')
+                {
+                    return filteredEventsJSON.push({eventSeverity: event.severity===20?<RedErrorIcon/>:event.severity===30?
+                        <OrangeWarningIcon/>:<BlueInfoIcon/>, eventDescription: event.description, 
+                            eventTimestamp: moment(event.timestamp).format('DD-MM-YYYY, HH:mm:ss')})
+                }
+            })
         }
-        return array
+        return filteredEventsJSON;
     }
+
+    handleChangeTimeFrom = (value) => {
+        this.props.setEventsFilterFromDate(value.toISOString())
+        this.props.getEvents(value.toISOString(), this.props.eventsToTimeFilter)
+    }
+
+    handleChangeTimeTo = (value) => {
+        this.props.setEventsFilterToDate(value.toISOString())
+        this.props.getEvents(this.props.eventsFromTimeFilter, value.toISOString())
+    }
+
+    componentDidMount() {
+        this.props.getEvents(this.props.eventsFromTimeFilter, this.props.eventsToTimeFilter)
+    }
+
+    // componentDidUpdate(prevProps) {
+    //     if(prevProps.eventsFromTimeFilter !== this.props.eventsFromTimeFilter || prevProps.eventsToTimeFilter !== this.props.eventsToTimeFilter)
+    //     {
+    //         this.props.getEvents(this.props.eventsFromTimeFilter, this.props.eventsToTimeFilter)
+    //     }
+    // }
 
     render() {
         const { t } = this.props;
@@ -63,20 +110,42 @@ class Events extends React.Component {
                         </Typography>
                     <Divider />
                 </Grid>
+                <Grid item xs={12} sm={6}>
+                <DateTimePicker style={{display: 'flex'}}
+                maxDate={this.props.eventsToTimeFilter}
+                    autoOk
+                    ampm={false}
+                    disableFuture
+                    value={this.props.eventsFromTimeFilter}
+                    onChange={this.handleChangeTimeFrom}
+                    label={t('eventsTimeFrom')}
+                />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                <DateTimePicker style={{display: 'flex'}}
+                minDate={this.props.eventsFromTimeFilter}
+                    autoOk
+                    ampm={false}
+                    disableFuture
+                    value={this.props.eventsToTimeFilter}
+                    onChange={this.handleChangeTimeTo}
+                    label={t('eventsTimeTo')}
+                />
+                </Grid>
                 <Grid item xs={12}>
                     <MaterialTable
                         icons={tableIcons}
                         columns={[
-                            { title: t('event'), field: 'event' },
-                            { title: t('eventsDevice'), field: 'device'},
-                            { title: t('eventsTime'), field: 'time', type: 'datetime', defaultSort:'desc' }
+                            { title: t('eventSeverity'), field: 'eventSeverity'},
+                            { title: t('eventsTime'), field: 'eventTimestamp', type: 'datetime', defaultSort:'desc' },
+                            { title: t('event'), field: 'eventDescription' }
                         ]}
-                        data={this.generateRandomData()}
-                        title='Demo Title'
+                        data={this.events()}
+                        title='Events'
                         options={{
                             pageSize: 10,
                             showTitle: false,
-                            searchFieldAlignment: 'right'
+                            searchFieldAlignment: 'right',
                         }}
                         localization={{
                             pagination: {
@@ -104,4 +173,19 @@ class Events extends React.Component {
     }
 }
 
-export default withTranslation()(Events);
+function mapStateToProps(state) {
+    return {
+      events: state.eventsReducer.events,
+      eventsFetchPending: state.eventsReducer.eventsFetchPending,
+      eventsFromTimeFilter: state.eventsReducer.eventsFromTimeFilter,
+      eventsToTimeFilter: state.eventsReducer.eventsToTimeFilter
+    };
+  }
+  
+  const mapDispatchToProps = {
+    getEvents,
+    setEventsFilterFromDate,
+    setEventsFilterToDate
+  };
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Events));

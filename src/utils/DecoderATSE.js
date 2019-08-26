@@ -43,4 +43,4 @@ class DecoderATSE {
   }
 }
 
-module.exports = DecoderATSE;
+export default DecoderATSE;

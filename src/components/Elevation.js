@@ -7,73 +7,80 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { manageDialogOpen } from '../actions/index';
 import { withTranslation } from 'react-i18next';
+import {
+    getIntervalData1Min,
+    getIntervalData15Min
+  } from "../actions/mindsphereDataUpdateInterval";
 
 class Elevation extends React.Component {
-    
+    interval15sec = null;
+    interval15min = null;
+
     manageSwitchesState = (name) => {
-    
-            let t = this.props.t;
-            let deviceStateClosed = this.props.params.breakers[name].stateClosed;
-            let deviceStateOpen = this.props.params.breakers[name].stateOpened;
-            let deviceStateTripped = this.props.params.breakers[name].stateTripped;
-            let namesToShort = ['cb_2FP1','cb_2FP2','cb_1FP1','cb_1FP2']
-    
-            if(namesToShort.indexOf(name)!==-1)
-            {
-                if(deviceStateClosed === true)
-                {
-                    return t('elevationClosedShort')
-                }
-                else if(deviceStateOpen === true)
-                {
-                    return t('elevationOpenShort')
-                }
-                else if(deviceStateTripped === true)
-                {
-                    return t('elevationTrippedShort')
-                }
+        let t = this.props.t;
+        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
+        let namesToShort = ['cb_2FP1', 'cb_2FP2', 'cb_1FP1', 'cb_1FP2', 'cb_Q3', 'cb_Q5']
+
+        if (namesToShort.indexOf(name) !== -1) {
+            if (deviceStateClosed === true) {
+                return t('elevationClosedShort')
             }
-            else {
-                if(deviceStateClosed === true)
-                {
-                    return t('elevationClosedLong')
-                }
-                else if(deviceStateOpen === true)
-                {
-                    return t('elevationOpenLong')
-                }
-                else if(deviceStateTripped === true)
-                {
-                    return t('elevationTrippedLong')
-                }
+            else if (deviceStateOpen === true) {
+                return t('elevationOpenShort')
             }
-        
-         
+            else if (deviceStateTripped === true) {
+                return t('elevationTrippedShort')
+            }
+        }
+        else {
+            if (deviceStateClosed === true) {
+                return t('elevationClosedLong')
+            }
+            else if (deviceStateOpen === true) {
+                return t('elevationOpenLong')
+            }
+            else if (deviceStateTripped === true) {
+                return t('elevationTrippedLong')
+            }
+        }
     }
 
-    manageSwitchesClassName = (name) => {        
-            let deviceStateClosed = this.props.params.breakers[name].stateClosed;
-            let deviceStateOpen = this.props.params.breakers[name].stateOpened;
-            let deviceStateTripped = this.props.params.breakers[name].stateTripped;
-    
-            if(deviceStateClosed === true)
-            {
-                return 'closed'
-            }
-            else if(deviceStateOpen === true)
-            {
-                return 'open'
-            }
-            else if(deviceStateTripped === true)
-            {
-                return 'tripped'
-            }
-        
-        
+    manageSwitchesClassName = (name) => {
+        let deviceStateClosed = this.props.params.breakers[name].stateClosed;
+        let deviceStateOpen = this.props.params.breakers[name].stateOpened;
+        let deviceStateTripped = this.props.params.breakers[name].stateTripped;
+
+        if (deviceStateClosed === true) {
+            return 'closed'
+        }
+        else if (deviceStateOpen === true) {
+            return 'open'
+        }
+        else if (deviceStateTripped === true) {
+            return 'tripped'
+        }
     }
 
     openProperties = (name, title, section, outgoingFeeder) => {
         this.props.manageDialogOpen(true, name, title, section, outgoingFeeder)
+    }
+    
+    componentDidMount() {
+        this.props.getIntervalData1Min();
+        this.props.getIntervalData15Min();
+        this.interval15sec = setInterval(() => {
+        this.props.getIntervalData1Min();
+        }, 30000);
+        this.interval15min = setInterval(() => {
+        this.props.getIntervalData15Min();
+        }, 900000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval15sec);
+        clearInterval(this.interval15min);
     }
 
     render() {
@@ -1488,10 +1495,10 @@ class Elevation extends React.Component {
                                 <polygon points="1506.37 325.89 1490.4 325.89 1490.4 325.64 1506.37 325.64 1506.37 325.89 1506.37 325.89"
                                     fill="#055f87" />
                             </g>
-                            <g id="S1P4_3VA_1_status" className='closed'><text transform="translate(1379.57 437.07)" fontSize="21"
-                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedShort')}</text></g>
-                            <g id="S1P4_3VA_2_status" className='closed'><text transform="translate(1465.7 437.07)" fontSize="21"
-                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{t('elevationClosedShort')}</text></g>
+                            <g id="S1P4_3VA_1_status" className={this.manageSwitchesClassName('cb_Q5')}><text transform="translate(1379.57 437.07)" fontSize="21"
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q5')}</text></g>
+                            <g id="S1P4_3VA_2_status" className={this.manageSwitchesClassName('cb_Q3')}><text transform="translate(1465.7 437.07)" fontSize="21"
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q3')}</text></g>
                             <g id="S2P1_3VA_1">
                                 <path d="M579.22,914.88h22.83V899.39H579.22v15.49Zm23,.21H579V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -1572,8 +1579,8 @@ class Elevation extends React.Component {
                             </g>
                             <g id="S2P1_3VA_1_status" className={this.manageSwitchesClassName('cb_2FP1')}><text transform="translate(465.15 929.28)" fontSize="21"
                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_2FP1')}</text></g>
-                            <g id="S2P1_3VA_2" onClick={() => this.openProperties('cb_2FP2','2FP2',`${t('slideUpDialogCircuitSection')} TR2`,'RPZOK')} 
-                            className={this.manageSwitchesClassName('cb_2FP2')}>
+                            <g id="S2P1_3VA_2" onClick={() => this.openProperties('cb_2FP2', '2FP2', `${t('slideUpDialogCircuitSection')} TR2`, 'RPZOK')}
+                                className={this.manageSwitchesClassName('cb_2FP2')}>
                                 <path d="M645.22,914.88h22.83V899.39H645.22v15.49Zm23,.21H645V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
                                 <g clipPath="url(#clip-path-20)">
@@ -1732,7 +1739,7 @@ class Elevation extends React.Component {
                                     fill="#055f87" />
                             </g>
                             <g id="S1P1_3VA_1_status" className={this.manageSwitchesClassName('cb_1FP1')}><text transform="translate(782.72 929.28)" fontSize="21"
-                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1FP2')}</text></g>
+                                fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_1FP1')}</text></g>
                             <g id="S1P1_3VA_2">
                                 <path d="M960.69,914.88h22.82V899.39H960.69v15.49Zm23,.21H960.48V899.18h23.24v15.91Z"
                                     transform="translate(-83.96 -51.18)" fill="#055f87" />
@@ -2138,104 +2145,105 @@ class Elevation extends React.Component {
                             </g>
                             <g id="S1P1.1_status" className={this.manageSwitchesClassName('cb_Q1')}><text transform="translate(798.64 679.67)" fontSize="21"
                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.manageSwitchesState('cb_Q1')}</text></g>
-                            <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('cb_2F1')} 
-                            onClick={() => this.openProperties('cb_2F1','2F1',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1B - P2')}>
+                            <g id="S2P2.1_overlay" className={this.manageSwitchesClassName('cb_2F1')}
+                                onClick={() => this.openProperties('cb_2F1', '2F1', `${t('slideUpDialogCircuitSection')} TR2`, 'Budynek 1B - P2')}>
                                 <rect x="3.44" y="128.32" width="180" height="80.87" />
                             </g>
                             <g id="S2P2.2_overlay" className={this.manageSwitchesClassName('cb_2F2')}
-                            onClick={() => this.openProperties('cb_2F2','2F2',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - RG')}>
+                                onClick={() => this.openProperties('cb_2F2', '2F2', `${t('slideUpDialogCircuitSection')} TR2`, 'Budynek 2 - RG')}>
                                 <rect x="3.44" y="209.19" width="180" height="80.87" />
                             </g>
                             <g id="S2P2.3_overlay" className={this.manageSwitchesClassName('cb_2F4')}
-                            onClick={() => this.openProperties('cb_2F4','2F4',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 2 - R1')}>
+                                onClick={() => this.openProperties('cb_2F4', '2F4', `${t('slideUpDialogCircuitSection')} TR2`, 'Budynek 2 - R1')}>
                                 <rect x="3.44" y="290.12" width="180" height="80.87" />
                             </g>
                             <g id="S2P2.4_overlay" className={this.manageSwitchesClassName('cb_2F5')}
-                            onClick={() => this.openProperties('cb_2F5','2F5',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 1A')}>
+                                onClick={() => this.openProperties('cb_2F5', '2F5', `${t('slideUpDialogCircuitSection')} TR2`, 'Budynek 1A')}>
                                 <rect x="3.44" y="370.99" width="180" height="80.87" />
                             </g>
                             <g id="S2P2.5_overlay" className={this.manageSwitchesClassName('cb_2F6')}
-                            onClick={() => this.openProperties('cb_2F6','2F6',`${t('slideUpDialogCircuitSection')} TR2`,'Parking')}>
+                                onClick={() => this.openProperties('cb_2F6', '2F6', `${t('slideUpDialogCircuitSection')} TR2`, 'Parking')}>
                                 <rect x="3.44" y="451.86" width="180" height="80.87" />
                             </g>
                             <g id="S2P2.10_overlay" className='static'>
                                 <rect x="3.44" y="856.15" width="180" height="88.01" />
                             </g>
                             <g id="S2P3.1_overlay" className={this.manageSwitchesClassName('cb_2F3')}
-                            onClick={() => this.openProperties('cb_2F3','2F3',`${t('slideUpDialogCircuitSection')} TR2`,'Budynek 01 - MSB2')}>
+                                onClick={() => this.openProperties('cb_2F3', '2F3', `${t('slideUpDialogCircuitSection')} TR2`, 'Budynek 01 - MSB2')}>
                                 <rect x="320.44" y="370.93" width="137" height="323.48" />
                             </g>
                             <g id="S2P1.1_overlay" className={this.manageSwitchesClassName('cb_Q2')}
-                            onClick={() => this.openProperties('TR2','Q2',`${t('slideUpDialogCircuitTransformer')} TR2`,`${t('slideUpDialogCircuitSection')} TR2`)}>
+                                onClick={() => this.openProperties('TR2', 'Q2', `${t('slideUpDialogCircuitTransformer')} TR2`, `${t('slideUpDialogCircuitSection')} TR2`)}>
                                 <rect x="457.44" y="370.77" width="137" height="323.48" />
                             </g>
                             <g id="S0P0.1_overlay" className="static">
                                 <rect x="594.44" y="370.93" width="180" height="323.48" />
                             </g>
                             <g id="S1P1.1_overlay" className={this.manageSwitchesClassName('cb_Q1')}
-                            onClick={() => this.openProperties('TR1','Q1',`${t('slideUpDialogCircuitTransformer')} TR1`,`${t('slideUpDialogCircuitSection')} TR1`)}>
+                                onClick={() => this.openProperties('TR1', 'Q1', `${t('slideUpDialogCircuitTransformer')} TR1`, `${t('slideUpDialogCircuitSection')} TR1`)}>
                                 <rect x="774.44" y="370.77" width="136.6" height="323.48" />
                             </g>
                             <g id="S1P2.1_overlay" className={this.manageSwitchesClassName('cb_1F2')}
-                            onClick={() => this.openProperties('cb_1F2','1F2',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - komp.')}>
+                                onClick={() => this.openProperties('cb_1F2', '1F2', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 3 - komp.')}>
                                 <rect x="911.04" y="128.32" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.2_overlay" className={this.manageSwitchesClassName('cb_1F3')}
-                            onClick={() => this.openProperties('cb_1F3','1F3',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - komp.')}>
+                                onClick={() => this.openProperties('cb_1F3', '1F3', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 1A - komp.')}>
                                 <rect x="911.04" y="209.18" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.3_overlay" className={this.manageSwitchesClassName('cb_1F4')}
-                            onClick={() => this.openProperties('cb_1F4','1F4',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 1A - klim.')}>
+                                onClick={() => this.openProperties('cb_1F4', '1F4', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 1A - klim.')}>
                                 <rect x="911.04" y="289.84" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.4_overlay" className={this.manageSwitchesClassName('cb_1F5')}
-                            onClick={() => this.openProperties('cb_1F5','1F5',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 3 - RG')}>
+                                onClick={() => this.openProperties('cb_1F5', '1F5', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 3 - RG')}>
                                 <rect x="911.04" y="370.79" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.5_overlay" className={this.manageSwitchesClassName('cb_1F6')}
-                            onClick={() => this.openProperties('cb_1F6','1F6',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}>
+                                onClick={() => this.openProperties('cb_1F6', '1F6', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 2 - RG')}>
                                 <rect x="911.04" y="451.86" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.6_overlay" className={this.manageSwitchesClassName('cb_1F7')}
-                            onClick={() => this.openProperties('cb_1F7','1F7',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 2 - RG')}>
+                                onClick={() => this.openProperties('cb_1F7', '1F7', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 1B - P1')}>
                                 <rect x="911.04" y="532.67" width="180" height="80.87" />
                             </g>
                             <g id="S1P2.10_overlay" className='static'>
                                 <rect x="911.04" y="856.2" width="180" height="87.82" />
                             </g>
                             <g id="S1P3.1_overlay" className={this.manageSwitchesClassName('cb_1F1')}
-                            onClick={() => this.openProperties('cb_1F1','1F1',`${t('slideUpDialogCircuitSection')} TR1`,'Budynek 01 - MSB1')}>
+                                onClick={() => this.openProperties('cb_1F1', '1F1', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 01 - MSB1')}>
                                 <rect x="1228.44" y="370.93" width="136.6" height="323.48" />
                             </g>
                             <g id="S1P4.3_overlay" className={this.manageSwitchesClassName('cb_3F1')}
-                            onClick={() => this.openProperties('cb_3F1','3F1','Sekcja GEN','Budynek 2 - serwer.')}>
+                                onClick={() => this.openProperties('cb_3F1', '3F1', `${t('slideUpDialogCircuitSection')} GEN`, 'Budynek 2 - serwer.')}>
                                 <rect x="1365.24" y="532.73" width="180" height="80.87" />
                             </g>
                             <g id="S1P4.4_overlay" className={this.manageSwitchesClassName('cb_3F2')}
-                            onClick={() => this.openProperties('cb_3F2','3F2','Sekcja GEN','Budynek 01 - MSG')}>
+                                onClick={() => this.openProperties('cb_3F2', '3F2', `${t('slideUpDialogCircuitSection')} GEN`, 'Budynek 01 - MSG')}>
                                 <rect x="1365.44" y="613.6" width="180" height="80.87" />
                             </g>
-                            <g id="S1P4_3VA_1_overlay" className="closed">
-                                <rect x="1365.44" y="85.62" width="90" height="366.18" />
+                            <g id="S1P4_3VA_1_overlay" className={this.manageSwitchesClassName('cb_Q5')}>
+                                <rect x="1365.44" y="273.62" width="90" height="178.18" />
                             </g>
-                            <g id="S1P4_3VA_2_overlay" className="closed">
-                                <rect x="1455.44" y="85.62" width="90" height="366.18" />
+                            <g id="S1P4_3VA_2_overlay" className={this.manageSwitchesClassName('cb_Q3')}
+                                onClick={() => this.openProperties('GEN', 'Q3', 'Generator', `${t('slideUpDialogCircuitSection')} GEN`)}>
+                                <rect x="1455.44" y="273.62" width="90" height="178.18" />
                             </g>
                             <g id="S2P1_3VA_1_overlay" className={this.manageSwitchesClassName('cb_2FP1')}
-                            onClick={() => this.openProperties('cb_2FP1','2FP1','TR2','Budynek 01 - MSF')}>
-                                <rect x="457.64" y="694.41" width="68.3" height="249.61" />
+                                onClick={() => this.openProperties('cb_2FP1', '2FP1', 'TR2', 'Budynek 01 - MSF')}>
+                                <rect x="457.64" y="784.41" width="68.3" height="159.61" />
                             </g>
                             <g id="S2P1_3VA_2_overlay" className={this.manageSwitchesClassName('cb_2FP2')}
-                            onClick={() => this.openProperties('cb_2FP2','2FP2','TR2','RPZOK')}>
-                                <rect x="525.94" y="694.41" width="68.3" height="249.61" />
+                                onClick={() => this.openProperties('cb_2FP2', '2FP2', 'TR2', 'RPZOK')}>
+                                <rect x="525.94" y="784.41" width="68.3" height="159.61" />
                             </g>
                             <g id="S1P1_3VA_1_overlay" className={this.manageSwitchesClassName('cb_1FP1')}
-                            onClick={() => this.openProperties('cb_1FP1','1FP1','TR1','Budynek 01 - MSF')}>
-                                <rect x="774.64" y="694.41" width="68.3" height="249.61" />
+                                onClick={() => this.openProperties('cb_1FP1', '1FP1', 'TR1', 'Budynek 01 - MSF')}>
+                                <rect x="774.64" y="784.41" width="68.3" height="159.61" />
                             </g>
                             <g id="S1P1_3VA_2_overlay" className={this.manageSwitchesClassName('cb_1FP2')}
-                            onClick={() => this.openProperties('cb_1FP2','1FP2','TR1','RPZOK')}>
-                                <rect x="842.94" y="694.41" width="68.3" height="249.61" />
+                                onClick={() => this.openProperties('cb_1FP2', '1FP2', 'TR1', 'RPZOK')}>
+                                <rect x="842.94" y="784.41" width="68.3" height="159.61" />
                             </g>
                             <g id="Roof">
                                 <polygon points="1669.84 33.62 3.44 33.62 53.44 1.82 1719.44 1.82 1669.84 33.62" fill="#a6c7d5" stroke="#055f87"
@@ -2257,7 +2265,9 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    manageDialogOpen
-  };
+    manageDialogOpen,
+    getIntervalData1Min,
+    getIntervalData15Min
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Elevation))

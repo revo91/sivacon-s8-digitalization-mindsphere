@@ -129,3 +129,51 @@ export const fetchPowermonitorPowerMonthDataActionCreator = function(
     await dispatch(hideBusyDialogActionCreator());
   };
 };
+
+//Fetch data when initializing component - with showing busy dialog
+export const getPowermonitorPowerMonthDataActionCreator = function(
+  yearNumber,
+  monthNumber
+) {
+  return async function(dispatch, getState) {
+    try {
+      let data = await getTotalActivePowerMonthData(yearNumber, monthNumber);
+
+      let normalizedData = normalizePowermonitorData(data);
+
+      //Getting limits from powermonitorDataState
+      let { powermonitor } = getState();
+      let transgressions = [];
+
+      if (exists(powermonitor.data)) {
+        let {
+          activePowerLimitWarning,
+          activePowerLimitAlarm
+        } = powermonitor.data;
+
+        transgressions = calculateTransgressions(
+          normalizedData,
+          activePowerLimitWarning,
+          activePowerLimitAlarm
+        );
+      }
+
+      let max = calculateMax(normalizedData);
+
+      await dispatch({
+        type: FETCH_POWERMONITOR_POWER_DATA,
+        payload: {
+          data: normalizedData,
+          transgressions: transgressions,
+          range: calculatePeriodRange(yearNumber, monthNumber),
+          maxValue: max.maxValue,
+          maxTime: max.maxTime
+        }
+      });
+    } catch (err) {
+      await dispatch(
+        enqueueSnackbar({ message: err.message, options: { variant: "error" } })
+      );
+    }
+  };
+};

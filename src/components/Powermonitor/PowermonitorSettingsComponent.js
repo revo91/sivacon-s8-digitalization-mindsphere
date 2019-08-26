@@ -7,13 +7,13 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Checkbox from "@material-ui/core/Checkbox";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Button from "@material-ui/core/Button";
+
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { settingsSchema } from "../../validation/Powermonitor";
 import {
@@ -32,6 +32,7 @@ import { exists, isEmpty } from "../../utils/utilities";
 import Joi from "joi-browser";
 import { ListItemText } from "@material-ui/core";
 import PowermonitorNewRecipientDialog from "./PowermonitorNewRecipientDialogComponent";
+import { getCurrentUser } from "../../services/userService";
 
 const BlackCheckbox = withStyles({
   root: {
@@ -44,12 +45,9 @@ const BlackCheckbox = withStyles({
 
 const styles = theme => ({
   settingsPaper: {
-    backgroundColor: theme.palette.background.paper,
     heigh: "100%",
-    minWidth: 400
-  },
-  mainGrid: {
-    height: "calc(100% - 45px)"
+    minWidth: 400,
+    padding: theme.spacing(2)
   },
   settingsGrid: {
     height: "100%"
@@ -92,7 +90,7 @@ const styles = theme => ({
     color: "red"
   },
   emailListPaper: {
-    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(2),
     height: "100%",
     minWidth: 400
   },
@@ -114,37 +112,37 @@ class PowermonitorSettingsComponent extends Component {
   }
 
   renderHeader = () => {
-    let { classes, t } = this.props;
+    let { t } = this.props;
 
     return (
       <Grid item>
-        <List>
-          <ListItem className={classes.listHeader}>
-            {t("powermonitorSettingsTitle")}
-          </ListItem>
-          <Divider />
-        </List>
+        <Typography variant="h5" gutterBottom>
+          {t("powermonitorSettingsTitle")}
+        </Typography>
       </Grid>
     );
   };
 
   renderMailHeader = () => {
-    let { classes, t } = this.props;
+    let { t } = this.props;
 
     return (
       <Grid item>
-        <List>
-          <ListItem className={classes.listHeader}>
-            {t("powermonitorSettingsEmailListTitle")}
-          </ListItem>
-          <Divider />
-        </List>
+        <Typography variant="h5" gutterBottom>
+          {t("powermonitorSettingsEmailListTitle")}
+        </Typography>
       </Grid>
     );
   };
 
+  checkIfUserIsNotAdmin = () => {
+    return !getCurrentUser().isAdmin;
+  };
+
   //Method for checking if login button should be disabled
   checkConfirmButtonDisable = () => {
+    if (this.checkIfUserIsNotAdmin()) return true;
+
     return !isEmpty(validate(this.props.formData)) || !this.props.anyTouched;
   };
 
@@ -190,7 +188,13 @@ class PowermonitorSettingsComponent extends Component {
   };
 
   //Method for rendering single Field of form
-  renderField = ({ input, label, type, meta: { touched, error, warning } }) => (
+  renderField = ({
+    input,
+    disabled,
+    label,
+    type,
+    meta: { touched, error, warning }
+  }) => (
     <Grid
       container
       direction="column"
@@ -205,6 +209,7 @@ class PowermonitorSettingsComponent extends Component {
         label={label}
         type={type}
         fullWidth
+        disabled={disabled}
       />
       {touched &&
         ((error && (
@@ -252,6 +257,7 @@ class PowermonitorSettingsComponent extends Component {
               <IconButton
                 edge="end"
                 aria-label="delete"
+                disabled={this.checkIfUserIsNotAdmin()}
                 onClick={() => {
                   this.props.removeRecipient(index);
                   this.props.touch();
@@ -269,6 +275,7 @@ class PowermonitorSettingsComponent extends Component {
   //Method for rendering single Field of form
   renderCheckbox = ({
     input,
+    disabled,
     label,
     type,
     meta: { touched, error, warning }
@@ -283,6 +290,7 @@ class PowermonitorSettingsComponent extends Component {
               input.onChange(event);
               this.props.touch();
             }}
+            disabled={disabled}
           />
         }
         label={label}
@@ -305,7 +313,7 @@ class PowermonitorSettingsComponent extends Component {
             alignItems="stretch"
             spacing={3}
           >
-            <Grid item>
+            <Grid item style={{ minWidth: 500 }}>
               <Paper className={classes.settingsPaper}>
                 <Grid
                   container
@@ -331,58 +339,69 @@ class PowermonitorSettingsComponent extends Component {
                           type="text"
                           component={this.renderField}
                           label={t("powermonitorSettingsWarningLimit")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                         <Field
                           name="activePowerLimitAlarm"
                           type="text"
                           component={this.renderField}
                           label={t("powermonitorSettingsAlarmLimit")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                         <Field
                           name="trafoPowerLosses"
                           type="text"
                           component={this.renderField}
                           label={t("powermonitorSettingsTrafoLossesLimit")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                         <Field
                           name="active"
                           type="checkbox"
                           component={this.renderCheckbox}
                           label={t("powermonitorSettingsActive")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                         <Field
                           name="sendingEventsEnabled"
                           type="checkbox"
                           component={this.renderCheckbox}
                           label={t("powermonitorSettingsSendingEventsEnabled")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                         <Field
                           name="sendingEmailsEnabled"
                           type="checkbox"
                           component={this.renderCheckbox}
                           label={t("powermonitorSettingsSendingEmailsEnabled")}
+                          disabled={this.checkIfUserIsNotAdmin()}
                         />
                       </Grid>
                     </Grid>
                   </Grid>
-                  <List>
-                    <Divider />
-                  </List>
+
                   <Grid item className={classes.footer}>
                     <Button
                       type="submit"
                       disabled={this.checkConfirmButtonDisable()}
                     >
-                      {t("powermonitorSettingsConfirmButton")}
+                      <Typography variant="h6" gutterBottom>
+                        {t("powermonitorSettingsConfirmButton")}
+                      </Typography>
                     </Button>
-                    <Button onClick={this.handleResetButtonClick}>
-                      {t("powermonitorSettingsResetButton")}
+                    <Button
+                      onClick={this.handleResetButtonClick}
+                      disabled={this.checkIfUserIsNotAdmin()}
+                    >
+                      <Typography variant="h6" gutterBottom>
+                        {t("powermonitorSettingsResetButton")}
+                      </Typography>
                     </Button>
                   </Grid>
                 </Grid>
               </Paper>
             </Grid>
-            <Grid item>
+            <Grid item style={{ minWidth: 500 }}>
               <Paper className={classes.emailListPaper}>
                 <Grid
                   container
@@ -399,14 +418,15 @@ class PowermonitorSettingsComponent extends Component {
                       component={this.renderEmailTable}
                     />
                   </Grid>
-                  <List>
-                    <Divider />
-                  </List>
+
                   <Grid item className={classes.emailListFooter}>
                     <Button
                       onClick={() => this.handleAddRecipientButtonClick()}
+                      disabled={this.checkIfUserIsNotAdmin()}
                     >
-                      {t("powermonitorSettingsAddRecipientButton")}
+                      <Typography variant="h6" gutterBottom>
+                        {t("powermonitorSettingsAddRecipientButton")}
+                      </Typography>
                     </Button>
                   </Grid>
                 </Grid>

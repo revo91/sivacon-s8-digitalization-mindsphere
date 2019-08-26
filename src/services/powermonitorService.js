@@ -1,8 +1,12 @@
 import axios from "axios";
+import { getDataFromRange } from "./mindsphereService";
 
 const powermonitorRoute = "customApi/powermonitor";
 const powermonitorTotalActivePowerRoute =
   "customApi/powermonitor/totalActivePower";
+const powermonitorEntityId = "82b4893792e74f959028ef2afca51bf4";
+const activePowerPropertySetName = "PZO_Powermonitor";
+const activePowerVariableName = "Total_active_power_15_min";
 
 let addDaysToDate = (date, days) => {
   var result = new Date(date);
@@ -44,18 +48,33 @@ export async function getTotalActivePowerData(fromDate, toDate) {
   let fromDateString = fromDate.toISOString();
   let toDateString = toDate.toISOString();
 
-  let result = await axios({
-    url: `${encodeURI(
-      powermonitorTotalActivePowerRoute
-    )}?from=${fromDateString}&to=${toDateString}`,
-    method: "GET",
-    data: {},
-    headers: { "Content-type": "application/json" },
-    withCredentials: true,
-    xsrfCookieName: "XSRF-TOKEN"
+  // let result = await axios({
+  //   url: `${encodeURI(
+  //     powermonitorTotalActivePowerRoute
+  //   )}?from=${fromDateString}&to=${toDateString}`,
+  //   method: "GET",
+  //   data: {},
+  //   headers: { "Content-type": "application/json" },
+  //   withCredentials: true,
+  //   xsrfCookieName: "XSRF-TOKEN"
+  // });
+
+  let result = await getDataFromRange(
+    powermonitorEntityId,
+    activePowerPropertySetName,
+    [activePowerVariableName],
+    fromDateString,
+    toDateString
+  );
+
+  let mappedData = result.map(x => {
+    return {
+      timestamp: new Date(x["_time"]).getTime(),
+      value: x[activePowerVariableName]
+    };
   });
 
-  return result.data;
+  return mappedData;
 }
 
 export async function getTotalActivePowerMonthData(yearNumber, monthNumber) {
@@ -79,6 +98,7 @@ export async function getTotalActivePowerMonthData(yearNumber, monthNumber) {
       }
     })
   ]);
+
   let dataArray = [...result[0], ...result[1]];
 
   return dataArray;

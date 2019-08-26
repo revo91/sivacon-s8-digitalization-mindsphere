@@ -19,52 +19,29 @@ import Powermonitor15MinComponent from "./Powermonitor15MinComponent";
 import PowermonitorSettings from "./PowermonitorSettingsComponent";
 
 import BottomNavigation from "@material-ui/core/BottomNavigation";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import Divider from "@material-ui/core/Divider";
 
 import MultilineChart from "@material-ui/icons/MultilineChart";
 import TrendingUp from "@material-ui/icons/TrendingUp";
 import Settings from "@material-ui/icons/Settings";
 
-import Typography from "@material-ui/core/Typography";
 import { withSnackbar } from "notistack";
 
-const BlackBottomNavigationAction = withStyles({
+const WhiteBottomNavigationAction = withStyles({
   root: {
+    color: "#90cde8",
     "&$selected": {
-      color: "black"
+      color: "white"
     }
   },
   selected: {}
 })(props => <BottomNavigationAction color="default" {...props} />);
 
 const styles = theme => ({
-  root: {
-    position: "absolute",
-    width: "calc(100% - 100px)",
-    height: "calc(100% - 35px)"
-  },
-  bottomNavigationGridItem: {},
+  root: {},
   bottomNavigation: {
-    width: 500
-  },
-  bottomNavigationAction: {},
-  selectedBottomNavigationAction: {
-    color: "black"
-  },
-  bottomNavigationIcon: {
-    root: {
-      color: "red"
-    }
-  },
-  progress: {
-    width: 200,
-    height: 200,
-    margin: theme.spacing(2)
-  },
-  progressContainer: {
-    height: "100%"
+    width: "100%",
+    background: "#055f87"
   },
   minDiv: {}
 });
@@ -131,26 +108,6 @@ class PowermonitorComponent extends Component {
     }
   };
 
-  renderProgress = () => {
-    return (
-      <Grid
-        className={this.props.classes.progressContainer}
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-      >
-        <Grid item>
-          <CircularProgress
-            className={this.props.classes.progress}
-            size={150}
-            thickness={5}
-          />
-        </Grid>
-      </Grid>
-    );
-  };
-
   render() {
     let { t, classes, powermonitor, changePowermonitorPage } = this.props;
     let { pageNumber } = powermonitor;
@@ -166,12 +123,34 @@ class PowermonitorComponent extends Component {
         spacing={3}
       >
         <Grid item>
-          <Typography variant="h3" gutterBottom>
-            {t("powermonitor")}
-          </Typography>
-          <Divider />
+          <Paper>
+            <BottomNavigation
+              value={pageNumber}
+              showLabels
+              className={classes.bottomNavigation}
+              onChange={(event, newValue) => {
+                changePowermonitorPage(newValue);
+              }}
+            >
+              <WhiteBottomNavigationAction
+                className={classes.bottomNavigationAction}
+                label={t("powermonitorBottomNavigationOverview")}
+                icon={<MultilineChart />}
+              />
+              <WhiteBottomNavigationAction
+                className={classes.bottomNavigationAction}
+                label={t("powermonitorBottomNavigationPowerTrend")}
+                icon={<TrendingUp />}
+              />
+              <WhiteBottomNavigationAction
+                className={classes.bottomNavigationAction}
+                label={t("powermonitorBottomNavigationSettings")}
+                icon={<Settings />}
+              />
+            </BottomNavigation>
+          </Paper>
         </Grid>
-        <Grid style={{ overflow: "auto" }} item xs={12}>
+        <Grid item xs={12}>
           {exists(powermonitor.data) ? this.renderPage(pageNumber) : null}
         </Grid>
         <Grid
@@ -181,45 +160,7 @@ class PowermonitorComponent extends Component {
           container
           direction="row"
           justify="center"
-        >
-          <Grid item>
-            <Paper>
-              <BottomNavigation
-                value={pageNumber}
-                showLabels
-                className={classes.bottomNavigation}
-                onChange={(event, newValue) => {
-                  changePowermonitorPage(newValue);
-                }}
-              >
-                <BlackBottomNavigationAction
-                  className={classes.bottomNavigationAction}
-                  label={t("powermonitorBottomNavigationOverview")}
-                  classes={{
-                    selected: classes.selectedBottomNavigationAction
-                  }}
-                  icon={<MultilineChart />}
-                />
-                <BlackBottomNavigationAction
-                  className={classes.bottomNavigationAction}
-                  label={t("powermonitorBottomNavigationPowerTrend")}
-                  classes={{
-                    selected: classes.selectedBottomNavigationAction
-                  }}
-                  icon={<TrendingUp />}
-                />
-                <BlackBottomNavigationAction
-                  className={classes.bottomNavigationAction}
-                  label={t("powermonitorBottomNavigationSettings")}
-                  classes={{
-                    selected: classes.selectedBottomNavigationAction
-                  }}
-                  icon={<Settings />}
-                />
-              </BottomNavigation>
-            </Paper>
-          </Grid>
-        </Grid>
+        />
       </Grid>
     );
   }

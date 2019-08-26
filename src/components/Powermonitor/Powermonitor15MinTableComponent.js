@@ -23,17 +23,13 @@ import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 
 const styles = theme => ({
-  title: {
-    fontSize: 14,
-    fontWeight: "bold"
-  },
   dateField: {
-    fontSize: 10
+    fontSize: 12
   },
   valueField: {},
   transgretionField: {},
   severityField: {
-    fontSize: 10
+    fontSize: 12
   },
   table: {}
 });
@@ -43,12 +39,6 @@ let renderSeverityName = (t, severity) => {
   if (severity === "warning")
     return t("powermonitorPower15TableSeverityWarning");
   return severity;
-};
-
-let renderTitle = (t, classes) => {
-  return (
-    <span className={classes.title}>{t("powermonitorPower15TableTitle")}</span>
-  );
 };
 
 const tableIcons = {
@@ -81,6 +71,10 @@ class Powermonitor15MinTableComponent extends React.Component {
     const { transgressions } = powermonitorActivePower;
     return (
       <MaterialTable
+        components={{
+          Container: props => props.children
+        }}
+        title=""
         className={classes.table}
         icons={tableIcons}
         columns={[
@@ -88,7 +82,6 @@ class Powermonitor15MinTableComponent extends React.Component {
             title: t("powermonitorPower15TableDateColumn"),
             type: "datetime",
             field: "date",
-            defaultSort: "desc",
             render: rowData => (
               <span className={classes.dateField}>
                 {moment(rowData.date).format("YYYY-MM-DD HH:mm")}
@@ -98,6 +91,7 @@ class Powermonitor15MinTableComponent extends React.Component {
           {
             title: t("powermonitorPower15TableValueColumn"),
             field: "value",
+            defaultSort: "desc",
             render: rowData => (
               <span className={classes.valueField}>
                 {rowData.value.toFixed(2)}
@@ -124,13 +118,12 @@ class Powermonitor15MinTableComponent extends React.Component {
           }
         ]}
         data={transgressions}
-        title={renderTitle(t, classes)}
         options={{
-          pageSize: 7,
+          pageSize: 10,
           showTitle: true,
           search: false,
           filtering: false,
-          pageSizeOptions: [7],
+          pageSizeOptions: [10],
           padding: "dense",
           exportButton: true,
           exportFileName: "transgressions.csv"

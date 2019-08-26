@@ -7,6 +7,10 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import { manageDialogOpen } from '../actions/index';
 import { withTranslation } from 'react-i18next';
+import {
+    getIntervalData1Min,
+    getIntervalData15Min
+  } from "../actions/mindsphereDataUpdateInterval";
 
 class Overview extends React.Component {
     constructor(props) {
@@ -37,6 +41,10 @@ class Overview extends React.Component {
         this.cb_Q3_ref = React.createRef();
     }
 
+    //intervals
+    interval15sec = null;
+    interval15min = null;
+
     //GSAP
     myTween = null;
 
@@ -59,12 +67,46 @@ class Overview extends React.Component {
         );
     }
 
+    getATSEstate = () => {
+        let ATSEstates = this.props.breakers.ATSE;
+        let t = this.props.t;
+        if(ATSEstates.alarm)
+        {
+            return t('atseAlarm')
+        }
+        else if(ATSEstates.manual)
+        {
+            return t('atseManual')
+        }
+        else if(ATSEstates.auto)
+        {
+            return t('atseAuto')
+        }
+        else {
+            return t('atseNotReady')
+        }
+    }
+
     componentDidMount() {
+        this.props.getIntervalData1Min();
+        this.props.getIntervalData15Min();
+        this.interval15sec = setInterval(() => {
+        this.props.getIntervalData1Min();
+        }, 30000);
+        this.interval15min = setInterval(() => {
+        this.props.getIntervalData15Min();
+        }, 900000);
+
         this.changeDeviceState()
     }
 
     componentDidUpdate() {
         this.changeDeviceState()
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval15sec);
+        clearInterval(this.interval15min);
     }
 
     render() {
@@ -132,11 +174,11 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="TR2_Tab">
-                                <rect x="303.91" y="64.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="303.91" y="64.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="303.91" y="82.6" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="303.91" y="82.6" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="303.91" y="101.2" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="303.91" y="101.2" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="303.91" y="44.07" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(307.23 55.99)" fontSize="12" fill="#fff"
@@ -146,54 +188,54 @@ class Overview extends React.Component {
                                     <tspan x="27.56" y="0" letterSpacing="-0.02em"> </tspan>
                                     <tspan x="30.68" y="0">TR2</tspan>
                                 </text><text transform="translate(305.91 77.52)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_active_power_import / 1000).toFixed(1)} kW</text><text
                                         transform="translate(305.91 96.12)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR2.Total_reactive_power_import / 1000).toFixed(1)} kvar</text><text
                                             transform="translate(305.91 114.72)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR2.Total_apparent_power_15_min !== 0 ?
-                                                (this.props.sources.TR2.Total_active_power_import_15_min / this.props.sources.TR2.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
-                            <g id="Opisy"><text transform="translate(73.93 161.2)" fontSize="24" fill="#1d1d1b"
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR2.Total_apparent_power !== 0 ?
+                                                (this.props.sources.TR2.Total_active_power_import / this.props.sources.TR2.Total_apparent_power).toFixed(2) : 0} PF</text></g>
+                            <g id="Opisy"><text transform="translate(73.93 161.2)" fontSize="24" fill="#055f87"
                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">2FP2</text><text transform="translate(-1 161.2)" fontSize="24"
-                                    fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2FP1</text><text
-                                        transform="translate(170.28 32.33)" fontSize="36" fill="#1d1d1b"
+                                    fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">2FP1</text><text
+                                        transform="translate(170.28 32.33)" fontSize="36" fill="#055f87"
                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">TR2</text><text transform="translate(206.98 219.27)"
-                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q2</text><text
-                                                transform="translate(629.86 32.33)" fontSize="36" fill="#1d1d1b"
+                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q2</text><text
+                                                transform="translate(629.86 32.33)" fontSize="36" fill="#055f87"
                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">TR1</text><text transform="translate(1005.19 109.3)"
-                                                    fontSize="36" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">G</text><text
-                                                        transform="translate(952.14 32.33)" fontSize="36" fill="#1d1d1b"
+                                                    fontSize="36" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">G</text><text
+                                                        transform="translate(982.14 32.33)" fontSize="36" fill="#055f87"
                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">GEN</text><text transform="translate(338.28 219.27)"
-                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q4</text><text
-                                                                transform="translate(666.69 219.27)" fontSize="24" fill="#1d1d1b"
+                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q4</text><text
+                                                                transform="translate(666.69 219.27)" fontSize="24" fill="#055f87"
                                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">Q1</text><text transform="translate(798.05 219.27)"
-                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q5</text><text
-                                                                        transform="translate(1032.26 219.27)" fontSize="24" fill="#1d1d1b"
+                                                                    fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">Q5</text><text
+                                                                        transform="translate(1032.26 219.27)" fontSize="24" fill="#055f87"
                                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">Q3</text><text transform="translate(456.74 161.2)"
-                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1FP1</text><text
-                                                                                transform="translate(533.67 161.2)" fontSize="24" fill="#1d1d1b"
+                                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">1FP1</text><text
+                                                                                transform="translate(533.67 161.2)" fontSize="24" fill="#055f87"
                                                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">1FP2</text><text transform="translate(6.11 359.07)"
-                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F1</text><text
-                                                                                        transform="translate(71.14 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                    fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F1</text><text
+                                                                                        transform="translate(71.14 359.07)" fontSize="24" fill="#055f87"
                                                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">2F2</text><text transform="translate(136.82 359.07)"
-                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F3</text><text
-                                                                                                transform="translate(202.51 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F3</text><text
+                                                                                                transform="translate(202.51 359.07)" fontSize="24" fill="#055f87"
                                                                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">2F4</text><text transform="translate(268.19 359.07)"
-                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F5</text><text
-                                                                                                        transform="translate(333.87 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                                    fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">2F5</text><text
+                                                                                                        transform="translate(333.87 359.07)" fontSize="24" fill="#055f87"
                                                                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">2F6</text><text transform="translate(399.55 359.07)"
-                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F1</text><text
-                                                                                                                transform="translate(465.23 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F1</text><text
+                                                                                                                transform="translate(465.23 359.07)" fontSize="24" fill="#055f87"
                                                                                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">1F2</text><text transform="translate(530.92 359.07)"
-                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F3</text><text
-                                                                                                                        transform="translate(596.6 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                                                    fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F3</text><text
+                                                                                                                        transform="translate(596.6 359.07)" fontSize="24" fill="#055f87"
                                                                                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">1F4</text><text transform="translate(662.28 359.07)"
-                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F5</text><text
-                                                                                                                                transform="translate(727.96 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F5</text><text
+                                                                                                                                transform="translate(727.96 359.07)" fontSize="24" fill="#055f87"
                                                                                                                                 fontFamily="Roboto, Helvetica, Arial, sans-serif">1F6</text><text transform="translate(793.65 359.07)"
-                                                                                                                                    fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F7</text><text
-                                                                                                                                        transform="translate(902.17 359.07)" fontSize="24" fill="#1d1d1b"
+                                                                                                                                    fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">1F7</text><text
+                                                                                                                                        transform="translate(902.17 359.07)" fontSize="24" fill="#055f87"
                                                                                                                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">3F1</text><text transform="translate(967.85 359.07)"
-                                                                                                                                            fontSize="24" fill="#1d1d1b" fontFamily="Roboto, Helvetica, Arial, sans-serif">3F2</text></g>
+                                                                                                                                            fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif">3F2</text></g>
                             <g id="_2F" data-name="2F"
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
                                     || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
@@ -409,11 +451,11 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="TR1_Tab">
-                                <rect x="763.65" y="64.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="763.65" y="64.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="763.65" y="82.6" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="763.65" y="82.6" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="763.65" y="101.2" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="763.65" y="101.2" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="763.65" y="44.07" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(766.97 55.99)" fontSize="12" fill="#fff"
@@ -423,12 +465,12 @@ class Overview extends React.Component {
                                     <tspan x="27.56" y="0" letterSpacing="-0.02em"> </tspan>
                                     <tspan x="30.68" y="0">TR1</tspan>
                                 </text><text transform="translate(765.64 77.52)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                    fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_active_power_import / 1000).toFixed(1)} kW</text><text
                                         transform="translate(765.64 96.12)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.TR1.Total_reactive_power_import / 1000).toFixed(1)} kvar</text><text
                                             transform="translate(765.64 114.72)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR1.Total_apparent_power_15_min !== 0 ?
-                                                (this.props.sources.TR1.Total_active_power_import_15_min / this.props.sources.TR1.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
+                                            fontFamily="Roboto, Helvetica, Arial, sans-serif">{this.props.sources.TR1.Total_apparent_power !== 0 ?
+                                                (this.props.sources.TR1.Total_active_power_import / this.props.sources.TR1.Total_apparent_power).toFixed(2) : 0} PF</text></g>
                             <g id="GEN" className={sources.GEN.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1009.87" y1="238.68" x2="1025.77" y2="222.78" fill="none" strokeLinecap="square"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -440,34 +482,28 @@ class Overview extends React.Component {
                                     strokeMiterlimit="10" strokeWidth="2" />
                             </g>
                             <g id="GEN_Tab">
-                                <rect x="937.85" y="155.2" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="937.85" y="155.2" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="937.85" y="173.46" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="937.85" y="173.46" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="937.85" y="192.06" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="937.85" y="192.06" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="937.85" y="134.94" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(940.84 146.86)" fontSize="12" fill="#fff"
                                         fontFamily="Roboto, Helvetica, Arial, sans-serif">Generator</text><text transform="translate(939.85 168.39)"
                                             fontSize="12" fill="#3c3c3b" stroke="none" fontFamily="Roboto, Helvetica, Arial, sans-serif">
-                                    {(this.props.sources.GEN.Total_active_power_import_15_min / 1000).toFixed(1)} kW</text><text
+                                    {(this.props.sources.GEN.Total_active_power_import / 1000).toFixed(1)} kW</text><text
                                         transform="translate(939.85 186.99)" fontSize="12" fill="#3c3c3b" stroke="none"
-                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.GEN.Total_reactive_power_import_15_min / 1000).toFixed(1)} kvar</text><text transform="translate(939.85 205.59)" fontSize="12"
-                                            fill="#3c3c3b" fontFamily="Roboto, Helvetica, Arial, sans-serif" stroke="none">{this.props.sources.GEN.Total_apparent_power_15_min !== 0 ?
-                                                (this.props.sources.GEN.Total_active_power_import_15_min / this.props.sources.GEN.Total_apparent_power_15_min).toFixed(2) : 0} PF</text></g>
-                            <g id="GEN_Stop"><text transform="translate(942.88 114.67)" fontSize="18" fill="#1d1d1b"
-                                fontFamily="Roboto, Helvetica, Arial, sans-serif">
-                                <tspan letterSpacing="-0.03em">S</tspan>
-                                <tspan x="8.88" y="0" letterSpacing="-0.02em">t</tspan>
-                                <tspan x="14.79" y="0">op</tspan>
-                            </text></g>
-                            <g id="GEN_Gotowosc"><text transform="translate(900.01 90.3)" fontSize="18" fill="#1d1d1b"
-                                fontFamily="Roboto, Helvetica, Arial, sans-serif">G<tspan x="12.11" y="0" letterSpacing="-0.02em">o</tspan>
-                                <tspan x="21.97" y="0" letterSpacing="-0.02em">t</tspan>
-                                <tspan x="27.89" y="0" letterSpacing="-0.01em">o</tspan>
-                                <tspan x="37.92" y="0" letterSpacing="-0.01em">w</tspan>
-                                <tspan x="51.88" y="0">ość</tspan>
-                            </text></g>
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">{(this.props.sources.GEN.Total_reactive_power_import / 1000).toFixed(1)} kvar</text><text transform="translate(939.85 205.59)" fontSize="12"
+                                            fill="#3c3c3b" fontFamily="Roboto, Helvetica, Arial, sans-serif" stroke="none">{this.props.sources.GEN.Total_apparent_power !== 0 ?
+                                                (this.props.sources.GEN.Total_active_power_import / this.props.sources.GEN.Total_apparent_power).toFixed(2) : 0} PF</text></g>
+
+<g id="GEN_Start_Stop"><text transform="translate(930.01 104.3)" fontSize="24" fill={this.props.sources.GEN.started===true?'#3ec221':"#055f87"} fontFamily="Roboto, Helvetica, Arial, sans-serif" style={{fontWeight: "600"}}>{this.props.sources.GEN.started===true?'Start':'Stop'}</text></g>
+                            <g id="ATSE_mode"><text transform="translate(1.01 20.33)" fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif" style={{fontWeight: "600"}}
+>{t('atseMode')}</text>
+<text transform="translate(1.01 50.33)" fontSize="24" fill="#055f87" fontFamily="Roboto, Helvetica, Arial, sans-serif" style={{fontWeight: "600"}}
+>{this.getATSEstate()}</text>
+</g>
                             <g id="_3F" data-name="3F"
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true && breakers.cb_Q5.stateClosed === true)
                                     || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true && breakers.cb_Q5.stateClosed === true)
@@ -515,11 +551,11 @@ class Overview extends React.Component {
                                 }>
                                 <line x1="592.74" y1="212.29" x2="592.74" y2="249.82" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
-                                <rect x="562.74" y="270.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="562.74" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="562.74" y="288.59" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="562.74" y="288.59" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="562.74" y="307.19" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="562.74" y="307.19" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="562.74" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(572.07 261.98)" fontSize="12" fill="#fff" stroke="none"
@@ -544,11 +580,11 @@ class Overview extends React.Component {
                                 }>
                                 <line x1="515.81" y1="212.06" x2="515.81" y2="249.59" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
-                                <rect x="485.81" y="270.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="485.81" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="485.81" y="288.59" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="485.81" y="288.59" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="485.81" y="307.19" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="485.81" y="307.19" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="485.81" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(490.8 261.98)" fontSize="12" fill="#fff" stroke="none"
@@ -573,11 +609,11 @@ class Overview extends React.Component {
                                 className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="134.29" y1="211.87" x2="134.29" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
-                                <rect x="104.29" y="270.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="104.29" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="104.29" y="288.59" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="104.29" y="288.59" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="104.29" y="307.19" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="104.29" y="307.19" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="104.29" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(113.62 261.98)" fontSize="12" fill="#fff" stroke="none"
@@ -599,11 +635,11 @@ class Overview extends React.Component {
                                 className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="56.07" y1="211.87" x2="56.07" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
-                                <rect x="26.07" y="270.33" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="26.07" y="288.59" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="288.59" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="26.07" y="307.19" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="307.19" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="26.07" y="250.06" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(31.06 261.98)" fontSize="12" fill="#fff" stroke="none"
@@ -626,11 +662,11 @@ class Overview extends React.Component {
                                 className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="1017.82" y1="410.07" x2="1017.82" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="987.82" y="466.6" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="987.82" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="987.82" y="484.87" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="987.82" y="484.87" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="987.82" y="503.47" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="987.82" y="503.47" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="987.82" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(991.81 458.26)" fontSize="12" fill="#fff" stroke="none"
@@ -651,11 +687,11 @@ class Overview extends React.Component {
                                 className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="952.14" y1="410.07" x2="952.14" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="922.14" y="466.6" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="922.14" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="922.14" y="484.87" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="922.14" y="484.87" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="922.14" y="503.47" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="922.14" y="503.47" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="922.14" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(923.79 458.26)" fontSize="12" fill="#fff" stroke="none"
@@ -677,15 +713,15 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="844.89" y1="410.07" x2="844.89" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="814.89" y="466.6" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="814.89" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="814.89" y="484.87" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="814.89" y="484.87" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="814.89" y="503.47" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="814.89" y="503.47" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="814.89" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(826.89 458.26)" fontSize="12" fill="#fff" stroke="none"
-                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B2 RG</text><text transform="translate(816.89 479.79)"
+                                        fontFamily="Roboto, Helvetica, Arial, sans-serif">B1B P1</text><text transform="translate(816.89 479.79)"
                                             fontSize="12" fill="#3c3c3b" stroke="none"
                                             fontFamily="Roboto, Helvetica, Arial, sans-serif">{(breakers.cb_1F7.Active_power_import_15_min / 1000).toFixed(1)} kW</text><text
                                                 transform="translate(816.89 498.39)" fontSize="12" fill="#3c3c3b" stroke="none"
@@ -704,11 +740,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="779.21" y1="410.07" x2="779.21" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="749.21" y="466.6" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="749.21" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="749.21" y="484.87" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="749.21" y="484.87" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="749.21" y="503.47" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="749.21" y="503.47" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="749.21" y="446.34" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(761.2 458.26)" fontSize="12" fill="#fff" stroke="none"
@@ -731,11 +767,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="713.53" y1="410.07" x2="713.53" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="683.53" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="683.53" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="683.53" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="683.53" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="683.53" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="683.53" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="683.53" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(695.52 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -758,11 +794,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="647.84" y1="410.07" x2="647.84" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="617.84" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="617.84" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="617.84" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="617.84" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="617.84" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="617.84" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="617.84" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(622.84 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -785,11 +821,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="582.16" y1="410.07" x2="582.16" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="552.16" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="552.16" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="552.16" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="552.16" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="552.16" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="552.16" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="552.16" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(553.15 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -813,11 +849,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="516.48" y1="410.07" x2="516.48" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="486.48" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="486.48" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="486.48" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="486.48" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="486.48" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="486.48" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="486.48" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(491.14 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -840,11 +876,11 @@ class Overview extends React.Component {
                                 className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="450.8" y1="410.07" x2="450.8" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="420.8" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="420.8" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="420.8" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="420.8" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="420.8" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="420.8" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="420.8" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(422.12 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -867,11 +903,11 @@ class Overview extends React.Component {
                                 className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="385.12" y1="410.07" x2="385.12" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="355.12" y="466.46" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="355.12" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="355.12" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="355.12" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="355.12" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="355.12" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="355.12" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(364.77 458.12)" fontSize="12" fill="#fff" stroke="none"
@@ -894,11 +930,11 @@ class Overview extends React.Component {
                                 className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="319.43" y1="410.07" x2="319.43" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="289.43" y="466.47" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="289.43" y="466.47" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="289.43" y="484.73" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="289.43" y="484.73" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="289.43" y="503.33" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="289.43" y="503.33" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="289.43" y="446.2" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(308.42 458.13)" fontSize="12" fill="#fff" stroke="none"
@@ -921,11 +957,11 @@ class Overview extends React.Component {
                                 className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="253.75" y1="410.07" x2="253.75" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="223.75" y="466.53" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="223.75" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="223.75" y="484.8" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="223.75" y="484.8" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="223.75" y="503.4" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="223.75" y="503.4" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="223.75" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(237.08 458.19)" fontSize="12" fill="#fff" stroke="none"
@@ -947,11 +983,11 @@ class Overview extends React.Component {
                                 className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="188.07" y1="410.07" x2="188.07" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="158.07" y="466.53" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="158.07" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="158.07" y="484.8" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="158.07" y="484.8" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="158.07" y="503.4" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="158.07" y="503.4" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="158.07" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(159.39 458.19)" fontSize="12" fill="#fff" stroke="none"
@@ -974,11 +1010,11 @@ class Overview extends React.Component {
                                 className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
                                 <line x1="122.39" y1="410.07" x2="122.39" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
-                                <rect x="92.39" y="466.53" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="92.39" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="92.39" y="484.8" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="92.39" y="484.8" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="92.39" y="503.4" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="92.39" y="503.4" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="92.39" y="446.27" width="60" height="19.93" fill="#055f87" stroke="#055f87" strokeMiterlimit="10"
                                     strokeWidth="2" /><text transform="translate(104.38 458.19)" fontSize="12" fill="#fff" stroke="none"
@@ -999,11 +1035,11 @@ class Overview extends React.Component {
                             <g id="_2F1_Tab" data-name="2F1_Tab"
 
                                 className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
-                                <rect x="26.07" y="466.53" width="60" height="18.27" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="26.07" y="484.8" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="484.8" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
-                                <rect x="26.07" y="503.4" width="60" height="18.6" fill="#a6c7d5" stroke="#055f87" strokeLinecap="square"
+                                <rect x="26.07" y="503.4" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <line x1="56.07" y1="410.07" x2="56.07" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -1039,7 +1075,7 @@ class Overview extends React.Component {
                             <g id="_3F1_overlay" className="overlay" onClick={() => this.openProperties('cb_3F1', '3F1', `${t('slideUpDialogCircuitSection')} GEN`, 'Budynek 2 - serwer.')}>
                                 <rect x="922.14" y="446.2" width="60" height="75.73" />
                             </g>
-                            <g id="_1F7_overlay" className="overlay" onClick={() => this.openProperties('cb_1F7', '1F7', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 2 - RG')}>
+                            <g id="_1F7_overlay" className="overlay" onClick={() => this.openProperties('cb_1F7', '1F7', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 1B - P1')}>
                                 <rect x="814.89" y="446.2" width="60" height="75.73" />
                             </g>
                             <g id="_1F6_overlay" className="overlay" onClick={() => this.openProperties('cb_1F6', '1F6', `${t('slideUpDialogCircuitSection')} TR1`, 'Budynek 2 - RG')}>
@@ -1107,7 +1143,9 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = {
-    manageDialogOpen
+    manageDialogOpen,
+    getIntervalData1Min,
+    getIntervalData15Min
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withTranslation()(Overview));

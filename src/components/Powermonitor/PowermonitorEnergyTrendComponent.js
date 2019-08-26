@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 const styles = theme => ({
   root: {
     padding: 25,
-    height: "100% "
+    height: "100%"
   }
 });
 
@@ -201,8 +201,8 @@ class PowermonitorEnergyTrendComponent extends Component {
       currentStepNumber
     );
 
-    let predictedBackgroundColor = "rgba(75,192,192,0.2)";
-    let predictedBorderColor = "rgba(75,192,192,1)";
+    let predictedBackgroundColor = "#055f8733";
+    let predictedBorderColor = "#055f8766";
 
     if (warning) {
       predictedBackgroundColor = "rgba(255,150,0,0.2)";
@@ -219,10 +219,10 @@ class PowermonitorEnergyTrendComponent extends Component {
         {
           label: t("powermonitorStepsLabel"),
           fill: true,
-          borderColor: "rgba(0,0,0,1)",
-          backgroundColor: "rgba(0,0,0,0.15)",
-          pointBorderColor: "rgba(0,0,0,1)",
-          pointBackgroundColor: "rgba(0,0,0,1)",
+          borderColor: "#055f87",
+          backgroundColor: "#055f8788",
+          pointBorderColor: "#055f87",
+          pointBackgroundColor: "#055f87",
           pointHitRadius: 20,
           pointRadius: 3,
           showLine: true,

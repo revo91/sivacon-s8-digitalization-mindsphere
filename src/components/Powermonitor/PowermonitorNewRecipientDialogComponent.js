@@ -187,8 +187,6 @@ const validate = formData => {
     recipient: result.error.details[0].message
   };
 
-  console.log(objectToReturn);
-
   return objectToReturn;
 };
 

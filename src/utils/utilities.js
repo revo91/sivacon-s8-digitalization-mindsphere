@@ -17,3 +17,17 @@ export function isEmpty(obj) {
   }
   return true;
 }
+
+//Method for checking if object is empty
+export function isObjectEmpty(obj) {
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function existsAndIsNotEmpty(object) {
+  return exists(object) && !isObjectEmpty(object);
+}

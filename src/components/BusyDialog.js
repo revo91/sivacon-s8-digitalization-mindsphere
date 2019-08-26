@@ -12,7 +12,7 @@ const styles = theme => {
     progress: {
       width: 200,
       height: 200,
-      margin: theme.spacing(2)
+      color: "#055f87"
     }
   };
 };

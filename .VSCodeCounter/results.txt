@@ -1,14 +1,14 @@
-Date : 2019-08-06 14:23:16
+Date : 2019-08-23 08:42:51
 Directory : e:\Dev\Mindsphere\SIDIRO-WARSZAWA-FRONT-END
-Total : 35 files,  23089 codes, 92 comments, 223 blanks, all 23404 lines
+Total : 72 files,  27570 codes, 229 comments, 666 blanks, all 28465 lines
 
 Languages
 +------------+------------+------------+------------+------------+------------+
 | language   | files      | code       | comment    | blank      | total      |
 +------------+------------+------------+------------+------------+------------+
-| JSON       |          4 |     17,712 |          0 |          3 |     17,715 |
-| JavaScript |         22 |      5,267 |         68 |        200 |      5,535 |
-| SCSS       |          4 |         66 |          0 |         15 |         81 |
+| JSON       |          4 |     17,331 |          0 |          3 |     17,334 |
+| JavaScript |         59 |     10,101 |        205 |        639 |     10,945 |
+| SCSS       |          4 |         94 |          0 |         19 |        113 |
 | HTML       |          1 |         24 |         24 |          1 |         49 |
 | CSS        |          2 |         12 |          0 |          3 |         15 |
 | XML        |          1 |          7 |          0 |          1 |          8 |
@@ -16,56 +16,97 @@ Languages
 +------------+------------+------------+------------+------------+------------+
 
 Directories
-+--------------------------------------------+------------+------------+------------+------------+------------+
-| path                                       | files      | code       | comment    | blank      | total      |
-+--------------------------------------------+------------+------------+------------+------------+------------+
-| .                                          |         35 |     23,089 |         92 |        223 |     23,404 |
-| src                                        |         29 |      5,352 |         68 |        219 |      5,639 |
-| src\components                             |         10 |      4,398 |          9 |        125 |      4,532 |
-| src\reducers                               |          5 |        369 |          2 |         16 |        387 |
-| src\actions                                |          2 |        118 |          6 |         13 |        137 |
-| src\styles                                 |          4 |         66 |          0 |         15 |         81 |
-| public                                     |          3 |         60 |         24 |          2 |         86 |
-+--------------------------------------------+------------+------------+------------+------------+------------+
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                   | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                      |         72 |     27,570 |        229 |        666 |     28,465 |
+| src                                                                    |         66 |     10,214 |        205 |        662 |     11,081 |
+| src\components                                                         |         22 |      6,957 |         54 |        392 |      7,403 |
+| src\components\Powermonitor                                            |          9 |      2,082 |         13 |        213 |      2,308 |
+| src\reducers                                                           |         12 |      1,421 |          2 |         37 |      1,460 |
+| src\actions                                                            |         12 |        757 |         25 |        109 |        891 |
+| src\utils                                                              |          6 |        168 |         60 |         39 |        267 |
+| src\styles                                                             |          4 |         94 |          0 |         19 |        113 |
+| src\services                                                           |          1 |         72 |          0 |         14 |         86 |
+| public                                                                 |          3 |         60 |         24 |          2 |         86 |
+| src\validation                                                         |          1 |         24 |          0 |          3 |         27 |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
 
 Files
-+--------------------------------------------+------------+------------+------------+------------+------------+
-| filename                                   | language   | code       | comment    | blank      | total      |
-+--------------------------------------------+------------+------------+------------+------------+------------+
-| README.md                                  | Markdown   |          1 |          0 |          0 |          1 |
-| package-lock.json                          | JSON       |     17,626 |          0 |          1 |     17,627 |
-| package.json                               | JSON       |         50 |          0 |          1 |         51 |
-| public\app-info.json                       | JSON       |         21 |          0 |          0 |         21 |
-| public\index.html                          | HTML       |         24 |         24 |          1 |         49 |
-| public\manifest.json                       | JSON       |         15 |          0 |          1 |         16 |
-| src\App.css                                | CSS        |          0 |          0 |          1 |          1 |
-| src\App.js                                 | JavaScript |        139 |          0 |         13 |        152 |
-| src\App.test.js                            | JavaScript |          8 |          0 |          2 |         10 |
-| src\actions\index.js                       | JavaScript |         18 |          0 |          2 |         20 |
-| src\actions\iottimeseriesData.js           | JavaScript |        100 |          6 |         11 |        117 |
-| src\components\ChartDataRangeTimePicker.js | JavaScript |         63 |          1 |         11 |         75 |
-| src\components\ChartDataRangeTimeSlider.js | JavaScript |        304 |          2 |         16 |        322 |
-| src\components\ChartLiveUpdateControls.js  | JavaScript |         41 |          0 |          8 |         49 |
-| src\components\Elevation.js                | JavaScript |      2,226 |          0 |          8 |      2,234 |
-| src\components\ElevationTest.js            | JavaScript |         27 |          0 |          7 |         34 |
-| src\components\Events.js                   | JavaScript |        101 |          0 |          6 |        107 |
-| src\components\Overview.js                 | JavaScript |        989 |          2 |         13 |      1,004 |
-| src\components\OverviewTest.js             | JavaScript |         31 |          0 |          7 |         38 |
-| src\components\SlideupDialog.js            | JavaScript |        450 |          1 |         26 |        477 |
-| src\components\TimeSeriesChart.js          | JavaScript |        166 |          3 |         23 |        192 |
-| src\i18n.js                                | JavaScript |        116 |         16 |          9 |        141 |
-| src\index.css                              | CSS        |         12 |          0 |          2 |         14 |
-| src\index.js                               | JavaScript |         27 |          4 |          9 |         40 |
-| src\logo.svg                               | XML        |          7 |          0 |          1 |          8 |
-| src\reducers\chartReducer.js               | JavaScript |        104 |          0 |          4 |        108 |
-| src\reducers\dialogReducer.js              | JavaScript |         49 |          2 |          6 |         57 |
-| src\reducers\drawerReducer.js              | JavaScript |         15 |          0 |          2 |         17 |
-| src\reducers\rootReducer.js                | JavaScript |         11 |          0 |          2 |         13 |
-| src\reducers\switchesStateReducer.js       | JavaScript |        190 |          0 |          2 |        192 |
-| src\serviceWorker.js                       | JavaScript |         92 |         31 |         13 |        136 |
-| src\styles\Elevation.scss                  | SCSS       |         30 |          0 |          5 |         35 |
-| src\styles\Overview.scss                   | SCSS       |         15 |          0 |          6 |         21 |
-| src\styles\SlideupDialog.scss              | SCSS       |          6 |          0 |          1 |          7 |
-| src\styles\_variables.scss                 | SCSS       |         15 |          0 |          3 |         18 |
-| Total                                      |            |     23,089 |         92 |        223 |     23,404 |
-+--------------------------------------------+------------+------------+------------+------------+------------+
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                               | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| README.md                                                              | Markdown   |          1 |          0 |          0 |          1 |
+| package-lock.json                                                      | JSON       |     17,237 |          0 |          1 |     17,238 |
+| package.json                                                           | JSON       |         58 |          0 |          1 |         59 |
+| public\app-info.json                                                   | JSON       |         21 |          0 |          0 |         21 |
+| public\index.html                                                      | HTML       |         24 |         24 |          1 |         49 |
+| public\manifest.json                                                   | JSON       |         15 |          0 |          1 |         16 |
+| src\App.css                                                            | CSS        |          0 |          0 |          1 |          1 |
+| src\App.js                                                             | JavaScript |        199 |          0 |          9 |        208 |
+| src\App.test.js                                                        | JavaScript |          8 |          0 |          2 |         10 |
+| src\actions\busyDialog.js                                              | JavaScript |         12 |          0 |          3 |         15 |
+| src\actions\eventManagementApi.js                                      | JavaScript |         30 |          3 |          4 |         37 |
+| src\actions\index.js                                                   | JavaScript |         18 |          0 |          1 |         19 |
+| src\actions\iottimeseriesData.js                                       | JavaScript |        163 |          5 |          6 |        174 |
+| src\actions\languageDialog.js                                          | JavaScript |          2 |          0 |          1 |          3 |
+| src\actions\mindsphereDataUpdateInterval.js                            | JavaScript |        217 |         10 |          9 |        236 |
+| src\actions\newRecipientDialog.js                                      | JavaScript |         12 |          0 |          3 |         15 |
+| src\actions\newRecipientForm.js                                        | JavaScript |          6 |          0 |          2 |          8 |
+| src\actions\powermonitorActivePowerData.js                             | JavaScript |        103 |          4 |         25 |        132 |
+| src\actions\powermonitorData.js                                        | JavaScript |        156 |          3 |         46 |        205 |
+| src\actions\powermonitorForm.js                                        | JavaScript |         16 |          0 |          4 |         20 |
+| src\actions\snackbar.js                                                | JavaScript |         22 |          0 |          5 |         27 |
+| src\components\BusyDialog.js                                           | JavaScript |         58 |          0 |          6 |         64 |
+| src\components\ChartDataRangeTimePicker.js                             | JavaScript |         67 |          0 |          7 |         74 |
+| src\components\ChartDataRangeTimeSlider.js                             | JavaScript |         99 |         25 |         13 |        137 |
+| src\components\ChartLiveUpdateControls.js                              | JavaScript |         37 |          0 |          6 |         43 |
+| src\components\Elevation.js                                            | JavaScript |      2,261 |          0 |         12 |      2,273 |
+| src\components\ElevationTest.js                                        | JavaScript |         27 |          0 |          7 |         34 |
+| src\components\Events.js                                               | JavaScript |        133 |          0 |         11 |        144 |
+| src\components\LanguageSelectionDialog.js                              | JavaScript |         60 |          0 |          8 |         68 |
+| src\components\Overview.js                                             | JavaScript |      1,089 |          3 |         36 |      1,128 |
+| src\components\OverviewTest.js                                         | JavaScript |         31 |          0 |          7 |         38 |
+| src\components\Powermonitor\Powermonitor15MinComponent.js              | JavaScript |        299 |          5 |         26 |        330 |
+| src\components\Powermonitor\Powermonitor15MinTableComponent.js         | JavaScript |        171 |          0 |         10 |        181 |
+| src\components\Powermonitor\Powermonitor15MinTrendComponent.js         | JavaScript |        245 |          0 |         42 |        287 |
+| src\components\Powermonitor\PowermonitorComponent.js                   | JavaScript |        226 |          0 |         20 |        246 |
+| src\components\Powermonitor\PowermonitorDetailsPaperComponent.js       | JavaScript |        211 |          2 |         19 |        232 |
+| src\components\Powermonitor\PowermonitorEnergyTrendComponent.js        | JavaScript |        269 |          1 |         39 |        309 |
+| src\components\Powermonitor\PowermonitorNewRecipientDialogComponent.js | JavaScript |        183 |          1 |         20 |        204 |
+| src\components\Powermonitor\PowermonitorOverviewComponent.js           | JavaScript |         46 |          0 |          8 |         54 |
+| src\components\Powermonitor\PowermonitorSettingsComponent.js           | JavaScript |        432 |          4 |         29 |        465 |
+| src\components\SlideupDialog.js                                        | JavaScript |        762 |          5 |         34 |        801 |
+| src\components\SnackbarNotifier.js                                     | JavaScript |         61 |          5 |         12 |         78 |
+| src\components\TimeSeriesChart.js                                      | JavaScript |        190 |          3 |         20 |        213 |
+| src\i18n.js                                                            | JavaScript |        371 |         28 |         13 |        412 |
+| src\index.css                                                          | CSS        |         12 |          0 |          2 |         14 |
+| src\index.js                                                           | JavaScript |         32 |          5 |          8 |         45 |
+| src\logo.svg                                                           | XML        |          7 |          0 |          1 |          8 |
+| src\reducers\busyDialogReducer.js                                      | JavaScript |         22 |          0 |          3 |         25 |
+| src\reducers\chartReducer.js                                           | JavaScript |        103 |          0 |          4 |        107 |
+| src\reducers\dialogReducer.js                                          | JavaScript |         45 |          2 |          3 |         50 |
+| src\reducers\drawerReducer.js                                          | JavaScript |         15 |          0 |          2 |         17 |
+| src\reducers\eventsReducer.js                                          | JavaScript |         32 |          0 |          2 |         34 |
+| src\reducers\languageDialogReducer.js                                  | JavaScript |         19 |          0 |          2 |         21 |
+| src\reducers\newRecipientDialogReducer.js                              | JavaScript |         25 |          0 |          3 |         28 |
+| src\reducers\powermonitorActivePowerReducer.js                         | JavaScript |         26 |          0 |          3 |         29 |
+| src\reducers\powermonitorReducer.js                                    | JavaScript |         42 |          0 |          3 |         45 |
+| src\reducers\rootReducer.js                                            | JavaScript |         27 |          0 |          2 |         29 |
+| src\reducers\snackbarReducer.js                                        | JavaScript |         41 |          0 |          6 |         47 |
+| src\reducers\switchesStateReducer.js                                   | JavaScript |      1,024 |          0 |          4 |      1,028 |
+| src\serviceWorker.js                                                   | JavaScript |         92 |         31 |         13 |        136 |
+| src\services\powermonitorService.js                                    | JavaScript |         72 |          0 |         14 |         86 |
+| src\styles\Elevation.scss                                              | SCSS       |         44 |          0 |          6 |         50 |
+| src\styles\Overview.scss                                               | SCSS       |         23 |          0 |          8 |         31 |
+| src\styles\SlideupDialog.scss                                          | SCSS       |          6 |          0 |          1 |          7 |
+| src\styles\_variables.scss                                             | SCSS       |         21 |          0 |          4 |         25 |
+| src\utils\Decoder3VA.js                                                | JavaScript |         38 |         18 |         11 |         67 |
+| src\utils\Decoder3WL.js                                                | JavaScript |         29 |         14 |          8 |         51 |
+| src\utils\DecoderATSE.js                                               | JavaScript |         25 |         14 |          8 |         47 |
+| src\utils\DecoderSupply.js                                             | JavaScript |         26 |         14 |          8 |         48 |
+| src\utils\getDeviceNameForApiCall.js                                   | JavaScript |         34 |          0 |          0 |         34 |
+| src\utils\utilities.js                                                 | JavaScript |         16 |          0 |          4 |         20 |
+| src\validation\Powermonitor.js                                         | JavaScript |         24 |          0 |          3 |         27 |
+| Total                                                                  |            |     27,570 |        229 |        666 |     28,465 |
++------------------------------------------------------------------------+------------+------------+------------+------------+------------+
