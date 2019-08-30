@@ -304,136 +304,142 @@ class PowermonitorSettingsComponent extends Component {
     return (
       <React.Fragment>
         <PowermonitorNewRecipientDialog />
-        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-          <Grid
-            className={classes.mainGrid}
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="stretch"
-            spacing={3}
-          >
-            <Grid item style={{ minWidth: 500 }}>
-              <Paper className={classes.settingsPaper}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="flex-end"
-                  alignItems="stretch"
-                  className={classes.settingsGrid}
-                  wrap="nowrap"
-                >
-                  {this.renderHeader()}
-                  <Grid item xs>
-                    <Grid
-                      container
-                      direction="row"
-                      justify="center"
-                      alignItems="stretch"
-                      spacing={1}
-                      className={classes.parametersGrid}
-                    >
-                      <Grid item xs={12}>
-                        <Field
-                          name="activePowerLimitWarning"
-                          type="text"
-                          component={this.renderField}
-                          label={t("powermonitorSettingsWarningLimit")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
-                        <Field
-                          name="activePowerLimitAlarm"
-                          type="text"
-                          component={this.renderField}
-                          label={t("powermonitorSettingsAlarmLimit")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
-                        <Field
-                          name="trafoPowerLosses"
-                          type="text"
-                          component={this.renderField}
-                          label={t("powermonitorSettingsTrafoLossesLimit")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
-                        <Field
-                          name="active"
-                          type="checkbox"
-                          component={this.renderCheckbox}
-                          label={t("powermonitorSettingsActive")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
-                        <Field
-                          name="sendingEventsEnabled"
-                          type="checkbox"
-                          component={this.renderCheckbox}
-                          label={t("powermonitorSettingsSendingEventsEnabled")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
-                        <Field
-                          name="sendingEmailsEnabled"
-                          type="checkbox"
-                          component={this.renderCheckbox}
-                          label={t("powermonitorSettingsSendingEmailsEnabled")}
-                          disabled={this.checkIfUserIsNotAdmin()}
-                        />
+        <Grid item>
+          <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+            <Grid
+              className={classes.mainGrid}
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="stretch"
+              spacing={3}
+            >
+              <Grid item style={{ minWidth: 500 }}>
+                <Paper className={classes.settingsPaper}>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="flex-end"
+                    alignItems="stretch"
+                    className={classes.settingsGrid}
+                    wrap="nowrap"
+                  >
+                    {this.renderHeader()}
+                    <Grid item xs>
+                      <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="stretch"
+                        spacing={1}
+                        className={classes.parametersGrid}
+                      >
+                        <Grid item xs={12}>
+                          <Field
+                            name="activePowerLimitWarning"
+                            type="text"
+                            component={this.renderField}
+                            label={t("powermonitorSettingsWarningLimit")}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                          <Field
+                            name="activePowerLimitAlarm"
+                            type="text"
+                            component={this.renderField}
+                            label={t("powermonitorSettingsAlarmLimit")}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                          <Field
+                            name="trafoPowerLosses"
+                            type="text"
+                            component={this.renderField}
+                            label={t("powermonitorSettingsTrafoLossesLimit")}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                          <Field
+                            name="active"
+                            type="checkbox"
+                            component={this.renderCheckbox}
+                            label={t("powermonitorSettingsActive")}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                          <Field
+                            name="sendingEventsEnabled"
+                            type="checkbox"
+                            component={this.renderCheckbox}
+                            label={t(
+                              "powermonitorSettingsSendingEventsEnabled"
+                            )}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                          <Field
+                            name="sendingEmailsEnabled"
+                            type="checkbox"
+                            component={this.renderCheckbox}
+                            label={t(
+                              "powermonitorSettingsSendingEmailsEnabled"
+                            )}
+                            disabled={this.checkIfUserIsNotAdmin()}
+                          />
+                        </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
 
-                  <Grid item className={classes.footer}>
-                    <Button
-                      type="submit"
-                      disabled={this.checkConfirmButtonDisable()}
-                    >
-                      <Typography variant="h6" gutterBottom>
-                        {t("powermonitorSettingsConfirmButton")}
-                      </Typography>
-                    </Button>
-                    <Button
-                      onClick={this.handleResetButtonClick}
-                      disabled={this.checkIfUserIsNotAdmin()}
-                    >
-                      <Typography variant="h6" gutterBottom>
-                        {t("powermonitorSettingsResetButton")}
-                      </Typography>
-                    </Button>
+                    <Grid item className={classes.footer}>
+                      <Button
+                        type="submit"
+                        disabled={this.checkConfirmButtonDisable()}
+                      >
+                        <Typography variant="h6" gutterBottom>
+                          {t("powermonitorSettingsConfirmButton")}
+                        </Typography>
+                      </Button>
+                      <Button
+                        onClick={this.handleResetButtonClick}
+                        disabled={this.checkIfUserIsNotAdmin()}
+                      >
+                        <Typography variant="h6" gutterBottom>
+                          {t("powermonitorSettingsResetButton")}
+                        </Typography>
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
-            </Grid>
-            <Grid item style={{ minWidth: 500 }}>
-              <Paper className={classes.emailListPaper}>
-                <Grid
-                  container
-                  direction="column"
-                  justify="flex-end"
-                  alignItems="stretch"
-                  className={classes.settingsGrid}
-                  wrap="nowrap"
-                >
-                  {this.renderMailHeader()}
-                  <Grid item xs>
-                    <FieldArray
-                      name="recipients"
-                      component={this.renderEmailTable}
-                    />
-                  </Grid>
+                </Paper>
+              </Grid>
+              <Grid item style={{ minWidth: 500 }}>
+                <Paper className={classes.emailListPaper}>
+                  <Grid
+                    container
+                    direction="column"
+                    justify="flex-end"
+                    alignItems="stretch"
+                    className={classes.settingsGrid}
+                    wrap="nowrap"
+                  >
+                    {this.renderMailHeader()}
+                    <Grid item xs>
+                      <FieldArray
+                        name="recipients"
+                        component={this.renderEmailTable}
+                      />
+                    </Grid>
 
-                  <Grid item className={classes.emailListFooter}>
-                    <Button
-                      onClick={() => this.handleAddRecipientButtonClick()}
-                      disabled={this.checkIfUserIsNotAdmin()}
-                    >
-                      <Typography variant="h6" gutterBottom>
-                        {t("powermonitorSettingsAddRecipientButton")}
-                      </Typography>
-                    </Button>
+                    <Grid item className={classes.emailListFooter}>
+                      <Button
+                        onClick={() => this.handleAddRecipientButtonClick()}
+                        disabled={this.checkIfUserIsNotAdmin()}
+                      >
+                        <Typography variant="h6" gutterBottom>
+                          {t("powermonitorSettingsAddRecipientButton")}
+                        </Typography>
+                      </Button>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Grid>
       </React.Fragment>
     );
   }

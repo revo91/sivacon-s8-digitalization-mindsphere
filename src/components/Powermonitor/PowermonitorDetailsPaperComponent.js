@@ -32,7 +32,7 @@ class PowermonitorDetailsComponent extends Component {
     return (
       <ListItem className={itemClassName} key={date.toString()}>
         <Grid container>
-          <Grid item xs>
+          <Grid item xs md lg>
             <Typography variant={"body2"} gutterBottom>
               {moment(date).format("HH:mm:ss")}
             </Typography>

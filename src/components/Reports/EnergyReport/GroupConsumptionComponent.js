@@ -13,7 +13,9 @@ const styles = theme => ({
     padding: theme.spacing(3)
   },
   dataGrid: {},
-  chartGridItem: {}
+  chartGridItem: {
+    minHeight: 300
+  }
 });
 
 class GroupConsumptionComponent extends Component {
@@ -34,10 +36,17 @@ class GroupConsumptionComponent extends Component {
             className={classes.dataGrid}
             spacing={2}
           >
-            <Grid item className={classes.chartGridItem} sm={12} md={5} lg={5}>
+            <Grid
+              item
+              className={classes.chartGridItem}
+              xs={12}
+              sm={12}
+              md={5}
+              lg={5}
+            >
               <GroupConsumptionPieChart />
             </Grid>
-            <Grid item sm={12} md={7} lg={7}>
+            <Grid item xs={12} sm={12} md={7} lg={7}>
               <GroupConsumptionTable />
             </Grid>
           </Grid>

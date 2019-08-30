@@ -747,7 +747,7 @@ const resources = {
       //languageDialog
       languageDialogTitle: "Change application language",
       languageDialogText:
-        "Based on various browser's settings, application automatically sets language. You can override this setting using buttons below.",
+        "Application automatically sets language based on various browser's settings. You can override this setting using buttons below.",
       languageDialogPolishLanguage: "Polish",
       languageDialogEnglishLanguage: "English",
       //sidebar
@@ -809,13 +809,7 @@ i18n
     detection: {
       // order and from where user language should be detected
       order: [
-        "navigator",
-        "cookie",
-        "querystring",
-        "localStorage",
-        "htmlTag",
-        "path",
-        "subdomain"
+        'querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag', 'path', 'subdomain'
       ],
 
       // keys or params to lookup language from

@@ -38,7 +38,9 @@ const WhiteBottomNavigationAction = withStyles({
 })(props => <BottomNavigationAction color="default" {...props} />);
 
 const styles = theme => ({
-  root: {},
+  root: {
+    minWidth: 700
+  },
   bottomNavigation: {
     width: "100%",
     background: "#055f87"
@@ -150,17 +152,7 @@ class PowermonitorComponent extends Component {
             </BottomNavigation>
           </Paper>
         </Grid>
-        <Grid item xs={12}>
-          {exists(powermonitor.data) ? this.renderPage(pageNumber) : null}
-        </Grid>
-        <Grid
-          className={classes.bottomNavigationGridItem}
-          alignItems="center"
-          item
-          container
-          direction="row"
-          justify="center"
-        />
+        {exists(powermonitor.data) ? this.renderPage(pageNumber) : null}
       </Grid>
     );
   }

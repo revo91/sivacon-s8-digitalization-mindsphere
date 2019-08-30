@@ -57,7 +57,7 @@ class Overview extends React.Component {
         Object.entries(breakers).forEach(
             ([key, value]) => {
                 let refName = `${key}_ref`;
-                if (value.state === 0) {
+                if (value.stateClosed === false) {
                     this.myTween = TweenLite.to(this[refName].current, 1, { rotation: 0, transformOrigin: "100% 100%" })
                 }
                 else if (value.stateClosed === true) {
@@ -305,7 +305,7 @@ class Overview extends React.Component {
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
                                     || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
                                     || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
-                                    ? "voltageApplied" : "noVoltage"}
+                                    ? "voltageApplied" : breakers.cb_Q4.stateTripped === true ? "stateTripped" : "noVoltage"}
 
                             >
                                 <line x1="358.6" y1="240.48" x2="383.85" y2="265.73" fill="none" strokeMiterlimit="10"
@@ -314,7 +314,7 @@ class Overview extends React.Component {
                             <g id="Q2" ref={this.cb_Q2_ref} className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true)
                                 || (breakers.cb_Q1.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.TR1.state === true)
                                 || (breakers.cb_Q3.stateClosed === true && breakers.cb_Q5.stateClosed === true && breakers.cb_Q4.stateClosed === true && sources.GEN.state === true)
-                                ? "voltageApplied" : "noVoltage"}>
+                                ? "voltageApplied" : breakers.cb_Q2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="227.28" y1="240.48" x2="252.54" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
@@ -401,7 +401,7 @@ class Overview extends React.Component {
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true)
                                     || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
                                     || (breakers.cb_Q5.stateClosed === true && breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
-                                    ? "voltageApplied" : "noVoltage"}
+                                    ? "voltageApplied" : breakers.cb_Q5.stateTripped === true ? "stateTripped" : "noVoltage"}
                             >
                                 <line x1="818.35" y1="240.48" x2="843.6" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
@@ -409,7 +409,7 @@ class Overview extends React.Component {
                             <g id="Q1" ref={this.cb_Q1_ref} className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true)
                                 || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true)
                                 || (breakers.cb_Q5.stateClosed === true && breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
-                                ? "voltageApplied" : "noVoltage"}>
+                                ? "voltageApplied" : breakers.cb_Q1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="687.02" y1="240.48" x2="712.27" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
@@ -540,14 +540,15 @@ class Overview extends React.Component {
                                 className={(breakers.cb_Q2.stateClosed === true && sources.TR2.state === true && breakers.cb_Q4.stateClosed === true && breakers.cb_Q5.stateClosed === true)
                                     || (breakers.cb_Q1.stateClosed === true && sources.TR1.state === true && breakers.cb_Q5.stateClosed === true)
                                     || (breakers.cb_Q3.stateClosed === true && sources.GEN.state === true)
-                                    ? "voltageApplied" : "noVoltage"}
+                                    ? "voltageApplied" : breakers.cb_Q3.stateTripped === true ? "stateTripped" : "noVoltage"}
                             >
                                 <line x1="992.57" y1="240.48" x2="1017.82" y2="265.73" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP2_Tab" data-name="1FP2_Tab"
 
-                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" 
+                                : breakers.cb_1FP2.stateTripped === true ? "stateTripped" : "noVoltage"
                                 }>
                                 <line x1="592.74" y1="212.29" x2="592.74" y2="249.82" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -569,14 +570,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1FP2" data-name="1FP2" ref={this.cb_1FP2_ref}
-                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP2.stateClosed === true) ? "voltageApplied" 
+                                : breakers.cb_1FP2.stateTripped === true ? "stateTripped" : "noVoltage"
                                 }>
                                 <line x1="567.49" y1="187.04" x2="592.74" y2="212.29" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1FP1_Tab" data-name="1FP1_Tab"
-
-                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" 
+                                : breakers.cb_1FP1.stateTripped === true ? "stateTripped" : "noVoltage"
                                 }>
                                 <line x1="515.81" y1="212.06" x2="515.81" y2="249.59" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
@@ -598,7 +600,8 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1FP1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1FP1" data-name="1FP1" ref={this.cb_1FP1_ref}
-                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" : "noVoltage"
+                                className={(sources.TR1.state === true) && (breakers.cb_1FP1.stateClosed === true) ? "voltageApplied" 
+                                : breakers.cb_1FP1.stateTripped === true ? "stateTripped" : "noVoltage"
                                 }
                             >
                                 <line x1="490.56" y1="186.81" x2="515.81" y2="212.06" fill="none" strokeMiterlimit="10"
@@ -606,7 +609,8 @@ class Overview extends React.Component {
                             </g>
                             <g id="_2FP2_Tab" data-name="2FP2_Tab"
 
-                                className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" 
+                                : breakers.cb_2FP2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="134.29" y1="211.87" x2="134.29" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <rect x="104.29" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -626,13 +630,15 @@ class Overview extends React.Component {
                                                     fontFamily="Roboto, Helvetica, Arial, sans-serif">
                                     {!isNaN((breakers.cb_2FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2FP2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
-                            <g id="_2FP2" data-name="2FP2" ref={this.cb_2FP2_ref} className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
+                            <g id="_2FP2" data-name="2FP2" ref={this.cb_2FP2_ref} className={breakers.cb_2FP2.stateClosed === true && sources.TR2.state === true ? "voltageApplied" 
+                            : breakers.cb_2FP2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="109.03" y1="186.62" x2="134.29" y2="211.87" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2FP1_Tab" data-name="2FP1_Tab"
 
-                                className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" 
+                                : breakers.cb_2FP1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="56.07" y1="211.87" x2="56.07" y2="249.4" fill="none" strokeLinecap="round"
                                     strokeMiterlimit="10" strokeWidth="2" />
                                 <rect x="26.07" y="270.33" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -653,13 +659,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2FP1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2FP1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2FP1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2FP1" data-name="2FP1" ref={this.cb_2FP1_ref}
-                                className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers.cb_2FP1.stateClosed === true && sources.TR2.state === true ? "voltageApplied" 
+                                : breakers.cb_2FP1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="30.82" y1="186.62" x2="56.07" y2="211.87" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F2_Tab" data-name="3F2_Tab"
 
-                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_3F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="1017.82" y1="410.07" x2="1017.82" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="987.82" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -678,13 +686,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_3F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_3F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_3F2" data-name="3F2" ref={this.cb_3F2_ref}
-                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_3F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="992.57" y1="384.82" x2="1017.82" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_3F1_Tab" data-name="3F1_Tab"
 
-                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_3F1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="952.14" y1="410.07" x2="952.14" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="922.14" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -704,13 +714,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_3F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_3F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_3F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_3F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_3F1" data-name="3F1" ref={this.cb_3F1_ref}
-                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_3FX && breakers.cb_3F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_3F1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="926.88" y1="384.82" x2="952.14" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F7_Tab" data-name="1F7_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F7.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="844.89" y1="410.07" x2="844.89" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="814.89" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -731,13 +743,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F7.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F7.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F7.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F7.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F7.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F7.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F7" data-name="1F7" ref={this.cb_1F7_ref}
-                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F7.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F7.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="819.64" y1="384.82" x2="844.89" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F6_Tab" data-name="1F6_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F6.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="779.21" y1="410.07" x2="779.21" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="749.21" y="466.6" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -758,13 +772,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F6.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F6.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F6" data-name="1F6" ref={this.cb_1F6_ref}
-                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F6.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F6.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="753.96" y1="384.82" x2="779.21" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F5_Tab" data-name="1F5_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F5.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="713.53" y1="410.07" x2="713.53" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="683.53" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -785,13 +801,14 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F5.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F5.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F5" data-name="1F5" ref={this.cb_1F5_ref}
-                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F5.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F5.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="688.28" y1="384.82" x2="713.53" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F4_Tab" data-name="1F4_Tab"
-
-                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F4.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="647.84" y1="410.07" x2="647.84" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="617.84" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -812,13 +829,15 @@ class Overview extends React.Component {
                                             fontFamily="Roboto, Helvetica, Arial, sans-serif">{!isNaN((breakers.cb_1F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                                 (breakers.cb_1F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F4.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F4" data-name="1F4" ref={this.cb_1F4_ref}
-                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F4.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F4.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="622.59" y1="384.82" x2="647.84" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F3_Tab" data-name="1F3_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F3.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="582.16" y1="410.07" x2="582.16" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="552.16" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -840,13 +859,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F3.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F3.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F3" data-name="1F3" ref={this.cb_1F3_ref}
-                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F3.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F3.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="556.91" y1="384.82" x2="582.16" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F2_Tab" data-name="1F2_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="516.48" y1="410.07" x2="516.48" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="486.48" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -867,13 +888,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F2" data-name="1F2" ref={this.cb_1F2_ref}
-                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="491.23" y1="384.82" x2="516.48" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_1F1_Tab" data-name="1F1_Tab"
 
-                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="450.8" y1="410.07" x2="450.8" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="420.8" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -894,13 +917,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_1F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_1F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_1F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_1F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_1F1" data-name="1F1" ref={this.cb_1F1_ref}
-                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_1FX && breakers.cb_1F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_1F1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="425.55" y1="384.82" x2="450.8" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F6_Tab" data-name="2F6_Tab"
 
-                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F6.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="385.12" y1="410.07" x2="385.12" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="355.12" y="466.46" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -921,13 +946,14 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F6.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F6.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F6.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F6.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F6" data-name="2F6" ref={this.cb_2F6_ref}
-                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F6.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F6.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="359.87" y1="384.82" x2="385.12" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F5_Tab" data-name="2F5_Tab"
-
-                                className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F5.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="319.43" y1="410.07" x2="319.43" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="289.43" y="466.47" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -948,13 +974,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F5.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F5.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F5.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F5.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F5" data-name="2F5" ref={this.cb_2F5_ref}
-                                className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F5.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F5.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="294.18" y1="384.82" x2="319.43" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F4_Tab" data-name="2F4_Tab"
 
-                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F4.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="253.75" y1="410.07" x2="253.75" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="223.75" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -974,13 +1002,15 @@ class Overview extends React.Component {
                                                     fontFamily="Roboto, Helvetica, Arial, sans-serif">{!isNaN((breakers.cb_2F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F4.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                                         (breakers.cb_2F4.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F4.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F4.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F4" data-name="2F4" ref={this.cb_2F4_ref}
-                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F4.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F4.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="228.5" y1="384.82" x2="253.75" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F3_Tab" data-name="2F3_Tab"
 
-                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F3.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="188.07" y1="410.07" x2="188.07" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="158.07" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -1001,13 +1031,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F3.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F3.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F3.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F3.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F3" data-name="2F3" ref={this.cb_2F3_ref}
-                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F3.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F3.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="162.82" y1="384.82" x2="188.07" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F2_Tab" data-name="2F2_Tab"
 
-                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="122.39" y1="410.07" x2="122.39" y2="447.6" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                                 <rect x="92.39" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -1028,13 +1060,15 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F2.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F2.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F2.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F2.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F2" data-name="2F2" ref={this.cb_2F2_ref}
-                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F2.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F2.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="97.14" y1="384.82" x2="122.39" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>
                             <g id="_2F1_Tab" data-name="2F1_Tab"
 
-                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <rect x="26.07" y="466.53" width="60" height="18.27" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
                                     strokeMiterlimit="10" />
                                 <rect x="26.07" y="484.8" width="60" height="18.6" fill="#def5ff" stroke="#055f87" strokeLinecap="square"
@@ -1055,7 +1089,8 @@ class Overview extends React.Component {
                                     {!isNaN((breakers.cb_2F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F1.Reactive_power_import_15_min, 2)))).toFixed(2)) ?
                                         (breakers.cb_2F1.Active_power_import_15_min / Math.abs(Math.sqrt(Math.pow(breakers.cb_2F1.Active_power_import_15_min, 2) + Math.pow(breakers.cb_2F1.Reactive_power_import_15_min, 2)))).toFixed(2) : 0.00} PF</text></g>
                             <g id="_2F1" data-name="2F1" ref={this.cb_2F1_ref}
-                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" : "noVoltage"}>
+                                className={breakers_2FX && breakers.cb_2F1.stateClosed === true ? "voltageApplied" 
+                                : breakers.cb_2F1.stateTripped === true ? "stateTripped" : "noVoltage"}>
                                 <line x1="30.81" y1="384.82" x2="56.06" y2="410.07" fill="none" strokeMiterlimit="10"
                                     strokeWidth="2" />
                             </g>

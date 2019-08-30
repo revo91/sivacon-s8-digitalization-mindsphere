@@ -11,7 +11,7 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
+import Paper from "@material-ui/core/Paper";
 import { DatePicker } from "@material-ui/pickers";
 import {
   fetchSupplyQualityReportActionCreator,
@@ -27,10 +27,8 @@ import SupplyQualityReportCurrentsComponent from "./SupplyQualityReportCurrentsC
 const styles = theme => ({
   appBar: {
     padding: theme.spacing(2),
-    position: "static"
-  },
-  navBarGridItem: {
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#f5f5f5"
   }
 });
 
@@ -62,7 +60,10 @@ class SupplyQualityReportComponent extends Component {
     let { fetchSupplyQualityReport } = this.props;
 
     if (exists(date))
-      fetchSupplyQualityReport(date.getFullYear(), date.getMonth());
+      fetchSupplyQualityReport(
+        date.toDate().getFullYear(),
+        date.toDate().getMonth()
+      );
   };
 
   handleSupplyChange = supply => {
@@ -77,7 +78,7 @@ class SupplyQualityReportComponent extends Component {
     let now = new Date(Date.now());
 
     return (
-      <AppBar className={classes.appBar} color="default">
+      <Paper className={classes.appBar} color="default">
         <Grid
           container
           direction="row"
@@ -123,7 +124,7 @@ class SupplyQualityReportComponent extends Component {
             </form>
           </Grid>
         </Grid>
-      </AppBar>
+      </Paper>
     );
   };
 

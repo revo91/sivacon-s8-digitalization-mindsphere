@@ -10,8 +10,7 @@ import { Scatter } from "react-chartjs-2";
 
 const styles = theme => ({
   chart: {
-    width: "100%",
-    minHeigth: 500
+    width: "100%"
   }
 });
 

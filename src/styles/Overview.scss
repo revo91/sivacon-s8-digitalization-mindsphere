@@ -1,5 +1,3 @@
-
-
 @import '_variables.scss';
 
 .minwidth {
@@ -15,7 +13,11 @@
 }
 
 .noVoltage {
-    stroke: $noVoltage
+    stroke: $noVoltage;
+}
+
+.stateTripped {
+    stroke: $trippedLine;
 }
 
 .overlay {

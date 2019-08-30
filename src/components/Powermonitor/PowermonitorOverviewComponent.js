@@ -6,11 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 import PowermonitorEnergyTrend from "./PowermonitorEnergyTrendComponent";
 import PowermonitorDetailsPaperComponent from "./PowermonitorDetailsPaperComponent";
 
-const styles = theme => ({
-  root: {
-    width: "100%"
-  }
-});
+const styles = theme => ({});
 
 class PowermonitorOverviewComponent extends Component {
   render() {
@@ -20,18 +16,21 @@ class PowermonitorOverviewComponent extends Component {
       return <p>{t("powermonitorNotReadyLabel")}</p>;
 
     return (
-      <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={12} sm={12} md={12} lg={4} style={{ minWidth: 300 }}>
+      <Grid
+        item
+        container
+        direction="row"
+        justify="flex-start"
+        alignItems="stretch"
+        spacing={3}
+        style={{
+          height: "100%"
+        }}
+      >
+        <Grid item xs={12} sm={12} md={12} lg={4}>
           <PowermonitorDetailsPaperComponent />
         </Grid>
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={12}
-          lg={8}
-          style={{ minWidth: 600, minHeight: 700 }}
-        >
+        <Grid item xs={12} sm={12} md={12} lg={8}>
           <PowermonitorEnergyTrend />
         </Grid>
       </Grid>

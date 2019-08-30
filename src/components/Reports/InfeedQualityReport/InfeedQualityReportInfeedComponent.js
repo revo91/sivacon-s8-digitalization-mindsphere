@@ -43,11 +43,7 @@ const styles = theme => ({
   },
   tableGridItem: {
     fontSize: 10,
-    marginTop: 10,
-    paddingTop: 40,
-    paddingBottom: 50,
-    paddingLeft: 60,
-    paddingRight: 60
+    padding: 40
   }
 });
 
@@ -397,26 +393,31 @@ class InfeedQualityReportInfeedComponent extends Component {
             )}`}
           </Typography>
           <Grid
+            className={classes.tableGridComponent}
             container
-            direction="column"
+            direction="row"
             justify="flex-start"
             alignItems="stretch"
-            className={classes.dataGrid}
           >
             <Grid
-              className={classes.tableGridComponent}
               item
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="stretch"
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              className={classes.tableGridItem}
             >
-              <Grid item lg={6} className={classes.tableGridItem}>
-                {this.renderCurrentTable()}
-              </Grid>
-              <Grid item lg={6} className={classes.tableGridItem}>
-                {this.renderTHDTable()}
-              </Grid>
+              {this.renderCurrentTable()}
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              className={classes.tableGridItem}
+            >
+              {this.renderTHDTable()}
             </Grid>
           </Grid>
         </Paper>

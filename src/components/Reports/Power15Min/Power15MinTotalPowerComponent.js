@@ -7,6 +7,7 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import Power15MinTotalPowerChartComponent from "./Power15MinTotalPowerChartComponent";
 
 import { withSnackbar } from "notistack";
+import { exists } from "../../../utils/utilities";
 
 const styles = theme => ({
   paper: {
@@ -23,6 +24,8 @@ class Total15MinPowerComponent extends Component {
     let { power15MinReport, t } = this.props;
     let maxValue = power15MinReport.data["total"].maxValue;
     let maxDate = power15MinReport.data["total"].maxDate;
+
+    if (!exists(maxValue) || !exists(maxDate)) return null;
 
     let maximumText = `${moment(maxDate).format(
       "YYYY-MM-DD HH:mm"

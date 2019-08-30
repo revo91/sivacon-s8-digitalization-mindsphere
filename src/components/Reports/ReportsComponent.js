@@ -12,8 +12,10 @@ import InfeedQualityReportComponent from "./InfeedQualityReport/InfeedQualityRep
 
 const styles = theme => ({
   root: {},
-  mainGridItem: {
-    width: "100%"
+  mainGridItem: {},
+  navGridItem: {
+    width: "100%",
+    minWidth: 1300
   }
 });
 
@@ -50,7 +52,7 @@ class ReportsComponent extends Component {
         alignItems="stretch"
         spacing={2}
       >
-        <Grid item className={classes.mainGridItem}>
+        <Grid item className={classes.navGridItem}>
           <ReportMenuComponent />
         </Grid>
         {this.renderPage(pageNumber)}

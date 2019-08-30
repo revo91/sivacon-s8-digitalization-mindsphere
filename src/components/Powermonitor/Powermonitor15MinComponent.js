@@ -14,52 +14,18 @@ import AppBar from "@material-ui/core/AppBar";
 import { DatePicker } from "@material-ui/pickers";
 
 const styles = theme => ({
-  root: {
-    height: "100%",
-    width: "100%"
-  },
+  root: {},
   appBar: {
     padding: theme.spacing(2),
-    position: "static",
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#f5f5f5"
   },
-  trendPaper: {
-    height: "100%",
-    padding: theme.spacing(2)
+  trendGrid: {
+    padding: theme.spacing(3)
   },
-  eventPaper: {
-    height: "100%"
-  },
-  listHeader: {
-    fontSize: 14,
-    fontWeight: "bold",
-    padding: 15
-  },
-  trendGridItem: {
-    padding: 25
-  },
-  mainGrid: {
-    height: "100%"
-  },
-  refreshButtonGrid: {
-    width: 100
-  },
-  refreshButtonGridItem: {},
-  selectYearInput: {
-    width: 150,
-    margin: 10
-  },
-  selectYearInputGridItem: {},
-  selectMonthInput: {
-    width: 150,
-    margin: 10
-  },
-  selectMonthInputGridItem: {},
-  maxValueInput: {
-    width: 250,
-    margin: 10
-  },
-  maxValueInputGridItem: {}
+  tableGrid: {
+    padding: theme.spacing(3)
+  }
 });
 
 class Powermonitor15MinComponent extends Component {
@@ -71,7 +37,10 @@ class Powermonitor15MinComponent extends Component {
     let { fetchPowermonitorPowerMonth } = this.props;
 
     if (exists(date))
-      fetchPowermonitorPowerMonth(date.getFullYear(), date.getMonth());
+      fetchPowermonitorPowerMonth(
+        date.toDate().getFullYear(),
+        date.toDate().getMonth()
+      );
   };
 
   renderNavBar = () => {
@@ -80,7 +49,7 @@ class Powermonitor15MinComponent extends Component {
     let now = new Date(Date.now());
 
     return (
-      <AppBar className={classes.appBar} color="default">
+      <Paper className={classes.appBar}>
         <DatePicker
           views={["year", "month"]}
           label={t("reportsEnergyReportDateTimePickerTitle")}
@@ -90,7 +59,7 @@ class Powermonitor15MinComponent extends Component {
           onChange={date => this.handleDateChange(date)}
           animateYearScrolling
         />
-      </AppBar>
+      </Paper>
     );
   };
 
@@ -102,11 +71,9 @@ class Powermonitor15MinComponent extends Component {
       : "";
 
     return (
-      <Grid item>
-        <Typography gutterBottom>
-          {`${t("powermonitorPower15MaxValueLabel")} : ${maximumText}`}
-        </Typography>
-      </Grid>
+      <Typography gutterBottom>
+        {`${t("powermonitorPower15MaxValueLabel")} : ${maximumText}`}
+      </Typography>
     );
   };
 
@@ -115,6 +82,7 @@ class Powermonitor15MinComponent extends Component {
 
     return (
       <Grid
+        item
         container
         direction="column"
         justify="center"
@@ -133,44 +101,41 @@ class Powermonitor15MinComponent extends Component {
           alignItems="stretch"
           spacing={3}
         >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            md={12}
-            lg={7}
-            style={{ minWidth: 600, minHeight: 650 }}
-          >
-            <Paper className={classes.trendPaper}>
+          <Grid item xs={12} sm={12} md={12} lg={7}>
+            <Paper>
               <Grid
                 container
                 direction="column"
-                justify="flex-start"
+                justify="space-between"
                 alignItems="stretch"
-                className={classes.mainGrid}
                 wrap="nowrap"
+                className={classes.trendGrid}
+                style={{ height: "100%" }}
               >
                 <Grid item>
                   <Typography variant="h5" gutterBottom>
                     {t("powermonitorPower15TrendTitle")}
                   </Typography>
                 </Grid>
-                <Grid item xs={12} className={classes.trendGridItem}>
+                <Grid item style={{ minHeight: 475 }}>
                   <Powermonitor15MinTrend />
                 </Grid>
-                {this.renderMaximumLabel(t, classes, powermonitorActivePower)}
+                <Grid item style={{ paddingTop: 25 }}>
+                  {this.renderMaximumLabel(t, classes, powermonitorActivePower)}
+                </Grid>
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={5} style={{ minWidth: 570 }}>
-            <Paper className={classes.trendPaper}>
+          <Grid item xs={12} sm={12} md={12} lg={5}>
+            <Paper style={{ minHeight: 500 }}>
               <Grid
                 container
                 direction="column"
                 justify="flex-start"
                 alignItems="stretch"
-                className={classes.mainGrid}
                 wrap="nowrap"
+                className={classes.tableGrid}
+                style={{ height: "100%" }}
               >
                 <Grid item>
                   <Typography variant="h5" gutterBottom>

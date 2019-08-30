@@ -3,14 +3,10 @@ import { connect } from "react-redux";
 import { withTranslation } from "react-i18next";
 import { withStyles } from "@material-ui/core/styles";
 import { fetchPowermonitorPowerMonthDataActionCreator } from "../../actions/powermonitorActivePowerData";
-import { Bar } from "react-chartjs-2";
+import { Bar, Scatter } from "react-chartjs-2";
 import { exists } from "../../utils/utilities";
 
-const styles = theme => ({
-  root: {
-    height: "100% "
-  }
-});
+const styles = theme => ({});
 
 class Powermonitor15MinComponent extends Component {
   renderTooltipLabel = (tooltipItem, data) => {
@@ -55,6 +51,7 @@ class Powermonitor15MinComponent extends Component {
 
     return {
       maintainAspectRatio: false,
+      responsive: true,
       title: {
         display: false
       },

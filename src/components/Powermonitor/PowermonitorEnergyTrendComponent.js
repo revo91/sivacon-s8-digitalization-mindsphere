@@ -9,6 +9,10 @@ import Paper from "@material-ui/core/Paper";
 const styles = theme => ({
   root: {
     padding: 25,
+    height: "100%",
+    minHeight: 600
+  },
+  scatter: {
     height: "100%"
   }
 });

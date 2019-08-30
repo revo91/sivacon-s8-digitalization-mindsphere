@@ -2225,7 +2225,7 @@ class Elevation extends React.Component {
                             <g id="S1P4_3VA_1_overlay" className={this.manageSwitchesClassName('cb_Q5')}>
                                 <rect x="1365.44" y="273.62" width="90" height="178.18" />
                             </g>
-                            <g id="S1P4_3VA_2_overlay" className={this.manageSwitchesClassName('cb_Q3')}
+                            <g id="S1P4_3VA_2_overlay" className="closed"
                                 onClick={() => this.openProperties('GEN', 'Q3', 'Generator', `${t('slideUpDialogCircuitSection')} GEN`)}>
                                 <rect x="1455.44" y="273.62" width="90" height="178.18" />
                             </g>

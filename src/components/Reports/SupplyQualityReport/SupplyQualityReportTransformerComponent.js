@@ -43,11 +43,7 @@ const styles = theme => ({
   },
   tableGridItem: {
     fontSize: 10,
-    marginTop: 10,
-    paddingTop: 40,
-    paddingBottom: 50,
-    paddingLeft: 60,
-    paddingRight: 60
+    padding: 40
   }
 });
 
@@ -409,25 +405,29 @@ class SupplyQualityReportTransformerComponent extends Component {
           </Typography>
           <Grid
             container
-            direction="column"
+            direction="row"
             justify="flex-start"
             alignItems="stretch"
-            className={classes.dataGrid}
           >
             <Grid
-              className={classes.tableGridComponent}
               item
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="stretch"
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              className={classes.tableGridItem}
             >
-              <Grid item lg={6} className={classes.tableGridItem}>
-                {this.renderVoltageTable()}
-              </Grid>
-              <Grid item lg={6} className={classes.tableGridItem}>
-                {this.renderCurrentTable()}
-              </Grid>
+              {this.renderVoltageTable()}
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={12}
+              lg={6}
+              className={classes.tableGridItem}
+            >
+              {this.renderCurrentTable()}
             </Grid>
           </Grid>
         </Paper>
